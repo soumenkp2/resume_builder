@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:resume_builder/BoxImage.dart';
-import 'package:resume_builder/CurvedWidget.dart';
-import 'package:resume_builder/TextWidget.dart';
+import 'package:resume_builder/AppUtils/BoxImage.dart';
+import 'package:resume_builder/AppUtils/CurvedWidget.dart';
+import 'package:resume_builder/AppUtils/TextWidget.dart';
 
 class profile extends StatefulWidget {
   @override
