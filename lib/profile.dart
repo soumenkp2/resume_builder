@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:resume_builder/BoxImage.dart';
-import 'package:resume_builder/CurvedWidget.dart';
-import 'package:resume_builder/TextWidget.dart';
+import 'package:resume_builder/AppUtils/BoxImage.dart';
+import 'package:resume_builder/AppUtils/CurvedWidget.dart';
+import 'package:resume_builder/AppUtils/TextWidget.dart';
 
 class profile extends StatefulWidget {
   @override
@@ -47,13 +47,13 @@ class profile_state extends State<profile> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   BoxImage(
-                    text: "Profile Details",
+                    text: "Profile Details",imagePath: 'Images/img.png',
                   ),
                   BoxImage(
-                    text: "Education",
+                    text: "Education",imagePath: 'Images/img.png'
                   ),
                   BoxImage(
-                    text: "Experience",
+                    text: "Experience",imagePath: 'Images/img.png'
                   )
                 ],
               ),
@@ -61,13 +61,13 @@ class profile_state extends State<profile> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   BoxImage(
-                    text: "Skills",
+                    text: "Skills",imagePath: 'Images/img.png'
                   ),
                   BoxImage(
-                    text: "Objective",
+                    text: "Objective",imagePath: 'Images/img.png'
                   ),
                   BoxImage(
-                    text: "Reference",
+                    text: "Reference",imagePath: 'Images/img.png'
                   )
                 ],
               ),
@@ -84,17 +84,17 @@ class profile_state extends State<profile> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   BoxImage(
-                    text: "Projects",
+                    text: "Projects",imagePath: 'Images/img.png'
                   ),
                   BoxImage(
-                    text: "Add More Section",
+                    text: "Add More Section",imagePath: 'Images/img.png'
                   ),
                   BoxImage(
-                    text: "Rearrange/ Edit Headings",
+                    text: "Rearrange/ Edit Headings",imagePath: 'Images/img.png'
                   )
                 ],
               ),
-              BoxImage(text: "Help"),
+              BoxImage(text: "Help",imagePath: 'images/menu.png'),
               const SizedBox(
                 height: 25,
               ),

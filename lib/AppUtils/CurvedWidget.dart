@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:resume_builder/TextWidget.dart';
+import 'package:resume_builder/AppUtils/TextWidget.dart';
 
 
 class CurvedWidget extends StatelessWidget {

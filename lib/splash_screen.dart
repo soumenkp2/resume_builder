@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:resume_builder/main.dart';
+import 'package:resume_builder/onboarding_screen.dart';
 
 import 'main.dart';
 import 'main_screen.dart';
@@ -27,7 +28,7 @@ class splash_state extends State<splash_screen>
   navigate_to_home() async
   {
     await Future.delayed(Duration(milliseconds: 7500),() {});
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => main_screen()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => onboarding_screen()));
   }
 
   final text_style = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
