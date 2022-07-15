@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:resume_builder/ResumeTemplates/Resume_temp1.dart';
+import 'info_fillup.dart';
 import 'splash_screen.dart';
 
 void main() {
@@ -16,7 +18,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: splash_screen()
+        home: info_fillup()
+      //splash_screen()
     );
   }
 }

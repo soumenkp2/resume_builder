@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:resume_builder/main.dart';
+import 'package:resume_builder/Screens/main.dart';
 import 'home.dart';
 import 'your_resume.dart';
 import 'profile.dart';
-
-
-
 
 class main_screen extends StatefulWidget
 {

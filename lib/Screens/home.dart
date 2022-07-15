@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:resume_builder/main.dart';
+import 'package:resume_builder/Screens/main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:resume_builder/Screens/your_resume.dart';
+
+import '../ResumeTemplates/Resume_temp1.dart';
 
 class home extends StatefulWidget {
   @override
@@ -17,6 +20,11 @@ class home_state extends State<home> {
     //Navigator.of(context).pushNamed('splash_screen');
   }
 
+  void moveToResume()
+  {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Resume_temp1()));
+    //Navigator.of(context).pushNamed('splash_screen');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +68,7 @@ class home_state extends State<home> {
                 ),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       new Container(
                         child: new Image.asset(
@@ -95,94 +104,112 @@ class home_state extends State<home> {
                       new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            new Text("Make Your Resume",
+                            new Text("Choose",
                                 style: GoogleFonts.poppins(
                                     textStyle: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 30,
                                         fontWeight: FontWeight.bold))),
                             new Text("See All",
                                 style: GoogleFonts.poppins(
                                     textStyle: TextStyle(fontSize: 10)))
                           ]),
 
+                      new Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text("Your Resume Template",
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold))),
+
+                      ),
                       new SizedBox(
-                          height: 150,
+                          height: 300,
                           child: ListView(
                               scrollDirection: Axis.horizontal,
-                              padding: const EdgeInsets.all(8),
+                              padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
                               children: <Widget>[
+
+                                new InkWell(
+                                  onTap: moveToResume,
+                                  child: Container(
+                                    //width: 150,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xffd4e3ea),
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(25)),
+                                      ),
+                                      margin:
+                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      child: new Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child : Image.asset(
+                                          'assets/images/resume_template3.png',
+                                          height: 35.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                  ),
+                                ),
+
                                 new Container(
-                                  width: 150,
+                                  //width: 150,
                                   decoration: BoxDecoration(
                                     color: const Color(0xffd4e3ea),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(25)),
                                   ),
                                   margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                   child: new Image.asset(
-                                    'assets/images/profile.png',
+                                    'assets/images/resume_template2.png',
                                     height: 35.0,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                                 new Container(
-                                  width: 150,
+                                  //width: 150,
                                   decoration: BoxDecoration(
                                     color: const Color(0xffd4e3ea),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(25)),
                                   ),
                                   margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  //padding: const EdgeInsets.all(20),
                                   child: new Image.asset(
-                                    'assets/images/profile.png',
-                                    height: 35.0,
+                                    'assets/images/resume_template1.png',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                                 new Container(
-                                  width: 150,
+                                 // width: 150,
                                   decoration: BoxDecoration(
                                     color: const Color(0xffd4e3ea),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(25)),
                                   ),
                                   margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                   //padding: const EdgeInsets.all(20),
                                   child: new Image.asset(
-                                    'assets/images/profile.png',
+                                    'assets/images/resume_template2.png',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                                 new Container(
-                                  width: 150,
+                                 // width: 150,
                                   decoration: BoxDecoration(
                                     color: const Color(0xffd4e3ea),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(25)),
                                   ),
                                   margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                   //padding: const EdgeInsets.all(20),
                                   child: new Image.asset(
-                                    'assets/images/profile.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                new Container(
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffd4e3ea),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                  ),
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                  //padding: const EdgeInsets.all(20),
-                                  child: new Image.asset(
-                                    'assets/images/profile.png',
+                                    'assets/images/resume_template1.png',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -195,108 +222,108 @@ class home_state extends State<home> {
             ),
 
 
-            new Container(
-                margin: const EdgeInsets.fromLTRB(10, 30, 20, 0),
-                child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            new Text("Make Your Resume",
-                                style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold))),
-                            new Text("See All",
-                                style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(fontSize: 10)))
-                          ]),
-                      new SizedBox(
-                          height: 150,
-                          child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              padding: const EdgeInsets.all(8),
-                              children: <Widget>[
-                                new Container(
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffd4e3ea),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                  ),
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                  child: new Image.asset(
-                                    'assets/images/profile.png',
-                                    height: 35.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                new Container(
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffd4e3ea),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                  ),
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                  child: new Image.asset(
-                                    'assets/images/profile.png',
-                                    height: 35.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                new Container(
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffd4e3ea),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                  ),
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                  //padding: const EdgeInsets.all(20),
-                                  child: new Image.asset(
-                                    'assets/images/profile.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                new Container(
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffd4e3ea),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                  ),
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                  //padding: const EdgeInsets.all(20),
-                                  child: new Image.asset(
-                                    'assets/images/profile.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                new Container(
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffd4e3ea),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                  ),
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                  //padding: const EdgeInsets.all(20),
-                                  child: new Image.asset(
-                                    'assets/images/profile.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ])),
-                    ]
-                )
-            ),
+            // new Container(
+            //     margin: const EdgeInsets.fromLTRB(10, 30, 20, 0),
+            //     child: new Column(
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         children: <Widget>[
+            //           new Row(
+            //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //               children: <Widget>[
+            //                 new Text("Make Your Resume",
+            //                     style: GoogleFonts.poppins(
+            //                         textStyle: TextStyle(
+            //                             fontSize: 20,
+            //                             fontWeight: FontWeight.bold))),
+            //                 new Text("See All",
+            //                     style: GoogleFonts.poppins(
+            //                         textStyle: TextStyle(fontSize: 10)))
+            //               ]),
+            //           new SizedBox(
+            //               height: 150,
+            //               child: ListView(
+            //                   scrollDirection: Axis.horizontal,
+            //                   padding: const EdgeInsets.all(8),
+            //                   children: <Widget>[
+            //                     new Container(
+            //                       width: 150,
+            //                       decoration: BoxDecoration(
+            //                         color: const Color(0xffd4e3ea),
+            //                         borderRadius:
+            //                             BorderRadius.all(Radius.circular(25)),
+            //                       ),
+            //                       margin:
+            //                           const EdgeInsets.fromLTRB(0, 0, 10, 0),
+            //                       child: new Image.asset(
+            //                         'assets/images/profile.png',
+            //                         height: 35.0,
+            //                         fit: BoxFit.cover,
+            //                       ),
+            //                     ),
+            //                     new Container(
+            //                       width: 150,
+            //                       decoration: BoxDecoration(
+            //                         color: const Color(0xffd4e3ea),
+            //                         borderRadius:
+            //                             BorderRadius.all(Radius.circular(25)),
+            //                       ),
+            //                       margin:
+            //                           const EdgeInsets.fromLTRB(0, 0, 10, 0),
+            //                       child: new Image.asset(
+            //                         'assets/images/profile.png',
+            //                         height: 35.0,
+            //                         fit: BoxFit.cover,
+            //                       ),
+            //                     ),
+            //                     new Container(
+            //                       width: 150,
+            //                       decoration: BoxDecoration(
+            //                         color: const Color(0xffd4e3ea),
+            //                         borderRadius:
+            //                             BorderRadius.all(Radius.circular(25)),
+            //                       ),
+            //                       margin:
+            //                           const EdgeInsets.fromLTRB(0, 0, 10, 0),
+            //                       //padding: const EdgeInsets.all(20),
+            //                       child: new Image.asset(
+            //                         'assets/images/profile.png',
+            //                         fit: BoxFit.cover,
+            //                       ),
+            //                     ),
+            //                     new Container(
+            //                       width: 150,
+            //                       decoration: BoxDecoration(
+            //                         color: const Color(0xffd4e3ea),
+            //                         borderRadius:
+            //                             BorderRadius.all(Radius.circular(25)),
+            //                       ),
+            //                       margin:
+            //                           const EdgeInsets.fromLTRB(0, 0, 10, 0),
+            //                       //padding: const EdgeInsets.all(20),
+            //                       child: new Image.asset(
+            //                         'assets/images/profile.png',
+            //                         fit: BoxFit.cover,
+            //                       ),
+            //                     ),
+            //                     new Container(
+            //                       width: 150,
+            //                       decoration: BoxDecoration(
+            //                         color: const Color(0xffd4e3ea),
+            //                         borderRadius:
+            //                             BorderRadius.all(Radius.circular(25)),
+            //                       ),
+            //                       margin:
+            //                           const EdgeInsets.fromLTRB(0, 0, 10, 0),
+            //                       //padding: const EdgeInsets.all(20),
+            //                       child: new Image.asset(
+            //                         'assets/images/profile.png',
+            //                         fit: BoxFit.cover,
+            //                       ),
+            //                     ),
+            //                   ])),
+            //         ]
+            //     )
+            // ),
 
           ],
         )

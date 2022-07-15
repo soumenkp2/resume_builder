@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:resume_builder/AppUtils/BoxImage.dart';
 import 'package:resume_builder/AppUtils/CurvedWidget.dart';
 import 'package:resume_builder/AppUtils/TextWidget.dart';
-import 'package:resume_builder/main.dart';
+import 'package:resume_builder/Screens/main.dart';
 
 
 class your_resume extends StatefulWidget
