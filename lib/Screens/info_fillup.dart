@@ -13,7 +13,10 @@ class info_fillup extends StatefulWidget {
   State<StatefulWidget> createState() => info_fillup_state();
 }
 
+String? category_head_name;
 List<Education_UserModel>? edu_list;
+//List<>
+
 Map<String, bool>? categories;
 
 class info_fillup_state extends State<info_fillup> {
@@ -23,29 +26,46 @@ class info_fillup_state extends State<info_fillup> {
     edu_list = new List<Education_UserModel>.empty(growable: true);
 
     categories = new Map<String, bool>();
-    categories!["education"] = false;
-    categories!["achievements"] = false;
-    categories!["language"] = false;
-    categories!["skills"] = true;
-    categories!["work"] = false;
-    categories!["profile"] = false;
+    categories!["Education"] = true;
+    categories!["Achievements"] = false;
+    categories!["Languages and Skills"] = false;
+    categories!["Projects"] = false;
+    categories!["Work"] = false;
+    categories!["Profile"] = false;
+
+    category_head_name = "Education";
   }
 
-  // void add_edu_card()
-  // {
-  //   setState(()
-  //   {
-  //     edu_list?.add(new Education_UserModel());
-  //   });
-  // }
+  void add_edu_card()
+  {
+    setState(()
+    {
+      edu_list?.add(new Education_UserModel());
+    });
+  }
+
+  void delete_edu_card()
+  {
+    setState(()
+    {
+      if(edu_list!.length <=0)
+        {
+          var snackBar = SnackBar(content: Text('One entry is mandatory to be filled out '));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      else
+        {
+          edu_list?.removeLast();
+        }
+
+    });
+  }
 
   void category_observation(String category_name) {
     setState(() {
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //   content: Text(category_name),
-      // ));
       categories?.forEach((key, value) {
         if (key == category_name) {
+          category_head_name = category_name;
           categories![key] = true;
         } else {
           categories![key] = false;
@@ -70,7 +90,7 @@ class info_fillup_state extends State<info_fillup> {
               children: <Widget>[
                 new InkWell(
                     onTap: () {
-                      category_observation("education");
+                      category_observation("Education");
                     },
                     child: Container(
                         width: 50,
@@ -92,7 +112,7 @@ class info_fillup_state extends State<info_fillup> {
                             )))),
                 new InkWell(
                   onTap: () {
-                    category_observation("skills");
+                    category_observation("Languages and Skills");
                   },
                   child: Container(
                       width: 50,
@@ -116,7 +136,7 @@ class info_fillup_state extends State<info_fillup> {
                 ),
                 new InkWell(
                   onTap: () {
-                    category_observation("achievements");
+                    category_observation("Achievements");
                   },
                   child: Container(
                       width: 50,
@@ -139,7 +159,7 @@ class info_fillup_state extends State<info_fillup> {
                 ),
                 new InkWell(
                   onTap: () {
-                    category_observation("work");
+                    category_observation("Work");
                   },
                   child: Container(
                       width: 50,
@@ -163,7 +183,7 @@ class info_fillup_state extends State<info_fillup> {
                 ),
                 new InkWell(
                   onTap: () {
-                    category_observation("profile");
+                    category_observation("Profile");
                   },
                   child: Container(
                       width: 50,
@@ -187,7 +207,7 @@ class info_fillup_state extends State<info_fillup> {
                 ),
                 new InkWell(
                   onTap: () {
-                    category_observation("project");
+                    category_observation("Projects");
                   },
                   child: new Container(
                       width: 50,
@@ -215,7 +235,69 @@ class info_fillup_state extends State<info_fillup> {
         ),
         //Termination of Categories
 
-        current_category(),
+        new Padding(
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            child: Row(children: <Widget>[
+              new Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 80, 0),
+                child: new Text(category_head_name!,
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold))),
+              ),
+              new InkWell(
+                onTap: add_edu_card,
+                child: new Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: new Image.asset(
+                      'assets/images/addbtn.png',
+                      height: 35.0,
+                      // fit: BoxFit.cover,
+                    )),
+              ),
+              new InkWell(
+                onTap: delete_edu_card,
+                child: new Visibility(
+                  visible: true,
+                  child: new Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: new Image.asset(
+                        'assets/images/minusbtn.png',
+                        height: 35.0,
+                        // fit: BoxFit.cover,
+                      )),
+                ),
+              )
+
+            ])),
+
+        new Divider(
+          color: Colors.black,
+          thickness: 3,
+        ),
+
+        new Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              //current_category()
+              Education_fillup_widget(),
+
+              ListView.separated(
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Column(children: <Widget>[
+                      Education_fillup_widget(),
+                    ]);
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemCount: edu_list!.length)
+            ]),
+
+
+
+        //current_category(),
       ],
     )));
   }
@@ -230,43 +312,43 @@ class EducationParent_Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Column(children: <Widget>[
-      new Padding(
-          padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-          child: Row(children: <Widget>[
-            new Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 80, 0),
-              child: new Text("Education",
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontSize: 30, fontWeight: FontWeight.bold))),
-            ),
-            new InkWell(
-              onTap: add_edu_card,
-              child: new Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: new Image.asset(
-                    'assets/images/addbtn.png',
-                    height: 35.0,
-                    // fit: BoxFit.cover,
-                  )),
-            ),
-            new Visibility(
-              visible: true,
-              child: new Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: new Image.asset(
-                    'assets/images/minusbtn.png',
-                    height: 35.0,
-                    // fit: BoxFit.cover,
-                  )),
-            ),
-          ])),
+      // new Padding(
+      //     padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+      //     child: Row(children: <Widget>[
+      //       new Padding(
+      //         padding: const EdgeInsets.fromLTRB(10, 10, 80, 0),
+      //         child: new Text("Education",
+      //             textAlign: TextAlign.left,
+      //             style: GoogleFonts.poppins(
+      //                 textStyle: TextStyle(
+      //                     fontSize: 30, fontWeight: FontWeight.bold))),
+      //       ),
+      //       new InkWell(
+      //         onTap: add_edu_card,
+      //         child: new Padding(
+      //             padding: const EdgeInsets.all(10),
+      //             child: new Image.asset(
+      //               'assets/images/addbtn.png',
+      //               height: 35.0,
+      //               // fit: BoxFit.cover,
+      //             )),
+      //       ),
+      //       new Visibility(
+      //         visible: true,
+      //         child: new Padding(
+      //             padding: const EdgeInsets.all(10),
+      //             child: new Image.asset(
+      //               'assets/images/minusbtn.png',
+      //               height: 35.0,
+      //               // fit: BoxFit.cover,
+      //             )),
+      //       ),
+      //     ])),
 
-      new Divider(
-        color: Colors.black,
-        thickness: 3,
-      ),
+      // new Divider(
+      //   color: Colors.black,
+      //   thickness: 3,
+      // ),
 
       //Form Fill Up
       new Column(
@@ -295,167 +377,88 @@ class EducationParent_Widget extends StatelessWidget {
 }
 
 Widget current_category() {
-  if (categories!["education"] == true) {
+  if (categories!["Education"] == true) {
     return EducationParent_Widget();
-  } else if (categories!["achievements"] == true) {
+  } else if (categories!["Achievements"] == true) {
     return Text("Achievements");
-  } else if (categories!["profile"] == true) {
+  } else if (categories!["Profile"] == true) {
     return Text("Profile");
-  } else if (categories!["work"] == true) {
+  } else if (categories!["Work"] == true) {
     return Text("Work");
-  } else if (categories!["skills"] == true) {
-    return Text("Skills");
-  } else if (categories!["language"] == true) {
-    return Text("Language");
+  } else if (categories!["Projects"] == true) {
+    return Text("Projects");
+  } else if (categories!["Languages and Skills"] == true) {
+    return Text("Languages and Skills");
   } else {
     return Education_fillup_widget();
   }
 }
 
-Widget Education_fillup_widget() {
-  return new Padding(
-    padding: const EdgeInsets.all(10),
-    child: new Container(
-// width: 50,
-// height: 50,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(25)),
-          boxShadow: [
-            BoxShadow(color: Colors.teal, spreadRadius: 2),
-          ],
-        ),
-        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              new Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter education qualification',
-                  ),
-                ),
-              ),
-              new Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter organization name',
-                  ),
-                ),
-              ),
-              new Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter starting-closing year',
-                  ),
-                ),
-              ),
-              new InkWell(
-                onTap: add_s(),
-              )
-            ])),
 
-// new Padding(
-//     padding: const EdgeInsets.all(10),
-//     child: new Image.asset(
-//       'assets/images/addbtn.png',
-//       height: 15.0,
-//       // fit: BoxFit.cover,
-//     )),
-  );
+class Education_fillup_widget extends StatelessWidget {
+  const Education_fillup_widget({
+    Key? key,
+  }) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return new Padding(
+      padding: const EdgeInsets.all(10),
+      child: new Container(
+          // width: 50,
+          // height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(25)),
+            boxShadow: [
+              BoxShadow(color: Colors.teal, spreadRadius: 2),
+            ],
+          ),
+          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter education qualification',
+                    ),),),
+
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter organization name',
+                    ),),),
+
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter starting-closing year',
+                    ),),),
+
+              ])),
+
+      // new Padding(
+      //     padding: const EdgeInsets.all(10),
+      //     child: new Image.asset(
+      //       'assets/images/addbtn.png',
+      //       height: 15.0,
+      //       // fit: BoxFit.cover,
+      //     )),
+    );
+  }
+
+
+
 }
-
-add_s() {
-
-}
-
-// class Education_fillup_widget extends StatelessWidget {
-//   const Education_fillup_widget({
-//     Key? key,
-//   }) : super(key: key);
-//
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Padding(
-//       padding: const EdgeInsets.all(10),
-//       child: new Container(
-//           // width: 50,
-//           // height: 50,
-//           decoration: BoxDecoration(
-//             color: Colors.white,
-//             borderRadius: BorderRadius.all(Radius.circular(25)),
-//             boxShadow: [
-//               BoxShadow(color: Colors.teal, spreadRadius: 2),
-//             ],
-//           ),
-//           margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-//           child: Column(
-//               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//               children: <Widget>[
-//
-//                 new Padding(
-//                   padding:
-//                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-//                   child: TextFormField(
-//                     decoration: const InputDecoration(
-//                       border: UnderlineInputBorder(),
-//                       labelText: 'Enter education qualification',
-//                     ),),),
-//
-//                 new Padding(
-//                   padding:
-//                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-//                   child: TextFormField(
-//                     decoration: const InputDecoration(
-//                       border: UnderlineInputBorder(),
-//                       labelText: 'Enter organization name',
-//                     ),),),
-//
-//                 new Padding(
-//                   padding:
-//                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-//                   child: TextFormField(
-//                     decoration: const InputDecoration(
-//                       border: UnderlineInputBorder(),
-//                       labelText: 'Enter starting-closing year',
-//                     ),),),
-//
-//               ])),
-//
-//       // new Padding(
-//       //     padding: const EdgeInsets.all(10),
-//       //     child: new Image.asset(
-//       //       'assets/images/addbtn.png',
-//       //       height: 15.0,
-//       //       // fit: BoxFit.cover,
-//       //     )),
-//     );
-//   }
-//
-//   @override
-//   State<StatefulWidget> createState() {
-//     // TODO: implement createState
-//     throw UnimplementedError();
-//   }
-//
-//   // Widget add_edu_widget()
-//   // {
-//   //   return Padding(
-//   //
-//   //
-//   //
-//   //
-//   //   );
-//   // }
-//
-// }
