@@ -5,7 +5,7 @@ import 'package:resume_builder/Screens/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/Screens/your_resume.dart';
 
-class Education_UserModel{
+class Profile_UserModel{
 
   String? name;
   String? phone_no;
@@ -15,7 +15,7 @@ class Education_UserModel{
 
 
   //Initialiazing the values
-  Education_UserModel({
+  Profile_UserModel({
     this.name,
     this.phone_no,
     this.location,
