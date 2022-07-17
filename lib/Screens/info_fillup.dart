@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:resume_builder/ResumeTemplates/Resume_temp2.dart';
 import 'package:resume_builder/Screens/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/Screens/your_resume.dart';
@@ -531,6 +532,9 @@ class info_fillup_state extends State<info_fillup> {
             child:
             ElevatedButton(
               onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                    //Resume_temp2()));
+                    Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list)));
                 //edu_data_upload(context);
               },
               child: Text('Next',

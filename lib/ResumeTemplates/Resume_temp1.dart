@@ -29,31 +29,6 @@ class Resume_temp1 extends StatefulWidget
 class Resume_temp1_state extends State<Resume_temp1>
 {
 
-  // final GlobalKey<State<StatefulWidget>> _printKey = GlobalKey();
-  //
-  // void _printScreen() {
-  //   Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
-  //     final doc = pw.Document();
-  //
-  //     final image = await WidgetWraper.fromKey(
-  //       key: _printKey,
-  //       pixelRatio: 2.0,
-  //     );
-  //
-  //     doc.addPage(pw.Page(
-  //         pageFormat: format,
-  //         build: (pw.Context context) {
-  //           return pw.Center(
-  //             child: pw.Expanded(
-  //               child: pw.Image(image),
-  //             ),
-  //           );
-  //         }));
-  //
-  //     return doc.save();
-  //   });
-  // }
-
   void _createPDF() async
   {
     final pdf = pw.Document();

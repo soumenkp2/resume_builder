@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:resume_builder/Screens/info_fillup.dart';
 import 'package:resume_builder/Screens/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/Screens/your_resume.dart';
 
 import '../ResumeTemplates/Resume_temp1.dart';
+import '../ResumeTemplates/Resume_temp2.dart';
 
 class home extends StatefulWidget {
   @override
@@ -20,11 +22,22 @@ class home_state extends State<home> {
     //Navigator.of(context).pushNamed('splash_screen');
   }
 
-  void moveToResume()
+  void moveToResume(int index)
   {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Resume_temp1()));
-    //Navigator.of(context).pushNamed('splash_screen');
+    if(index==1)
+      {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => Resume_temp1()));
+      }
+    else if(index==2)
+      {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+      }
+    else
+      {
+
+      }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,7 +145,7 @@ class home_state extends State<home> {
                               children: <Widget>[
 
                                 new InkWell(
-                                  onTap: moveToResume,
+                                  onTap: (){moveToResume(1);},
                                   child: Container(
                                     //width: 150,
                                       decoration: BoxDecoration(
@@ -153,21 +166,28 @@ class home_state extends State<home> {
                                   ),
                                 ),
 
-                                new Container(
-                                  //width: 150,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffd4e3ea),
-                                    borderRadius:
+                                new InkWell(
+                                  onTap: (){moveToResume(2);},
+                                  child: Container(
+                                    //width: 150,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xffd4e3ea),
+                                        borderRadius:
                                         BorderRadius.all(Radius.circular(25)),
-                                  ),
-                                  margin:
-                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  child: new Image.asset(
-                                    'assets/images/resume_template2.png',
-                                    height: 35.0,
-                                    fit: BoxFit.cover,
+                                      ),
+                                      margin:
+                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      child: new Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child : Image.asset(
+                                          'assets/images/resume_template2.png',
+                                          height: 35.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
                                   ),
                                 ),
+
                                 new Container(
                                   //width: 150,
                                   decoration: BoxDecoration(

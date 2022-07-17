@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:resume_builder/ResumeTemplates/Resume_temp1.dart';
+import '../ResumeTemplates/Resume_temp2.dart';
 import 'info_fillup.dart';
 import 'splash_screen.dart';
 
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: //info_fillup()
-      splash_screen()
+                splash_screen()
+      //Resume_temp2()
     );
   }
 }
