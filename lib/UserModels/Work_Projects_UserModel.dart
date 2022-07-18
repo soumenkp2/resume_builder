@@ -32,6 +32,10 @@ class Work_Projects_UserModel{
 
     return data;
   }
-
+  Work_Projects_UserModel.fromDbMap(Map<String, dynamic> data)
+      : organization_name = data["organization_name"],
+        qualification_name = data["qualification_name"],
+        year_duration = data["year_duration"],
+        brief = data["brief"];
 
 }

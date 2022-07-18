@@ -29,6 +29,10 @@ class Education_UserModel{
 
     return edu_data;
   }
+  Education_UserModel.fromDbMap(Map<String, dynamic> edu_data)
+      : organization_name= edu_data["organization_name"],
+        qualification_name= edu_data["qualification_name"],
+        year_duration= edu_data["year_duration"];
 
 
 }

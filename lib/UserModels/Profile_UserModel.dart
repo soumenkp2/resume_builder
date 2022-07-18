@@ -37,5 +37,11 @@ class Profile_UserModel{
     return data;
   }
 
+  Profile_UserModel.fromDbMap(Map<String, dynamic> data)
+      : name = data["name"],
+        location = data["location"],
+        phone_no = data["phone_no"],
+        mail = data["mail"],
+        social_link = data["social_link"];
 
 }
