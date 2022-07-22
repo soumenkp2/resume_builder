@@ -24,5 +24,7 @@ class Skills_Languages_UserModel{
     return data;
   }
 
+  Skills_Languages_UserModel.fromDbMap(Map<String, dynamic> data)
+      : value = data["value"];
 
 }

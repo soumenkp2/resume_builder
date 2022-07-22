@@ -26,6 +26,10 @@ class Achievements_UserModel{
 
     return data;
   }
+  Achievements_UserModel.fromDbMap(Map<String, dynamic> map)
+      : organization_name = map['organization_name'],
+        qualification_name = map['organization_name'];
+
 
 
 }
