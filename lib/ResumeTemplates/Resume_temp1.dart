@@ -36,7 +36,7 @@ class Resume_temp1_state extends State<Resume_temp1>
 
   void _createPDF() async
   {
-    final pdf = pw.Document();
+    //final pdf = pw.Document();
 
 
     // On Flutter, use the [path_provider](https://pub.dev/packages/path_provider) library:
