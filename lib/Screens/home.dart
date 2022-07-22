@@ -8,6 +8,7 @@ import 'package:resume_builder/Screens/your_resume.dart';
 
 import '../ResumeTemplates/Resume_temp1.dart';
 import '../ResumeTemplates/Resume_temp2.dart';
+import '../ResumeTemplates/Resume_temp3.dart';
 
 class home extends StatefulWidget {
   @override
@@ -32,6 +33,10 @@ class home_state extends State<home> {
       {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
       }
+    else if(index==3)
+    {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => Resume_temp3()));
+    }
     else
       {
 
@@ -188,21 +193,25 @@ class home_state extends State<home> {
                                   ),
                                 ),
 
-                                new Container(
-                                  //width: 150,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffd4e3ea),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                  ),
-                                  margin:
-                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  //padding: const EdgeInsets.all(20),
-                                  child: new Image.asset(
-                                    'assets/images/resume_template1.png',
-                                    fit: BoxFit.cover,
+                                new InkWell(
+                                  onTap: (){moveToResume(3);},
+                                  child: Container(
+                                    //width: 150,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xffd4e3ea),
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(25)),
+                                    ),
+                                    margin:
+                                    const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    //padding: const EdgeInsets.all(20),
+                                    child: new Image.asset(
+                                      'assets/images/resume_template1.png',
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
+
                                 new Container(
                                  // width: 150,
                                   decoration: BoxDecoration(

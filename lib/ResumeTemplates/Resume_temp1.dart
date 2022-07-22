@@ -2,6 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/%20CustomResumeWidgets/Header_Widget.dart';
+import 'package:resume_builder/ResumeTemplates/Resume_temp3.dart';
+import 'package:resume_builder/ResumeWidgets/project_Widget.dart';
+import 'package:resume_builder/pdf_resume_api.dart';
 
 import '../ CustomResumeWidgets/Language_Widget.dart';
 import '../ CustomResumeWidgets/Skill_Widget.dart';
@@ -12,12 +15,14 @@ import '../ CustomResumeWidgets/Education_Widget.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
-
+//import 'package:pdf/widgets.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 import 'dart:io';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+
+import '../pdf_api.dart';
 
 
 class Resume_temp1 extends StatefulWidget
@@ -33,19 +38,20 @@ class Resume_temp1_state extends State<Resume_temp1>
   {
     final pdf = pw.Document();
 
-    pdf.addPage(pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Center(
-            child: pw.Text("Hello World"),
-          ); // Center
-        })); // Page
 
     // On Flutter, use the [path_provider](https://pub.dev/packages/path_provider) library:
 //   final output = await getTemporaryDirectory();
 //   final file = File("${output.path}/example.pdf");
-    final file = File("example.pdf");
-    await file.writeAsBytes(await pdf.save());
+//     final file = File("example.pdf");
+//     await file.writeAsBytes(await pdf.save());
+  
+    //final file = await PdfApi.saveDocument(name: "resume_temp1", pdf: pdf);
+    final file = await pdfResumeApi.generate();
+    PdfApi.openFile(file);
+
+
+
+
   }
 
 
@@ -215,7 +221,7 @@ class Resume_temp1_state extends State<Resume_temp1>
 
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.print),
-        onPressed: null,
+        onPressed: _createPDF,
     ),
 
     );

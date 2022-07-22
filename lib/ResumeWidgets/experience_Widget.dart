@@ -12,6 +12,9 @@ class experience_Widget extends StatelessWidget {
 
   List<Work_Projects_UserModel>? work_list;
 
+  String? color;
+  String? txt_color;
+  String? high_color;
 
 
   //double? height;
@@ -25,8 +28,57 @@ class experience_Widget extends StatelessWidget {
 
     this.work_list,
 
+    this.color,
+    this.txt_color,
+    this.high_color,
 
   });
+
+
+  Color set_color(String str)
+  {
+    if(str == "teal")
+    {
+      return Colors.teal;
+    }
+    else if(str == "blueGrey")
+    {
+      return Colors.blueGrey;
+    }
+    else if(str == "brown")
+    {
+      return Colors.brown;
+    }
+    else if(str == "white")
+    {
+      return Colors.transparent;
+    }
+    else
+    {
+      return Colors.transparent;
+    }
+  }
+
+  Color set_txt_color(String str)
+  {
+    if(str == "white")
+    {
+      return Colors.white;
+    }
+    else if(str == "black")
+    {
+      return Colors.black;
+    }
+    else if(str == "indigo")
+    {
+      return Colors.indigo;
+    }
+    else
+    {
+      return Colors.black;
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +91,21 @@ class experience_Widget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            new Text(
-                "Work Experience",
-                style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold))
+
+            new Container(
+              child: Text(
+                  "Work Experience",
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontSize: 20,
+                          color: set_txt_color(txt_color!),
+                          //backgroundColor: Colors.amber,
+                          fontWeight: FontWeight.bold))
+              ),
+              color: set_color(color!),
+              width: double.infinity,
             ),
+
             new Divider(
               color: Colors.black,
               thickness: 3,
@@ -76,6 +136,7 @@ class experience_Widget extends StatelessWidget {
       org_name: work_list?.elementAt(index).organization_name,
       brief: work_list?.elementAt(index).brief,
       dur_name: work_list?.elementAt(index).year_duration,
+      high_color: high_color,
     );
 
   }
@@ -83,11 +144,36 @@ class experience_Widget extends StatelessWidget {
 
 class Experience_Details extends StatelessWidget {
 
+  Color set_color(String str)
+  {
+    if(str == "teal")
+    {
+      return Colors.teal;
+    }
+    else if(str == "blueGrey")
+    {
+      return Colors.blueGrey;
+    }
+    else if(str == "brown")
+    {
+      return Colors.brown;
+    }
+    else if(str == "white")
+    {
+      return Colors.transparent;
+    }
+    else
+    {
+      return Colors.transparent;
+    }
+  }
+
   String? experience_name;
   String? org_name;
   String? dur_name;
   String? brief;
 
+  String? high_color;
 
   Experience_Details({
     this.experience_name,
@@ -96,7 +182,8 @@ class Experience_Details extends StatelessWidget {
 
     this.dur_name,
 
-    this.brief
+    this.brief,
+    this.high_color,
 
   });
 
@@ -119,7 +206,7 @@ class Experience_Details extends StatelessWidget {
                   org_name!,
                   style: GoogleFonts.poppins(
                       textStyle: TextStyle(
-                          color: Colors.teal,
+                          color: set_color(high_color!),
                           fontSize: 10,
                           fontWeight: FontWeight.w600))
               ),

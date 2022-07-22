@@ -4,30 +4,34 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../UserModels/Skills_Languages_UserModel.dart';
 
-class skill_Widget extends StatelessWidget {
+class Language_Widget extends StatelessWidget {
 
   double? margin_top;
   double? margin_bottom;
   double? margin_left;
   double? margin_right;
 
+  List<Skills_Languages_UserModel>? language_list;
+
   String? color;
   String? txt_color;
   String? high_color;
 
-  List<Skills_Languages_UserModel>? skill_list;
 
-  skill_Widget({
+
+
+
+  Language_Widget({
     this.margin_top,
     this.margin_bottom,
     this.margin_left,
     this.margin_right,
-    this.skill_list,
+
+    this.language_list ,
     this.color,
     this.txt_color,
     this.high_color,
   });
-
 
   Color set_color(String str)
   {
@@ -73,6 +77,7 @@ class skill_Widget extends StatelessWidget {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -83,10 +88,9 @@ class skill_Widget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-
             new Container(
               child: Text(
-                  "Skills",
+                  "Languages",
                   style: GoogleFonts.poppins(
                       textStyle: TextStyle(
                           fontSize: 20,
@@ -97,11 +101,18 @@ class skill_Widget extends StatelessWidget {
               color: set_color(color!),
               width: double.infinity,
             ),
-
             new Divider(
               color: Colors.black,
               thickness: 3,
             ),
+
+            // Container(
+            //   decoration: BoxDecoration(
+            //     border: Border(
+            //       bottom: BorderSide(color: Colors.lightGreen,width: 3.0),
+            //     ),
+            //   ),
+            // ),
 
             new Align(
               alignment: Alignment.topLeft,
@@ -112,17 +123,16 @@ class skill_Widget extends StatelessWidget {
                     return Column(children: <Widget>[
                       Align(
                         alignment: Alignment.topLeft,
-                        child: skills(index,skill_list),
+                        child: langs(index,language_list),
                       ),
 
                     ]);
                   },
                   separatorBuilder: (context, index) => new SizedBox.shrink(),
-                  itemCount: skill_list!.length),
+                  itemCount: language_list!.length),
 
 
             )
-
 
 
 
@@ -132,12 +142,14 @@ class skill_Widget extends StatelessWidget {
     );
   }
 
-  skills(int index, List<Skills_Languages_UserModel>? skill_list) {
+
+  langs(int index, List<Skills_Languages_UserModel>? skill_list) {
     return Skill_Details(
       skill_name: skill_list?.elementAt(index).value,
       color: high_color,
     );
   }
+
 }
 
 class Skill_Details extends StatelessWidget {
@@ -148,58 +160,36 @@ class Skill_Details extends StatelessWidget {
 
   Skill_Details({
     this.skill_name,
-    this.color,
+    this.color
 
   });
-
-  Color set_color(String str)
-  {
-    if(str == "teal")
-    {
-      return Colors.teal;
-    }
-    else if(str == "blueGrey")
-    {
-      return Colors.blueGrey;
-    }
-    else if(str == "brown")
-    {
-      return Colors.brown;
-    }
-    else if(str == "white")
-    {
-      return Colors.white;
-    }
-    else
-    {
-      return Colors.white;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return new Padding(
-      padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
-      child: Container(
-        child: Text(
-          skill_name!,
-          style: GoogleFonts.poppins(
-        textStyle: TextStyle(
-          color: Colors.white,
-        fontSize: 12,
-            fontWeight: FontWeight.normal))
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: set_color(color!),
-          boxShadow: [
-            BoxShadow(color: set_color(color!), spreadRadius: 3),
-          ],
-        ),
+        padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
+        child: Container(
+          width: 100,
+          child: Text(
+              skill_name!,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal))
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(color: Colors.teal, spreadRadius: 1),
+            ],
+          ),
 
-      )
+        )
 
 
-            );
+    );
   }
 }

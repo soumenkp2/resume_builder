@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class Education_Widget extends StatelessWidget {
 
+
   double? height;
   double? margin_top;
   double? margin_bottom;
