@@ -19,6 +19,8 @@ class header_Widget extends StatelessWidget {
   String? link;
   String? mail;
   String? address;
+  String? color;
+
 
 
   header_Widget({
@@ -28,6 +30,7 @@ class header_Widget extends StatelessWidget {
     this.margin_left,
     this.margin_right,
     this.profile_list,
+    this.color,
   });
 
   String set_values(String str)
@@ -65,12 +68,33 @@ class header_Widget extends StatelessWidget {
 
   }
 
+  Color set_color(String str)
+  {
+    if(str == "teal")
+      {
+        return Colors.teal;
+      }
+    else if(str == "blueGrey")
+      {
+        return Colors.blueGrey;
+      }
+    else if(str == "brown")
+      {
+        return Colors.brown;
+      }
+    else
+      {
+        return Colors.black;
+      }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return new Container(
       //color: Colors.limeAccent,
       height: height,
-      color: Colors.teal,
+      color: set_color(color!),
       margin: EdgeInsets.fromLTRB(margin_left!, margin_top!, margin_right!, margin_bottom!),
       //padding: const EdgeInsets.all(10),
       child: Padding(

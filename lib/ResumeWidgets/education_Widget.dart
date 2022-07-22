@@ -15,21 +15,74 @@ class education_Widget extends StatelessWidget {
   List<Education_UserModel>? edu_list;
   //int? index;
 
+  String? color;
+  String? txt_color;
+  String? high_color;
+
+
+
   education_Widget({
     this.margin_top,
     this.margin_bottom,
     this.margin_left,
     this.margin_right,
 
+    this.color,
+    this.txt_color,
     // this.course_name,
     // this.org_name,
     // this.dur_name,
 
+    this.high_color,
     this.edu_list,
     //this.index,
 
 
 });
+
+  Color set_color(String str)
+  {
+    if(str == "teal")
+    {
+      return Colors.teal;
+    }
+    else if(str == "blueGrey")
+    {
+      return Colors.blueGrey;
+    }
+    else if(str == "brown")
+    {
+      return Colors.brown;
+    }
+    else if(str == "white")
+    {
+      return Colors.transparent;
+    }
+    else
+      {
+        return Colors.transparent;
+      }
+  }
+
+  Color set_txt_color(String str)
+  {
+    if(str == "white")
+    {
+      return Colors.white;
+    }
+    else if(str == "black")
+    {
+      return Colors.black;
+    }
+    else if(str == "indigo")
+    {
+      return Colors.indigo;
+    }
+    else
+    {
+      return Colors.black;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +95,20 @@ class education_Widget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
 
-            new Text(
-                "Education",
-                style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold))
+            new Container(
+              child: Text(
+                  "Education",
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontSize: 20,
+                          color: set_txt_color(txt_color!),
+                          //backgroundColor: Colors.amber,
+                          fontWeight: FontWeight.bold))
+              ),
+              color: set_color(color!),
+              width: double.infinity,
             ),
+
 
             new Divider(
               color: Colors.black,
@@ -80,7 +140,8 @@ class education_Widget extends StatelessWidget {
     return Course_Details(
         course_name: edu_list?.elementAt(index).qualification_name,
         org_name: edu_list?.elementAt(index).organization_name,
-        dur_name: edu_list?.elementAt(index).year_duration
+        dur_name: edu_list?.elementAt(index).year_duration,
+      high_color: high_color,
     );
 
   }
@@ -91,7 +152,32 @@ class Course_Details extends StatelessWidget {
   String? course_name;
   String? org_name;
   String? dur_name;
+  String? high_color;
 
+
+  Color set_color(String str)
+  {
+    if(str == "teal")
+    {
+      return Colors.teal;
+    }
+    else if(str == "blueGrey")
+    {
+      return Colors.blueGrey;
+    }
+    else if(str == "brown")
+    {
+      return Colors.brown;
+    }
+    else if(str == "white")
+    {
+      return Colors.transparent;
+    }
+    else
+    {
+      return Colors.transparent;
+    }
+  }
 
   Course_Details({
     this.course_name,
@@ -100,6 +186,7 @@ class Course_Details extends StatelessWidget {
 
     this.dur_name,
 
+    this.high_color,
   });
 
   @override
@@ -121,7 +208,7 @@ class Course_Details extends StatelessWidget {
                   org_name!,
                   style: GoogleFonts.poppins(
                       textStyle: TextStyle(
-                          color: Colors.teal,
+                          color: set_color(high_color!),
                           fontSize: 10,
                           fontWeight: FontWeight.w600))
               ),

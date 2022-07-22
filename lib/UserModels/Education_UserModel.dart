@@ -18,6 +18,7 @@ class Education_UserModel{
     this.qualification_name,
   });
 
+
   //Setting values in map to use it further
   Map<String,String> toJson()
   {

@@ -26,6 +26,10 @@ List<Work_Projects_UserModel>? project_list;
 List<Skills_Languages_UserModel>? skill_list;
 List<Achievements_UserModel>? achievement_list;
 List<Profile_UserModel>? profile_list;
+List<Skills_Languages_UserModel>? language_list;
+String? form_name;
+
+
 
 Map<String,List>? final_data;
 bool? send_flag;
@@ -42,14 +46,16 @@ class info_fillup_state extends State<info_fillup> {
     skill_list = new List<Skills_Languages_UserModel>.empty(growable: true);
     achievement_list = new List<Achievements_UserModel>.empty(growable: true);
     profile_list = new List<Profile_UserModel>.empty(growable: true);
+    language_list = new List<Skills_Languages_UserModel>.empty(growable: true);
 
     categories = new Map<String, bool>();
     categories!["Education"] = true;
     categories!["Achievements"] = false;
-    categories!["Languages and Skills"] = false;
+    categories!["Skills"] = false;
     categories!["Projects"] = false;
     categories!["Work"] = false;
     categories!["Profile"] = false;
+    categories!["Languages"] = false;
 
     category_head_name = "Education";
 
@@ -59,15 +65,17 @@ class info_fillup_state extends State<info_fillup> {
     project_list?.add(new Work_Projects_UserModel());
     skill_list?.add(new Skills_Languages_UserModel());
     profile_list?.add(new Profile_UserModel());
+    language_list?.add(new Skills_Languages_UserModel());
 
-    final_data = new Map<String,List>();
-    final_data!["Education_details"] = edu_list!;
-    final_data!["Achievement_details"] = achievement_list!;
-    final_data!["Project_details"] = project_list!;
-    final_data!["Skill_details"] = skill_list!;
-    final_data!["Work_details"] = work_list!;
-    final_data!["Profile_details"] = profile_list!;
-    send_flag = false;
+
+    // final_data = new Map<String,List>();
+    // final_data!["Education_details"] = edu_list!;
+    // final_data!["Achievement_details"] = achievement_list!;
+    // final_data!["Project_details"] = project_list!;
+    // final_data!["Skill_details"] = skill_list!;
+    // final_data!["Work_details"] = work_list!;
+    // final_data!["Profile_details"] = profile_list!;
+    // send_flag = false;
 
 
 
@@ -126,7 +134,7 @@ class info_fillup_state extends State<info_fillup> {
             project_list?.add(new Work_Projects_UserModel());
           }
         }
-      else if(category_name == "Languages and Skills")
+      else if(category_name == "Skills")
         {
           if(skill_list!.length >1)
           {
@@ -150,6 +158,18 @@ class info_fillup_state extends State<info_fillup> {
             profile_list?.add(new Profile_UserModel());
           }
         }
+      else if(category_name == "Languages")
+      {
+        if(language_list!.length >4)
+        {
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+        else
+        {
+          language_list?.add(new Skills_Languages_UserModel());
+        }
+      }
       else
         {
           var snackBar = SnackBar(content: Text('Unwanted Behaviour Noticed'));
@@ -212,7 +232,7 @@ class info_fillup_state extends State<info_fillup> {
           project_list?.removeLast();
         }
       }
-      else if(category_name == "Languages and Skills")
+      else if(category_name == "Skills")
       {
         if(skill_list!.length <=1)
         {
@@ -236,6 +256,18 @@ class info_fillup_state extends State<info_fillup> {
           profile_list?.removeLast();
         }
       }
+      else if(category_name == "Languages")
+      {
+        if(language_list!.length <=1)
+        {
+          var snackBar = SnackBar(content: Text('Min Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+        else
+        {
+          language_list?.removeLast();
+        }
+      }
       else
       {
         var snackBar = SnackBar(content: Text('Unwanted Behaviour Noticed'));
@@ -247,6 +279,7 @@ class info_fillup_state extends State<info_fillup> {
 
   void category_observation(String category_name) {
     setState(() {
+
       categories?.forEach((key, value) {
         if (key == category_name) {
           category_head_name = category_name;
@@ -302,7 +335,16 @@ class info_fillup_state extends State<info_fillup> {
         print(element.value);
       });
 
+      print("\n\nLanguages");
+      language_list?.forEach((element) {
+        print(element.value);
+      });
     });
+
+    print(form_name);
+
+
+
   }
 
   @override
@@ -316,155 +358,215 @@ class info_fillup_state extends State<info_fillup> {
         new SingleChildScrollView(
           child: new Padding(
             padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                new InkWell(
-                    onTap: () {
-                      category_observation("Education");
-                    },
-                    child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          boxShadow: [
-                            BoxShadow(color: Colors.teal, spreadRadius: 2),
-                          ],
-                        ),
-                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: new Padding(
+
+            child : new SizedBox(
+              height: 60,
+              child: new ListView(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.all(5),
+                  children: <Widget> [
+
+
+                    new InkWell(
+                        onTap: () {
+                          category_observation("Education");
+                        },
+                        child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(Radius.circular(25)),
+                              boxShadow: [
+                                BoxShadow(color: Colors.teal, spreadRadius: 2),
+                              ],
+                            ),
+                            margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: new Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: new Image.asset(
+                                  'assets/images/education.png',
+                                  //height: 15.0,
+                                  fit: BoxFit.cover,
+                                )))),
+                    new InkWell(
+                      onTap: () {
+                        category_observation("Skills");
+                      },
+                      child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            boxShadow: [
+                              BoxShadow(color: Colors.teal, spreadRadius: 2),
+                            ],
+                          ),
+                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: new Padding(
                             padding: const EdgeInsets.all(10),
                             child: new Image.asset(
-                              'assets/images/education.png',
+                              'assets/images/skill.png',
                               //height: 15.0,
                               fit: BoxFit.cover,
-                            )))),
-                new InkWell(
-                  onTap: () {
-                    category_observation("Languages and Skills");
-                  },
-                  child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                        boxShadow: [
-                          BoxShadow(color: Colors.teal, spreadRadius: 2),
-                        ],
-                      ),
-                      margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: new Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: new Image.asset(
-                          'assets/images/skill.png',
-                          //height: 15.0,
-                          fit: BoxFit.cover,
-                        ),
-                      )),
-                ),
-                new InkWell(
-                  onTap: () {
-                    category_observation("Achievements");
-                  },
-                  child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                        boxShadow: [
-                          BoxShadow(color: Colors.teal, spreadRadius: 2),
-                        ],
-                      ),
-                      margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: new Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: new Image.asset(
-                            'assets/images/trophy.png',
-                            // height: 35.0,
-                            // fit: BoxFit.cover,
-                          ))),
-                ),
-                new InkWell(
-                  onTap: () {
-                    category_observation("Work");
-                  },
-                  child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                        boxShadow: [
-                          BoxShadow(color: Colors.teal, spreadRadius: 2),
-                        ],
-                      ),
-                      margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: new Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: new Image.asset(
-                          'assets/images/work_experience.png',
-                          //height: 15.0,
-                          fit: BoxFit.cover,
-                        ),
-                      )),
-                ),
-                new InkWell(
-                  onTap: () {
-                    category_observation("Profile");
-                  },
-                  child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                        boxShadow: [
-                          BoxShadow(color: Colors.teal, spreadRadius: 2),
-                        ],
-                      ),
-                      margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: new Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: new Image.asset(
-                          'assets/images/profile.png',
-                          //height: 15.0,
-                          fit: BoxFit.cover,
-                        ),
-                      )),
-                ),
-                new InkWell(
-                  onTap: () {
-                    category_observation("Projects");
-                  },
-                  child: new Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                        boxShadow: [
-                          BoxShadow(color: Colors.teal, spreadRadius: 2),
-                        ],
-                      ),
-                      margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: new Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: new Image.asset(
-                          'assets/images/projects.png',
-                          //height: 15.0,
-                          fit: BoxFit.cover,
-                        ),
-                      )),
-                ),
-              ],
-            ),
+                            ),
+                          )),
+                    ),
+                    new InkWell(
+                      onTap: () {
+                        category_observation("Achievements");
+                      },
+                      child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            boxShadow: [
+                              BoxShadow(color: Colors.teal, spreadRadius: 2),
+                            ],
+                          ),
+                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: new Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: new Image.asset(
+                                'assets/images/trophy.png',
+                                // height: 35.0,
+                                // fit: BoxFit.cover,
+                              ))),
+                    ),
+                    new InkWell(
+                      onTap: () {
+                        category_observation("Work");
+                      },
+                      child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            boxShadow: [
+                              BoxShadow(color: Colors.teal, spreadRadius: 2),
+                            ],
+                          ),
+                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: new Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: new Image.asset(
+                              'assets/images/work_experience.png',
+                              //height: 15.0,
+                              fit: BoxFit.cover,
+                            ),
+                          )),
+                    ),
+                    new InkWell(
+                      onTap: () {
+                        category_observation("Profile");
+                      },
+                      child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            boxShadow: [
+                              BoxShadow(color: Colors.teal, spreadRadius: 2),
+                            ],
+                          ),
+                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: new Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: new Image.asset(
+                              'assets/images/profile.png',
+                              //height: 15.0,
+                              fit: BoxFit.cover,
+                            ),
+                          )),
+                    ),
+                    new InkWell(
+                      onTap: () {
+                        category_observation("Projects");
+                      },
+                      child: new Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            boxShadow: [
+                              BoxShadow(color: Colors.teal, spreadRadius: 2),
+                            ],
+                          ),
+                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: new Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: new Image.asset(
+                              'assets/images/projects.png',
+                              //height: 15.0,
+                              fit: BoxFit.cover,
+                            ),
+                          )),
+                    ),
+
+                    new InkWell(
+                      onTap: () {
+                        category_observation("Languages");
+                      },
+                      child: new Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                            boxShadow: [
+                              BoxShadow(color: Colors.teal, spreadRadius: 2),
+                            ],
+                          ),
+                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: new Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: new Image.asset(
+                              'assets/images/projects.png',
+                              //height: 15.0,
+                              fit: BoxFit.cover,
+                            ),
+                          )),
+                    ),
+
+
+
+                  ]
+              ),
+
+
+
+            )
+
+
+
+
           ),
         ),
         //Termination of Categories
+
+
+        new Padding(
+          padding:
+          const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextFormField(
+            initialValue: form_name ,
+            onChanged: (text) => form_name=text,
+            validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'Can\'t be empty';
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Enter Form Name',
+            ),),),
 
         new Padding(
             padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -511,8 +613,6 @@ class info_fillup_state extends State<info_fillup> {
         new Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              //current_category()
-              //current_category(),
 
               ListView.separated(
                   shrinkWrap: true,
@@ -534,7 +634,8 @@ class info_fillup_state extends State<info_fillup> {
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
                     //Resume_temp2()));
-                    Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list)));
+                Next_to_dynamic_resume(context)));
+                    //Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list)));
                 //edu_data_upload(context);
               },
               child: Text('Next',
@@ -547,12 +648,92 @@ class info_fillup_state extends State<info_fillup> {
         ),
 
 
-        //current_category(),
+
       ],
     )));
   }
 
 
+}
+
+
+Widget Next_to_dynamic_resume(BuildContext context)
+{
+  bool check = true;
+
+  edu_list?.forEach((value) {
+    if(value.organization_name == null || value.qualification_name==null || value.year_duration==null)
+      {
+        check = false;
+      }
+  });
+
+  project_list?.forEach((value) {
+    if(value.organization_name == null || value.qualification_name==null || value.year_duration==null || value.brief==null)
+    {
+      check = false;
+    }
+  });
+
+  work_list?.forEach((value) {
+    if(value.organization_name == null || value.qualification_name==null || value.year_duration==null || value.brief==null)
+    {
+      check = false;
+    }
+  });
+
+  achievement_list?.forEach((value) {
+    if(value.organization_name == null || value.qualification_name==null)
+    {
+      check = false;
+    }
+  });
+
+  profile_list?.forEach((value) {
+    if(value.name == null || value.location==null || value.phone_no==null)
+    {
+      check = false;
+    }
+  });
+
+  skill_list?.forEach((value) {
+    if(value.value == null)
+    {
+      check = false;
+    }
+  });
+
+  language_list?.forEach((value) {
+    if(value.value == null)
+    {
+      check = false;
+    }
+  });
+
+  if(form_name == null)
+    {
+      check = false;
+    }
+
+
+
+
+
+  if(check == true)
+    {
+
+      return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+    }
+  else
+    {
+
+      return new Text("Fill all the blanks properly!!",
+          textAlign: TextAlign.left,
+          style: GoogleFonts.poppins(
+              textStyle: TextStyle(
+                  fontSize: 30, fontWeight: FontWeight.bold)));
+
+    }
 }
 
 int list_len()
@@ -567,8 +748,11 @@ int list_len()
     return work_list!.length;
   } else if (categories!["Projects"] == true) {
     return project_list!.length;
-  } else if (categories!["Languages and Skills"] == true) {
+  } else if (categories!["Skills"] == true) {
     return skill_list!.length;
+  }
+  else if (categories!["Languages"] == true) {
+    return language_list!.length;
   }
   else
     {
@@ -588,9 +772,13 @@ Widget current_category(int index) {
     return Work_fillup_widget(index: index);
   } else if (categories!["Projects"] == true) {
     return Project_fillup_widget(index: index);
-  } else if (categories!["Languages and Skills"] == true) {
+  } else if (categories!["Skills"] == true) {
     return Skill_fillup_widget(index: index);
-  } else {
+  } else if(categories!["Languages"] == true)
+    {
+      return language_fillup_widget(index: index);
+    }
+  else {
     return Text("Invalid Widget");
   }
 }
@@ -636,6 +824,7 @@ class Profile_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: profile_list?.elementAt(index!).name,
                     onChanged: (text) => name=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -653,7 +842,7 @@ class Profile_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: profile_list?.elementAt(index!).phone_no,
                     onChanged: (text) => phone_no=text,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -671,6 +860,7 @@ class Profile_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: profile_list?.elementAt(index!).location,
                     onChanged: (text) => location=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -688,6 +878,7 @@ class Profile_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: profile_list?.elementAt(index!).mail,
                     onChanged: (text) => mail=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -705,6 +896,7 @@ class Profile_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: profile_list?.elementAt(index!).social_link,
                     onChanged: (text) => link=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -824,6 +1016,7 @@ class Project_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: project_list?.elementAt(index!).qualification_name,
                     onChanged: (text) => project_name =text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -841,6 +1034,7 @@ class Project_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: project_list?.elementAt(index!).organization_name,
                     onChanged: (text) => project_type =text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -858,6 +1052,7 @@ class Project_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: project_list?.elementAt(index!).brief,
                     onChanged: (text) => project_brief=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -875,6 +1070,7 @@ class Project_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: project_list?.elementAt(index!).year_duration,
                     onChanged: (text) => project_duration=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -949,6 +1145,101 @@ class Project_fillup_widget extends StatelessWidget {
   }
 
 }
+
+class language_fillup_widget extends StatelessWidget {
+
+  int? index;
+  String? skill_name;
+
+  language_fillup_widget({
+    this.index,
+  });
+
+
+  @override
+  Widget build(BuildContext context) {
+    return new Padding(
+      padding: const EdgeInsets.all(10),
+      child: new Container(
+        // width: 50,
+        // height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(25)),
+            boxShadow: [
+              BoxShadow(color: Colors.teal, spreadRadius: 2),
+            ],
+          ),
+          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+
+                new Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    onChanged: (text) => skill_name=text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    initialValue: language_list?.elementAt(index!).value,
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter langauage name',
+                    ),
+                  ),),
+
+                new Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child:
+                    ElevatedButton(
+                      onPressed: () {
+                        language_data_upload(context);
+                      },
+                      child: Text('Save'),
+                    )
+
+                ),
+
+
+              ])),
+
+    );
+  }
+
+  void language_data_upload(BuildContext context) {
+
+    if(skill_name==null)
+    {
+      skill_name = language_list?.elementAt(index!).value;
+    }
+
+    if(skill_name!.isEmpty || skill_name==null)
+    {
+      var snackBar = SnackBar(content: Text('data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    else if(skill_name!.isNotEmpty && skill_name!=null)
+    {
+      language_list?.elementAt(index!).value = skill_name;
+
+      var snackBar = SnackBar(content: Text('Data filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    else
+    {
+      var snackBar = SnackBar(content: Text('Data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
+
+  }}
 
 class Skill_fillup_widget extends StatelessWidget {
 
@@ -1045,6 +1336,7 @@ class Skill_fillup_widget extends StatelessWidget {
 
   }}
 
+
 class Achievement_fillup_widget extends StatelessWidget {
 
   int? index;
@@ -1081,6 +1373,7 @@ class Achievement_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: achievement_list?.elementAt(index!).qualification_name,
                     onChanged: (text) => ach_name=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -1098,6 +1391,7 @@ class Achievement_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: achievement_list?.elementAt(index!).organization_name,
                     onChanged: (text) => ach_org=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -1200,6 +1494,7 @@ class Work_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: work_list?.elementAt(index!).qualification_name,
                     onChanged: (text) => project_name=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -1216,6 +1511,7 @@ class Work_fillup_widget extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
                     initialValue: work_list?.elementAt(index!).organization_name,
+                    autovalidateMode: AutovalidateMode.always,
                     onChanged: (text) => project_type=text,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
@@ -1234,6 +1530,7 @@ class Work_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: work_list?.elementAt(index!).brief,
                     onChanged: (text) => project_brief=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -1251,6 +1548,7 @@ class Work_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: work_list?.elementAt(index!).year_duration,
                     onChanged: (text) => project_duration=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -1363,6 +1661,7 @@ class Education_fillup_widget extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
                     initialValue: edu_list?.elementAt(index!).qualification_name,
+                    autovalidateMode: AutovalidateMode.always,
                     onChanged: (text) => edu_name=text,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
@@ -1380,6 +1679,7 @@ class Education_fillup_widget extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
                     initialValue: edu_list?.elementAt(index!).organization_name,
+                    autovalidateMode: AutovalidateMode.always,
                     onChanged: (text) => edu_org=text,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
@@ -1398,6 +1698,7 @@ class Education_fillup_widget extends StatelessWidget {
                   child: TextFormField(
                     initialValue: edu_list?.elementAt(index!).year_duration,
                     onChanged: (text) => edu_duration=text,
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';

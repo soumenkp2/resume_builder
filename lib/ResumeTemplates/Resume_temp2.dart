@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/%20CustomResumeWidgets/Header_Widget.dart';
 
 import '../ CustomResumeWidgets/Education_Widget.dart';
-import '../ResumeWidgets/Language_Widget.dart';
+import '../ResumeWidgets/language_Widget.dart';
 import '../ResumeWidgets/skill_Widget.dart';
 import '../ResumeWidgets/achievement_Widget.dart';
 import '../ResumeWidgets/project_Widget.dart';
@@ -40,8 +40,10 @@ class Resume_temp2 extends StatefulWidget
   List<Skills_Languages_UserModel>? skill_list;
   List<Achievements_UserModel>? achievement_list;
   List<Profile_UserModel>? profile_list;
+  List<Skills_Languages_UserModel>? language_list;
 
-   Resume_temp2(this.edu_list, this.work_list, this.project_list, this.profile_list, this.achievement_list, this.skill_list);
+
+   Resume_temp2(this.edu_list, this.work_list, this.project_list, this.profile_list, this.achievement_list, this.skill_list, this.language_list);
 
   @override
   State<StatefulWidget> createState() => Resume_temp2_state();
@@ -65,8 +67,8 @@ class Resume_temp2_state extends State<Resume_temp2>
     // widget.skill_list = new List<Skills_Languages_UserModel>.empty(growable: true);
     // widget.achievement_list = new List<Achievements_UserModel>.empty(growable: true);
     // widget.profile_list = new List<Profile_UserModel>.empty(growable: true);
-
-
+    //
+    //
     // widget.edu_list?.add(new Education_UserModel());
     // widget.edu_list?.elementAt(0).qualification_name = "BTech - Computer Science Engineering";
     // widget.edu_list?.elementAt(0).organization_name = "KIET Group of Institutions, Ghaziabad";
@@ -129,13 +131,13 @@ class Resume_temp2_state extends State<Resume_temp2>
           children: <Widget>[
 
             new header_Widget(
-                height: 120,
+                height: 100,
                 margin_top: 0,
                 margin_left: 0,
-                margin_bottom: 10,
+                margin_bottom: 0,
                 margin_right: 0,
                 profile_list: widget.profile_list,
-
+                color: "teal"
             ),
 
             new Padding(padding: const EdgeInsets.all(10),
@@ -156,6 +158,9 @@ class Resume_temp2_state extends State<Resume_temp2>
                             margin_bottom: 0,
                             margin_right: 10,
                             edu_list: widget.edu_list,
+                            color: "white",
+                            txt_color: "black",
+                            high_color: "teal"
                           ),
 
                           new experience_Widget(
@@ -164,18 +169,24 @@ class Resume_temp2_state extends State<Resume_temp2>
                             margin_bottom: 0,
                             margin_right: 10,
                             work_list: widget.work_list,
+                              color: "white",
+                              txt_color: "black",
+                              high_color: "teal"
                           ),
 
-                          new skill_Widget(
-                  margin_left: 0,
-                  margin_top: 20,
-                  margin_bottom: 0,
-                  margin_right: 10,
-                  skill_list: widget.skill_list,
-                  ),
 
 
+                          Language_Widget(
+                            margin_top: 20,
+                            margin_left: 0,
+                            margin_bottom: 0,
+                            margin_right: 10,
+                            color: "white",
+                            txt_color: "black",
+                            high_color: "teal",
+                            language_list: widget.language_list,
 
+                          )
 
 
 
@@ -194,6 +205,9 @@ class Resume_temp2_state extends State<Resume_temp2>
                               margin_bottom: 0,
                               margin_right: 0,
                               achievement_list: widget.achievement_list,
+                                color: "white",
+                                txt_color: "black",
+                                high_color: "teal"
                             ),
 
                             new project_Widget(
@@ -202,20 +216,23 @@ class Resume_temp2_state extends State<Resume_temp2>
                               margin_bottom: 0,
                               margin_right: 0,
                               project_list: widget.project_list,
+                                color: "white",
+                                txt_color: "black",
+                                high_color: "teal"
+                            ),
+
+                            new skill_Widget(
+                                margin_left: 10,
+                                margin_top: 20,
+                                margin_bottom: 0,
+                                margin_right: 0,
+                                skill_list: widget.skill_list,
+                                color: "white",
+                                txt_color: "black",
+                                high_color: "teal"
                             ),
 
 
-                            Language_Widget(
-                              height: 180,
-                              margin_top: 20,
-                              margin_left: 10,
-                              margin_bottom: 0,
-                              margin_right: 0,
-                              skill1: "English",
-                              skill2: "Hindi",
-                              skill3: "Bengali",
-
-                            )
 
                           ]
 
