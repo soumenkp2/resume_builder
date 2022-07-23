@@ -54,9 +54,9 @@ class home_state extends State<home> {
     {
       Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(5)));
     }
-    else
+    else if(index ==0 )
       {
-
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => Resume_temp2()));
       }
   }
 
@@ -165,6 +165,28 @@ class home_state extends State<home> {
                               scrollDirection: Axis.horizontal,
                               padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
                               children: <Widget>[
+
+                                // new InkWell(
+                                //   onTap: (){moveToResume(0);},
+                                //   child: Container(
+                                //     //width: 150,
+                                //       decoration: BoxDecoration(
+                                //         color: const Color(0xffd4e3ea),
+                                //         borderRadius:
+                                //         BorderRadius.all(Radius.circular(25)),
+                                //       ),
+                                //       margin:
+                                //       const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                //       child: new Padding(
+                                //         padding: const EdgeInsets.all(0),
+                                //         child : Image.asset(
+                                //           'assets/images/resume_template1.png',
+                                //           height: 35.0,
+                                //           fit: BoxFit.cover,
+                                //         ),
+                                //       )
+                                //   ),
+                                // ),
 
                                 new InkWell(
                                   onTap: (){moveToResume(1);},

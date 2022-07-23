@@ -27,6 +27,9 @@ import '../UserModels/Profile_UserModel.dart';
 import '../UserModels/Skills_Languages_UserModel.dart';
 import '../UserModels/Work_Projects_UserModel.dart';
 
+import 'package:resume_builder/pdf_resume_api.dart';
+
+import '../pdf_api.dart';
 
 
 class Template_5 extends StatefulWidget
@@ -108,6 +111,12 @@ class Template_5state extends State<Template_5>
 
   }
 
+
+  void _createPDF() async
+  {
+    final file = await pdfResumeApi.generate(widget.profile_list,widget.edu_list,widget.work_list,widget.project_list,widget.achievement_list,widget.skill_list,widget.language_list,"white","black","teal",5);
+    PdfApi.openFile(file);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -214,7 +223,13 @@ class Template_5state extends State<Template_5>
 
             )
 
-        )
+        ),
+
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.print),
+        onPressed: _createPDF,
+        //_printScreen ,
+      ),
 
 
 

@@ -27,32 +27,44 @@ import '../pdf_api.dart';
 
 class Resume_temp1 extends StatefulWidget
 {
+
   @override
   State<StatefulWidget> createState() => Resume_temp1_state();
 }
 
 class Resume_temp1_state extends State<Resume_temp1>
 {
+  final GlobalKey<State<StatefulWidget>> _printKey = GlobalKey();
 
-  void _createPDF() async
-  {
-    //final pdf = pw.Document();
+  void _printScreen() {
+    Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
+      final doc = pw.Document();
 
+      final image = await WidgetWraper.fromKey(
+        key: _printKey,
+        pixelRatio: 2.0,
+      );
 
-    // On Flutter, use the [path_provider](https://pub.dev/packages/path_provider) library:
-//   final output = await getTemporaryDirectory();
-//   final file = File("${output.path}/example.pdf");
-//     final file = File("example.pdf");
-//     await file.writeAsBytes(await pdf.save());
-  
-    //final file = await PdfApi.saveDocument(name: "resume_temp1", pdf: pdf);
-    final file = await pdfResumeApi.generate();
-    PdfApi.openFile(file);
+      doc.addPage(pw.Page(
+          pageFormat: format,
+          build: (pw.Context context) {
+            return pw.Center(
+              child: pw.Expanded(
+                child: pw.Image(image),
+              ),
+            );
+          }));
 
-
-
-
+      return doc.save();
+    });
   }
+
+  // void _createPDF() async
+  // {
+  //   final file = await pdfResumeApi.generate();
+  //   PdfApi.openFile(file);
+  //
+  // }
 
 
   @override
@@ -221,7 +233,8 @@ class Resume_temp1_state extends State<Resume_temp1>
 
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.print),
-        onPressed: _createPDF,
+        onPressed: //_createPDF
+        _printScreen ,
     ),
 
     );

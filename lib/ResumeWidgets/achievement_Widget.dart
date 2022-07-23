@@ -106,6 +106,7 @@ class achievement_Widget extends StatelessWidget {
 
             ListView.separated(
                 shrinkWrap: true,
+                padding: const EdgeInsets.all(0),
                 physics: const ScrollPhysics(),
                 itemBuilder: (context, index) {
                   return Column(children: <Widget>[

@@ -114,6 +114,7 @@ class experience_Widget extends StatelessWidget {
             ListView.separated(
                 shrinkWrap: true,
                 physics: const ScrollPhysics(),
+                padding: const EdgeInsets.all(0),
                 itemBuilder: (context, index) {
                   return Column(children: <Widget>[
                     experiences(index,work_list),

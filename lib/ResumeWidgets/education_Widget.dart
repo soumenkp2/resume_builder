@@ -118,6 +118,7 @@ class education_Widget extends StatelessWidget {
 
             ListView.separated(
                 shrinkWrap: true,
+                padding: const EdgeInsets.all(0),
                 physics: const ScrollPhysics(),
                 itemBuilder: (context, index) {
                   return Column(children: <Widget>[
@@ -192,6 +193,7 @@ class Course_Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
+      padding: const EdgeInsets.all(0),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,

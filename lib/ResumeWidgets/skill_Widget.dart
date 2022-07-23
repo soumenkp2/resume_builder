@@ -107,6 +107,7 @@ class skill_Widget extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: ListView.separated(
                   shrinkWrap: true,
+                  padding: const EdgeInsets.all(0),
                   physics: const ScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Column(children: <Widget>[

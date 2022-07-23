@@ -27,6 +27,9 @@ import '../UserModels/Profile_UserModel.dart';
 import '../UserModels/Skills_Languages_UserModel.dart';
 import '../UserModels/Work_Projects_UserModel.dart';
 
+import 'package:resume_builder/pdf_resume_api.dart';
+
+import '../pdf_api.dart';
 
 
 
@@ -56,6 +59,8 @@ class Template_1 extends StatefulWidget
 
 class Template_1state extends State<Template_1>
 {
+
+
 
   @override
   void initState() {
@@ -123,6 +128,14 @@ class Template_1state extends State<Template_1>
     // widget.profile_list?.elementAt(0).social_link = "linkedin.com";
     // widget.profile_list?.elementAt(0).mail = "soumenkp2";
     // widget.profile_list?.elementAt(0).phone_no = "8077570708";
+
+  }
+
+
+  void _createPDF() async
+  {
+    final file = await pdfResumeApi.generate(widget.profile_list,widget.edu_list,widget.work_list,widget.project_list,widget.achievement_list,widget.skill_list,widget.language_list,"white","black","teal",1);
+    PdfApi.openFile(file);
 
   }
 
@@ -249,7 +262,13 @@ class Template_1state extends State<Template_1>
 
                 ]
             )
-        )
+        ),
+
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.print),
+        onPressed: _createPDF,
+        //_printScreen ,
+      ),
 
 
 
