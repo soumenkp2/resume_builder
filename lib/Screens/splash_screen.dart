@@ -40,7 +40,7 @@ class splash_state extends State<splash_screen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Container(
-              child: Image.asset('assets/images/profile.png',
+              child: Image.asset('assets/images/resume_app_logo.png',
               height: 200,
               width: 200)
             ),
