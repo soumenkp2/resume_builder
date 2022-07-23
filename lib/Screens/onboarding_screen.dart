@@ -93,7 +93,7 @@ class onboarding_screen_state extends State<onboarding_screen> {
                           ),
                           margin: const EdgeInsets.fromLTRB(10, 30, 10, 0),
                           child: new Image.asset(
-                            'assets/images/onboarding_first.png',
+                            'assets/images/header.png',
                           ),
                         ),
 

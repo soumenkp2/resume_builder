@@ -8,7 +8,12 @@ import 'package:resume_builder/Screens/your_resume.dart';
 
 import '../ResumeTemplates/Resume_temp1.dart';
 import '../ResumeTemplates/Resume_temp2.dart';
-import '../ResumeTemplates/Resume_temp3.dart';
+import '../ResumeTemplates/Template_5.dart';
+import '../ResumeTemplates/Template_6.dart';
+import '../ResumeTemplates/Template_1.dart';
+import '../ResumeTemplates/Template_2.dart';
+import '../ResumeTemplates/Template_3.dart';
+import '../ResumeTemplates/Template_4.dart';
 
 class home extends StatefulWidget {
   @override
@@ -27,15 +32,27 @@ class home_state extends State<home> {
   {
     if(index==1)
       {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => Resume_temp1()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(1)));
       }
     else if(index==2)
       {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(2)));
       }
     else if(index==3)
     {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => Resume_temp3()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>info_fillup(3)));
+    }
+    else if(index==4)
+    {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(4)));
+    }
+    else if(index==6)
+    {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(6)));
+    }
+    else if(index==5)
+    {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(5)));
     }
     else
       {
@@ -143,7 +160,7 @@ class home_state extends State<home> {
 
                       ),
                       new SizedBox(
-                          height: 300,
+                          height: 400,
                           child: ListView(
                               scrollDirection: Axis.horizontal,
                               padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -159,11 +176,11 @@ class home_state extends State<home> {
                                         BorderRadius.all(Radius.circular(25)),
                                       ),
                                       margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                       child: new Padding(
                                         padding: const EdgeInsets.all(0),
                                         child : Image.asset(
-                                          'assets/images/resume_template3.png',
+                                          'assets/images/template_1.png',
                                           height: 35.0,
                                           fit: BoxFit.cover,
                                         ),
@@ -181,11 +198,11 @@ class home_state extends State<home> {
                                         BorderRadius.all(Radius.circular(25)),
                                       ),
                                       margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                       child: new Padding(
                                         padding: const EdgeInsets.all(0),
                                         child : Image.asset(
-                                          'assets/images/resume_template2.png',
+                                          'assets/images/template_2.png',
                                           height: 35.0,
                                           fit: BoxFit.cover,
                                         ),
@@ -206,42 +223,71 @@ class home_state extends State<home> {
                                     const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                     //padding: const EdgeInsets.all(20),
                                     child: new Image.asset(
-                                      'assets/images/resume_template1.png',
+                                      'assets/images/template_3.png',
                                       fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
 
-                                new Container(
-                                 // width: 150,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffd4e3ea),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                  ),
-                                  margin:
-                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  //padding: const EdgeInsets.all(20),
-                                  child: new Image.asset(
-                                    'assets/images/resume_template2.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                new Container(
-                                 // width: 150,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffd4e3ea),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                  ),
-                                  margin:
-                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  //padding: const EdgeInsets.all(20),
-                                  child: new Image.asset(
-                                    'assets/images/resume_template1.png',
-                                    fit: BoxFit.cover,
+
+                                new InkWell(
+                                  onTap: (){moveToResume(4);},
+                                  child: Container(
+                                    //width: 150,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xffd4e3ea),
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(25)),
+                                    ),
+                                    margin:
+                                    const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    //padding: const EdgeInsets.all(20),
+                                    child: new Image.asset(
+                                      'assets/images/template_4.png',
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
+
+                                new InkWell(
+                                  onTap: (){moveToResume(5);},
+                                  child: Container(
+                                    //width: 150,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xffd4e3ea),
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(25)),
+                                    ),
+                                    margin:
+                                    const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    //padding: const EdgeInsets.all(20),
+                                    child: new Image.asset(
+                                      'assets/images/template_5.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+
+                                new InkWell(
+                                  onTap: (){moveToResume(6);},
+                                  child: Container(
+                                    //width: 150,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xffd4e3ea),
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(25)),
+                                    ),
+                                    margin:
+                                    const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    //padding: const EdgeInsets.all(20),
+                                    child: new Image.asset(
+                                      'assets/images/template_6.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+
+
                               ]
                           )
                       ),

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
-import 'package:resume_builder/ResumeTemplates/Resume_temp3.dart';
+import 'package:resume_builder/ResumeTemplates/Template_6.dart';
 import 'package:resume_builder/pdf_api.dart';
 
 import ' CustomResumeWidgets/Language_Widget.dart';

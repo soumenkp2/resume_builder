@@ -8,6 +8,12 @@ import 'package:resume_builder/Screens/your_resume.dart';
 import 'package:resume_builder/UserModels/Skills_Languages_UserModel.dart';
 
 import '../ResumeTemplates/Resume_temp1.dart';
+import '../ResumeTemplates/Template_1.dart';
+import '../ResumeTemplates/Template_2.dart';
+import '../ResumeTemplates/Template_3.dart';
+import '../ResumeTemplates/Template_4.dart';
+import '../ResumeTemplates/Template_5.dart';
+import '../ResumeTemplates/Template_6.dart';
 import '../UserModels/Achievements_UserModel.dart';
 import '../UserModels/Education_UserModel.dart';
 import '../UserModels/Profile_UserModel.dart';
@@ -15,6 +21,13 @@ import '../UserModels/Work_Projects_UserModel.dart';
 import 'dart:developer';
 
 class info_fillup extends StatefulWidget {
+
+
+
+  int index;
+
+  info_fillup(this.index);
+
   @override
   State<StatefulWidget> createState() => info_fillup_state();
 }
@@ -31,12 +44,16 @@ String? form_name;
 
 
 
+
 Map<String,List>? final_data;
 bool? send_flag;
 
 Map<String, bool>? categories;
 
 class info_fillup_state extends State<info_fillup> {
+
+
+
   @override
   void initState() {
     super.initState();
@@ -80,6 +97,8 @@ class info_fillup_state extends State<info_fillup> {
 
 
   }
+
+
 
   void add_card(String category_name)
   {
@@ -634,7 +653,7 @@ class info_fillup_state extends State<info_fillup> {
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
                     //Resume_temp2()));
-                Next_to_dynamic_resume(context)));
+                Next_to_dynamic_resume(context,widget.index)));
                     //Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list)));
                 //edu_data_upload(context);
               },
@@ -657,7 +676,7 @@ class info_fillup_state extends State<info_fillup> {
 }
 
 
-Widget Next_to_dynamic_resume(BuildContext context)
+Widget Next_to_dynamic_resume(BuildContext context, int index)
 {
   bool check = true;
 
@@ -722,7 +741,42 @@ Widget Next_to_dynamic_resume(BuildContext context)
   if(check == true)
     {
 
-      return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      if(index==1)
+      {
+        return Template_1(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+      }
+      else if(index==2)
+      {
+        return Template_2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+      }
+      else if(index==3)
+      {
+        return Template_3(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+        //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>info_fillup()));
+      }
+      else if(index==4)
+      {
+        return Template_4(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+      }
+      else if(index==6)
+      {
+        return Template_6(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+      }
+      else if(index==5)
+      {
+        return Template_5(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+      }
+      else
+      {
+        return Text("hello ji");
+      }
+
+      //return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
     }
   else
     {

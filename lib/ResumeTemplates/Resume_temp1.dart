@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/%20CustomResumeWidgets/Header_Widget.dart';
-import 'package:resume_builder/ResumeTemplates/Resume_temp3.dart';
+import 'package:resume_builder/ResumeTemplates/Template_6.dart';
 import 'package:resume_builder/ResumeWidgets/project_Widget.dart';
 import 'package:resume_builder/pdf_resume_api.dart';
 
