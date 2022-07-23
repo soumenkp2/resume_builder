@@ -6,6 +6,7 @@ import 'package:resume_builder/Screens/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/Screens/your_resume.dart';
 
+import '../DataBase/DataBaseManager.dart';
 import '../ResumeTemplates/Resume_temp1.dart';
 import '../ResumeTemplates/Resume_temp2.dart';
 import '../ResumeTemplates/Template_5.dart';
@@ -14,6 +15,7 @@ import '../ResumeTemplates/Template_1.dart';
 import '../ResumeTemplates/Template_2.dart';
 import '../ResumeTemplates/Template_3.dart';
 import '../ResumeTemplates/Template_4.dart';
+import 'FormListPage.dart';
 
 class home extends StatefulWidget {
   @override
@@ -23,6 +25,7 @@ class home extends StatefulWidget {
 class home_state extends State<home> {
   @override
   void initState() {
+    var db= DataBaseManager.instance;
     super.initState();
     //onstart();
     //Navigator.of(context).pushNamed('splash_screen');
@@ -32,27 +35,27 @@ class home_state extends State<home> {
   {
     if(index==1)
       {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(1)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => FormListPage(tableIndex: 1)));
       }
     else if(index==2)
       {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(2)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => FormListPage(tableIndex: 2)));
       }
     else if(index==3)
     {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>info_fillup(3)));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>FormListPage(tableIndex: 3)));
     }
     else if(index==4)
     {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(4)));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => FormListPage(tableIndex: 4)));
     }
     else if(index==6)
     {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(6)));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => FormListPage(tableIndex: 6)));
     }
     else if(index==5)
     {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(5)));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => FormListPage(tableIndex: 5)));
     }
     else if(index ==0 )
       {

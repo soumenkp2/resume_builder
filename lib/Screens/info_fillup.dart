@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:resume_builder/DataBase/TableName.dart';
 import 'package:resume_builder/ResumeTemplates/Resume_temp2.dart';
 import 'package:resume_builder/Screens/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/Screens/your_resume.dart';
 import 'package:resume_builder/UserModels/Skills_Languages_UserModel.dart';
 
+import '../DataBase/DataBaseManager.dart';
 import '../ResumeTemplates/Resume_temp1.dart';
 import '../ResumeTemplates/Template_1.dart';
 import '../ResumeTemplates/Template_2.dart';
@@ -44,16 +46,12 @@ String? form_name;
 
 
 
-
 Map<String,List>? final_data;
 bool? send_flag;
 
 Map<String, bool>? categories;
 
 class info_fillup_state extends State<info_fillup> {
-
-
-
   @override
   void initState() {
     super.initState();
@@ -97,8 +95,6 @@ class info_fillup_state extends State<info_fillup> {
 
 
   }
-
-
 
   void add_card(String category_name)
   {
@@ -681,49 +677,49 @@ Widget Next_to_dynamic_resume(BuildContext context, int index)
   bool check = true;
 
   edu_list?.forEach((value) {
-    if(value.organization_name == null || value.qualification_name==null || value.year_duration==null)
+    if(value.tableName==null|| value.organization_name == null || value.qualification_name==null || value.year_duration==null)
       {
         check = false;
       }
   });
 
   project_list?.forEach((value) {
-    if(value.organization_name == null || value.qualification_name==null || value.year_duration==null || value.brief==null)
+    if(value.tableName==null||value.organization_name == null || value.qualification_name==null || value.year_duration==null || value.brief==null)
     {
       check = false;
     }
   });
 
   work_list?.forEach((value) {
-    if(value.organization_name == null || value.qualification_name==null || value.year_duration==null || value.brief==null)
+    if(value.tableName==null||value.organization_name == null || value.qualification_name==null || value.year_duration==null || value.brief==null)
     {
       check = false;
     }
   });
 
   achievement_list?.forEach((value) {
-    if(value.organization_name == null || value.qualification_name==null)
+    if(value.tableName==null||value.organization_name == null || value.qualification_name==null)
     {
       check = false;
     }
   });
 
   profile_list?.forEach((value) {
-    if(value.name == null || value.location==null || value.phone_no==null)
+    if(value.tableName==null||value.name == null || value.location==null || value.phone_no==null)
     {
       check = false;
     }
   });
 
   skill_list?.forEach((value) {
-    if(value.value == null)
+    if(value.tableName==null||value.value == null)
     {
       check = false;
     }
   });
 
   language_list?.forEach((value) {
-    if(value.value == null)
+    if(value.tableName==null||value.value == null)
     {
       check = false;
     }
@@ -740,6 +736,8 @@ Widget Next_to_dynamic_resume(BuildContext context, int index)
 
   if(check == true)
     {
+      insertDataBase(index);
+
 
       if(index==1)
       {
@@ -788,6 +786,35 @@ Widget Next_to_dynamic_resume(BuildContext context, int index)
                   fontSize: 30, fontWeight: FontWeight.bold)));
 
     }
+}
+
+void insertDataBase(int index){
+  var db= DataBaseManager.instance;
+  skill_list?.forEach((element) {
+    db.insertKeys("SKILLS", element);
+  });
+  edu_list?.forEach((element) {
+    db.insertKeys("EDUCATION", element);
+  });
+  work_list?.forEach((element) {
+    db.insertKeys("WORK", element);
+  });
+  project_list?.forEach((element) {
+    db.insertKeys("PROJECT", element);
+  });
+  profile_list?.forEach((element) {
+    db.insertKeys("PROFILE", element);
+  });
+  language_list?.forEach((element) {
+    db.insertKeys("LANGUAGE", element);
+  });
+  achievement_list?.forEach((element) {
+    db.insertKeys("ACHIEVEMENT", element);
+  });
+  TableName t =new TableName(tableName: form_name,id:index.toString());
+  db.insertKeys("TABLENAME",t);
+
+
 }
 
 int list_len()
@@ -1016,7 +1043,8 @@ class Profile_fillup_widget extends StatelessWidget {
         profile_list?.elementAt(index!).mail = mail;
         profile_list?.elementAt(index!).social_link = link;
         profile_list?.elementAt(index!).phone_no = phone_no;
-
+        profile_list?.elementAt(index!).tableName=form_name;
+        profile_list?.elementAt(index!).id=form_name!+index.toString();
         var snackBar = SnackBar(content: Text('data filled'));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
@@ -1186,7 +1214,8 @@ class Project_fillup_widget extends StatelessWidget {
       project_list?.elementAt(index!).organization_name = project_type;
       project_list?.elementAt(index!).brief = project_brief;
       project_list?.elementAt(index!).year_duration = project_duration;
-
+      project_list?.elementAt(index!).tableName=form_name;
+      project_list?.elementAt(index!).id=form_name!+index.toString();
       var snackBar = SnackBar(content: Text('Data filled'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
@@ -1282,7 +1311,8 @@ class language_fillup_widget extends StatelessWidget {
     else if(skill_name!.isNotEmpty && skill_name!=null)
     {
       language_list?.elementAt(index!).value = skill_name;
-
+      language_list?.elementAt(index!).tableName=form_name;
+      language_list?.elementAt(index!).id=form_name!+index.toString();
       var snackBar = SnackBar(content: Text('Data filled'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
@@ -1377,7 +1407,8 @@ class Skill_fillup_widget extends StatelessWidget {
     else if(skill_name!.isNotEmpty && skill_name!=null)
     {
       skill_list?.elementAt(index!).value = skill_name;
-
+      skill_list?.elementAt(index!).tableName=form_name;
+      skill_list?.elementAt(index!).id=form_name!+index.toString();
       var snackBar = SnackBar(content: Text('Data filled'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
@@ -1496,7 +1527,8 @@ class Achievement_fillup_widget extends StatelessWidget {
     {
       achievement_list?.elementAt(index!).qualification_name = ach_name;
       achievement_list?.elementAt(index!).organization_name = ach_org;
-
+      achievement_list?.elementAt(index!).tableName=form_name;
+      achievement_list?.elementAt(index!).id=form_name!+index.toString();
       var snackBar = SnackBar(content: Text('Data filled'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
@@ -1665,7 +1697,8 @@ class Work_fillup_widget extends StatelessWidget {
       work_list?.elementAt(index!).organization_name = project_type;
       work_list?.elementAt(index!).brief = project_brief;
       work_list?.elementAt(index!).year_duration = project_duration;
-
+      work_list?.elementAt(index!).tableName=form_name;
+      work_list?.elementAt(index!).id=form_name!+index.toString();
       var snackBar = SnackBar(content: Text('Data filled'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
@@ -1808,7 +1841,8 @@ class Education_fillup_widget extends StatelessWidget {
       edu_list?.elementAt(index!).qualification_name = edu_name;
       edu_list?.elementAt(index!).organization_name = edu_org;
       edu_list?.elementAt(index!).year_duration = edu_duration;
-
+      edu_list?.elementAt(index!).tableName=form_name;
+      edu_list?.elementAt(index!).id=form_name!+index.toString();
       var snackBar = SnackBar(content: Text('Data filled'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
