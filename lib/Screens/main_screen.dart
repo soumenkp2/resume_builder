@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:resume_builder/Screens/main.dart';
 import 'home.dart';
 import 'your_resume.dart';
-import 'profile.dart';
+import 'faq.dart';
 
 class main_screen extends StatefulWidget
 {
@@ -17,7 +17,7 @@ class main_screen extends StatefulWidget
 class main_screen_state extends State<main_screen>
 {
 
-  var pages_date = [home(),your_resume(),profile()];
+  var pages_date = [home(),your_resume(),faq()];
 
   int selected_item = 0;
 
@@ -36,11 +36,13 @@ class main_screen_state extends State<main_screen>
         body: Center(
           child: pages_date[selected_item],
         ),
+
+
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Home"),
             BottomNavigationBarItem(icon: Icon(Icons.dashboard_customize), label: "Your Resume"),
-            BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: "Profile")
+            BottomNavigationBarItem(icon: Icon(Icons.question_answer), label: "FAQs")
           ],
           currentIndex: selected_item,
           onTap: (setValue)
@@ -50,8 +52,6 @@ class main_screen_state extends State<main_screen>
             });
           },
         )
-
-
 
 
     );

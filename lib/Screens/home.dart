@@ -68,32 +68,34 @@ class home_state extends State<home> {
     return Scaffold(
         backgroundColor: Colors.white38,
         body: SingleChildScrollView(
+          padding: const EdgeInsets.only(top: 60),
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+
             // Row -> menu btn and search btn (Coloumn child 1)
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                new Container(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                  child: new Image.asset(
-                    'assets/images/menu.png',
-                    height: 40.0,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                new Container(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
-                  child: new Image.asset(
-                    'assets/images/search.png',
-                    height: 35.0,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ],
-            ),
-            //Row -> menu btn and search terminates
+            // new Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: <Widget>[
+            //     new Container(
+            //       padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
+            //       child: new Image.asset(
+            //         'assets/images/menu.png',
+            //         height: 40.0,
+            //         fit: BoxFit.cover,
+            //       ),
+            //     ),
+            //     new Container(
+            //       padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
+            //       child: new Image.asset(
+            //         'assets/images/search.png',
+            //         height: 35.0,
+            //         fit: BoxFit.cover,
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // //Row -> menu btn and search terminates
 
             //App Header
             new Container(
@@ -192,26 +194,26 @@ class home_state extends State<home> {
                                 // ),
 
                                 new InkWell(
-                                  onTap: (){moveToResume(1);},
-                                  child: Container(
-                                    //width: 150,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xffd4e3ea),
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                      ),
-                                      margin:
-                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                      child: new Padding(
-                                        padding: const EdgeInsets.all(0),
-                                        child : Image.asset(
-                                          'assets/images/template_1.png',
-                                          height: 35.0,
-                                          fit: BoxFit.cover,
+                                        onTap: (){moveToResume(1);},
+                                        child: Container(
+                                          //width: 150,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xffd4e3ea),
+                                              borderRadius:
+                                              BorderRadius.all(Radius.circular(25)),
+                                            ),
+                                            margin:
+                                            const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                            child: new Padding(
+                                              padding: const EdgeInsets.all(0),
+                                              child : Image.asset(
+                                                'assets/images/template_1.png',
+                                                height: 35.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            )
                                         ),
-                                      )
-                                  ),
-                                ),
+                                      ),
 
                                 new InkWell(
                                   onTap: (){moveToResume(2);},

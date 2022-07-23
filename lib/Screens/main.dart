@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
+      debugShowCheckedModeBanner: false,
 
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -24,8 +24,10 @@ class MyApp extends StatelessWidget {
 
                 splash_screen()
       //Resume_temp2()
+
     );
   }
+
 }
 
 

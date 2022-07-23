@@ -24,7 +24,7 @@ class onboarding_screen_state extends State<onboarding_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            padding: const EdgeInsets.only(bottom: 80),
+            padding: const EdgeInsets.only(top: 80),
             child: PageView(
                 controller: controller,
                 children: [
@@ -141,20 +141,9 @@ class onboarding_screen_state extends State<onboarding_screen> {
             //Bottom
             bottomSheet: Container(
               height: 80,
-              child: Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  new Padding(padding: const EdgeInsets.all(0),
-                    child: new Text(
-                      "Skip",
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold)),
-                      maxLines: 4,
-                    ),
-                  ),
 
                   Center(
                     child: SmoothPageIndicator(
@@ -170,7 +159,7 @@ class onboarding_screen_state extends State<onboarding_screen> {
 
                   new ElevatedButton(
                     child: new Text(
-                      "Next",
+                      "Skip",
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(
                               color: Colors.black87,
@@ -179,14 +168,18 @@ class onboarding_screen_state extends State<onboarding_screen> {
                       maxLines: 4,
                     ),
                     onPressed: (){
-                      Navigator.push(
+
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => main_screen()),
                       );
                     },
+
+
                   ),
                 ],
               )
+
 
 
     ),
