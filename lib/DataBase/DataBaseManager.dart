@@ -43,6 +43,7 @@ class DataBaseManager {
   _initDatabase() async {
     final path2 = await getDatabasesPath();
     String path = join(path2, _dbName);
+    print(path);
 
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }

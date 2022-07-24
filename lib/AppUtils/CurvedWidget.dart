@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/AppUtils/TextWidget.dart';
 
 
@@ -40,8 +41,9 @@ class CurvedWidget extends StatelessWidget {
           Positioned(
               top: 100,
               left: 20,
-              child: TextWidget(text: s, size: size, color: color))
-        ],
+            child: Text(s, style: GoogleFonts.poppins(textStyle: TextStyle(),fontWeight: FontWeight.bold, fontSize: size)),
+          ),
+      ]
       ),
     );
   }

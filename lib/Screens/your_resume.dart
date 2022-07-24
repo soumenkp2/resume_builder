@@ -169,7 +169,7 @@ class your_resume_state extends State<your_resume> {
                                           child: new Padding(
                                             padding: const EdgeInsets.all(0),
                                             child: Image.asset(
-                                              'assets/images/template_1.png',
+                                              'assets/images/template_${_tableName?.elementAt(index).id}.png',
                                               fit: BoxFit.scaleDown,
                                             ),
                                           )),

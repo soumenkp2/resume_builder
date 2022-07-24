@@ -30,7 +30,7 @@ class faq_state extends State<faq> {
             children: [
               CurvedWidget(
                 s: "FAQs",
-                size: 80,
+                size: 26,
                 color: Color(0xFF011639),
               ),
               const SizedBox(
@@ -40,10 +40,8 @@ class faq_state extends State<faq> {
                 alignment: Alignment.center,
                 child: Container(
                     padding: EdgeInsets.only(left: 25),
-                    child: const TextWidget(
-                        text: "Have Some Doubts?",
-                        size: 40,
-                        color: Color(0xFF000000))),
+                    child: Text('Have Some Doubts?', style: GoogleFonts.poppins(textStyle: TextStyle(),fontWeight: FontWeight.bold, fontSize: 20),),
+              ),
               ),
 
                 ExpansionTile(
