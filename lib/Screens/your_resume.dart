@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/AppUtils/BoxImage.dart';
 import 'package:resume_builder/AppUtils/CurvedWidget.dart';
 import 'package:resume_builder/AppUtils/TextWidget.dart';
@@ -117,13 +118,31 @@ class your_resume_state extends State<your_resume> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                      padding: EdgeInsets.only(left: 25),
-                      child: const TextWidget(
-                          text: "Preview your Resume",
-                          size: 20.0,
-                          color: Color(0xFF000000))),
-                ),
-              ]),
+                    margin: const EdgeInsets.fromLTRB(10, 30, 20, 0),
+                    child: new Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                    new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          new Text("View",
+                              style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold))),
+                        ]),
+
+                    new Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text("Your Previous Templates",
+                          textAlign: TextAlign.left,
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold))),
+
+                    ),
+                    ]),),)]),
               SizedBox(
                 height: 400,
                 child: FutureBuilder<List<TableName>?>(

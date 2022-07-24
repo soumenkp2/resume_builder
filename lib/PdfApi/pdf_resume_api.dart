@@ -5,16 +5,16 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 import 'package:resume_builder/ResumeTemplates/Template_6.dart';
 import 'package:resume_builder/UserModels/Education_UserModel.dart';
-import 'package:resume_builder/pdf_api.dart';
+import 'package:resume_builder/PdfApi/pdf_api.dart';
 
-import ' CustomResumeWidgets/Language_Widget.dart';
-import ' CustomResumeWidgets/Education_Widget.dart';
-import ' CustomResumeWidgets/Header_Widget.dart';
-import 'ResumeTemplates/Resume_temp1.dart';
-import 'UserModels/Achievements_UserModel.dart';
-import 'UserModels/Profile_UserModel.dart';
-import 'UserModels/Skills_Languages_UserModel.dart';
-import 'UserModels/Work_Projects_UserModel.dart';
+import '../ CustomResumeWidgets/Language_Widget.dart';
+import '../ CustomResumeWidgets/Education_Widget.dart';
+import '../ CustomResumeWidgets/Header_Widget.dart';
+import '../ResumeTemplates/Resume_temp1.dart';
+import '../UserModels/Achievements_UserModel.dart';
+import '../UserModels/Profile_UserModel.dart';
+import '../UserModels/Skills_Languages_UserModel.dart';
+import '../UserModels/Work_Projects_UserModel.dart';
 
 class pdfResumeApi{
 
@@ -67,6 +67,37 @@ Widget Template_1(List<Profile_UserModel>? profile_list, List<Education_UserMode
   return Column(
     children: <Widget>[
       pdf_headers(profile_list, high_color),
+
+      // new Padding(padding: const EdgeInsets.all(10),
+      //     child: new Row(
+      //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //         crossAxisAlignment: CrossAxisAlignment.center,
+      //         children: <Widget>[
+      //           pdf_education(edu_list,color,txt_color,high_color),
+      //           pdf_achievement(ach_list, color, txt_color, high_color),
+      //         ])
+      // ),
+      //
+      // new Padding(padding: const EdgeInsets.all(10),
+      //     child: new Row(
+      //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //         crossAxisAlignment: CrossAxisAlignment.center,
+      //         children: <Widget>[
+      //           pdf_project_work(work_list, color, txt_color, high_color, "Work Experience"),
+      //           pdf_project_work(project_list, color, txt_color, high_color, "Projects"),
+      //         ])
+      // ),
+      //
+      // new Padding(padding: const EdgeInsets.all(10),
+      //     child: new Row(
+      //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //         crossAxisAlignment: CrossAxisAlignment.center,
+      //         children: <Widget>[
+      //           pdf_skill_lang(lang_list, color, txt_color, high_color, "Languages"),
+      //           pdf_skill_lang(skill_list, color, txt_color, high_color, "Skills"),
+      //         ])
+      // ),
+
       new Padding(padding: const EdgeInsets.all(10),
           child: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -112,22 +143,23 @@ Widget Template_3(List<Profile_UserModel>? profile_list, List<Education_UserMode
     children: <Widget>[
       pdf_headers(profile_list, high_color),
       new Padding(padding: const EdgeInsets.all(10),
-
-                child : new Flexible(child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      pdf_education(edu_list,color,txt_color,high_color),
-                      pdf_project_work(work_list, color, txt_color, high_color, "Work Experience"),
-                      pdf_achievement(ach_list, color, txt_color, high_color),
-                      pdf_project_work(project_list, color, txt_color, high_color, "Projects"),
-                      pdf_skill_lang(skill_list, color, txt_color, high_color, "Skills"),
-                      pdf_skill_lang(lang_list, color, txt_color, high_color, "Languages"),
-                    ]
-                )),
-
-
-      )
+        child: pdf_education(edu_list,color,txt_color,high_color),
+      ),
+      new Padding(padding: const EdgeInsets.all(10),
+          child: pdf_project_work(work_list, color, txt_color, high_color, "Work Experience"),
+      ),
+      new Padding(padding: const EdgeInsets.all(10),
+          child: pdf_achievement(ach_list, color, txt_color, high_color),
+      ),
+      new Padding(padding: const EdgeInsets.all(10),
+          child: pdf_project_work(project_list, color, txt_color, high_color, "Projects"),
+      ),
+      new Padding(padding: const EdgeInsets.all(10),
+          child: pdf_skill_lang(skill_list, color, txt_color, high_color, "Skills"),
+      ),
+      new Padding(padding: const EdgeInsets.all(10),
+          child: pdf_skill_lang(lang_list, color, txt_color, high_color, "Languages"),
+      ),
 
 
     ],

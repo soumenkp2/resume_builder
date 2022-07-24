@@ -40,8 +40,8 @@ class faq_state extends State<faq> {
                 alignment: Alignment.center,
                 child: Container(
                     padding: EdgeInsets.only(left: 25),
-                    child: Text('Have Some Doubts?', style: GoogleFonts.poppins(textStyle: TextStyle(),fontWeight: FontWeight.bold, fontSize: 20),),
-              ),
+                    child: Text('Have Some Doubts?', style: GoogleFonts.poppins(textStyle: TextStyle(), fontWeight: FontWeight.bold, fontSize: 20) ),
+                ),
               ),
 
                 ExpansionTile(

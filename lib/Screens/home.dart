@@ -149,9 +149,6 @@ class home_state extends State<home> {
                                     textStyle: TextStyle(
                                         fontSize: 30,
                                         fontWeight: FontWeight.bold))),
-                            new Text("See All",
-                                style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(fontSize: 10)))
                           ]),
 
                       new Align(

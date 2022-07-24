@@ -28,9 +28,9 @@ import '../UserModels/Skills_Languages_UserModel.dart';
 import '../UserModels/Work_Projects_UserModel.dart';
 
 
-import 'package:resume_builder/pdf_resume_api.dart';
+import 'package:resume_builder/PdfApi/pdf_resume_api.dart';
 
-import '../pdf_api.dart';
+import '../PdfApi/pdf_api.dart';
 
 
 

@@ -362,6 +362,18 @@ class info_fillup_state extends State<info_fillup> {
 
   }
 
+  Color detect_gesture_byColor(String categ_name)
+  {
+    if(category_head_name == categ_name)
+      {
+        return Colors.white10;
+      }
+    else 
+      {
+        return Colors.white;
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -390,7 +402,7 @@ class info_fillup_state extends State<info_fillup> {
                             width: 50,
                             height: 50,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: detect_gesture_byColor("Education"),
                               borderRadius: BorderRadius.all(Radius.circular(25)),
                               boxShadow: [
                                 BoxShadow(color: Colors.teal, spreadRadius: 2),
@@ -412,7 +424,7 @@ class info_fillup_state extends State<info_fillup> {
                           width: 50,
                           height: 50,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: detect_gesture_byColor("Skills"),
                             borderRadius: BorderRadius.all(Radius.circular(25)),
                             boxShadow: [
                               BoxShadow(color: Colors.teal, spreadRadius: 2),
@@ -436,7 +448,7 @@ class info_fillup_state extends State<info_fillup> {
                           width: 50,
                           height: 50,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: detect_gesture_byColor("Achievements"),
                             borderRadius: BorderRadius.all(Radius.circular(25)),
                             boxShadow: [
                               BoxShadow(color: Colors.teal, spreadRadius: 2),
@@ -459,7 +471,7 @@ class info_fillup_state extends State<info_fillup> {
                           width: 50,
                           height: 50,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: detect_gesture_byColor("Work"),
                             borderRadius: BorderRadius.all(Radius.circular(25)),
                             boxShadow: [
                               BoxShadow(color: Colors.teal, spreadRadius: 2),
@@ -483,7 +495,7 @@ class info_fillup_state extends State<info_fillup> {
                           width: 50,
                           height: 50,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: detect_gesture_byColor("Profile"),
                             borderRadius: BorderRadius.all(Radius.circular(25)),
                             boxShadow: [
                               BoxShadow(color: Colors.teal, spreadRadius: 2),
@@ -507,7 +519,7 @@ class info_fillup_state extends State<info_fillup> {
                           width: 50,
                           height: 50,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: detect_gesture_byColor("Projects"),
                             borderRadius: BorderRadius.all(Radius.circular(25)),
                             boxShadow: [
                               BoxShadow(color: Colors.teal, spreadRadius: 2),
@@ -532,7 +544,7 @@ class info_fillup_state extends State<info_fillup> {
                           width: 50,
                           height: 50,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: detect_gesture_byColor("Languages"),
                             borderRadius: BorderRadius.all(Radius.circular(25)),
                             boxShadow: [
                               BoxShadow(color: Colors.teal, spreadRadius: 2),
@@ -572,9 +584,10 @@ class info_fillup_state extends State<info_fillup> {
           child: TextFormField(
             initialValue: form_name ,
             onChanged: (text) => form_name=text,
+            autovalidateMode: AutovalidateMode.always,
             validator: (text) {
               if (text == null || text.isEmpty) {
-                return 'Can\'t be empty';
+                return 'You cannot save anything until you fill this';
               }
               return null;
             },
@@ -592,7 +605,7 @@ class info_fillup_state extends State<info_fillup> {
                     textAlign: TextAlign.left,
                     style: GoogleFonts.poppins(
                         textStyle: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold))),
+                            fontSize: 25, fontWeight: FontWeight.bold))),
               ),
               new InkWell(
                 onTap: (){add_card(category_head_name!);},

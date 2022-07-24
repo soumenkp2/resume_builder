@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/%20CustomResumeWidgets/Header_Widget.dart';
 import 'package:resume_builder/ResumeTemplates/Template_6.dart';
 import 'package:resume_builder/ResumeWidgets/project_Widget.dart';
-import 'package:resume_builder/pdf_resume_api.dart';
+import 'package:resume_builder/PdfApi/pdf_resume_api.dart';
 
 import '../ CustomResumeWidgets/Language_Widget.dart';
 import '../ CustomResumeWidgets/Skill_Widget.dart';
@@ -22,7 +22,7 @@ import 'dart:io';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../pdf_api.dart';
+import '../PdfApi/pdf_api.dart';
 
 
 class Resume_temp1 extends StatefulWidget
