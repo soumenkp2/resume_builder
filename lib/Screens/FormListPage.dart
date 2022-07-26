@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:resume_builder/DataBase/DataBaseManager.dart';
 import 'package:resume_builder/Screens/EditForm.dart';
-import 'package:resume_builder/Screens/info_fillup.dart';
+import 'package:resume_builder/Screens/edit_form_fillup.dart';
+//import 'package:resume_builder/Screens/info_fillup.dart';
 import 'package:resume_builder/UserModels/Achievements_UserModel.dart';
 import 'package:resume_builder/UserModels/Education_UserModel.dart';
 import 'package:resume_builder/UserModels/Skills_Languages_UserModel.dart';
@@ -16,6 +17,7 @@ import '../ResumeTemplates/Template_4.dart';
 import '../ResumeTemplates/Template_5.dart';
 import '../ResumeTemplates/Template_6.dart';
 import '../UserModels/Profile_UserModel.dart';
+import 'info_fillup.dart';
 
 class FormListPage extends StatefulWidget {
   int tableIndex;
@@ -73,6 +75,15 @@ class _FormListPageState extends State<FormListPage> {
     _getTableName();
     list = DataBaseManager.instance.queryTableData();
     super.initState();
+
+
+    print("\n\nEducation");
+    _educationTable?.forEach((element) {
+      print(element.qualification_name);
+      print(element.organization_name);
+      print(element.year_duration);
+    });
+
   }
 
   @override
@@ -104,72 +115,91 @@ class _FormListPageState extends State<FormListPage> {
                     return Card(
                       color: Colors.white12,
                       margin: const EdgeInsets.all(15),
-                      child:InkWell(
-                        onTap: () async {
-                          await _getDataBase(
-                              _tableName
-                                  ?.elementAt(index!)
-                                  .tableName ?? 'NO LIST');
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  Next_to_dynamic_resume(context, widget.tableIndex))) ;
-                        } ,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              SizedBox(width: 20.0),
-                              Expanded(
-                                child: Row(
-                                 mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      data?.elementAt(index!).tableName??"No Table Name",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w500,
+                      child:Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                SizedBox(width: 20.0),
+                                Expanded(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      InkWell(
+                                        onTap: ()async{
+                                          await _getDataBase(
+                                              _tableName
+                                                  ?.elementAt(index!)
+                                                  .tableName ?? 'NO LIST');
+                                          Navigator.of(context).push(MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Next_to_dynamic_resume(context, widget.tableIndex))) ;
+                                        },
+                                        child: Text(
+                                          data?.elementAt(index!).tableName??"No Table Name",
+                                          style: TextStyle(
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
                                       ),
+
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(width: 20.0),
+                                InkWell(
+                                  onTap: ()async{
+
+                                    await _getDataBase(
+                                        _tableName
+                                            ?.elementAt(index!)
+                                            .tableName ?? 'NO LIST');
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            edit_form_fillup(widget.tableIndex, _educationTable, _projectTable, _skillTable, _languageTable, _workTable, _achievementTable, _profileTable))) ;
+
+                                  },
+                                  child: Container(
+                                    height: 40.0,
+                                    width: 40.0,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey[200],
                                     ),
-
-                                  ],
-                                ),
-                              ),
-                              SizedBox(width: 20.0),
-                              GestureDetector(
-                                onTap: () => (){
-
-                                },
-                                child: Container(
-                                  height: 40.0,
-                                  width: 40.0,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.grey[200],
+                                    alignment: Alignment.center,
+                                    child: Icon(Icons.edit, color: Colors.orange[800]),
                                   ),
-                                  alignment: Alignment.center,
-                                  child: Icon(Icons.edit, color: Colors.orange[800]),
                                 ),
-                              ),
-                              SizedBox(width: 20.0),
-                              GestureDetector(
-                                onTap: () => (){
 
-                                },
-                                child: Container(
-                                  height: 40.0,
-                                  width: 40.0,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.grey[200],
+
+                                SizedBox(width: 20.0),
+                                InkWell(
+                                  onTap: ()async{
+
+                                  },
+                                  child: Container(
+                                    height: 40.0,
+                                    width: 40.0,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey[200],
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Icon(Icons.delete, color: Colors.red[400]),
                                   ),
-                                  alignment: Alignment.center,
-                                  child: Icon(Icons.delete, color: Colors.red[800]),
                                 ),
-                              ),
-                            ],
+
+
+                              ],
+                            ),
                           ),
-                        ),
+
+                        ],
                       ),
+
+
                     );
                   });
             }
@@ -188,6 +218,9 @@ class _FormListPageState extends State<FormListPage> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
+          //Navigator.of(context).push(MaterialPageRoute(builder: (context) => edit_form_fillup(widget.tableIndex, _educationTable, _projectTable, _skillTable, _languageTable, _workTable, _achievementTable, _profileTable)));
+          //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(1)));
+
           Navigator.of(context)
               .push(MaterialPageRoute(
                   builder: (builder) => info_fillup(widget.tableIndex)))
@@ -202,58 +235,28 @@ class _FormListPageState extends State<FormListPage> {
   }
 
 
+
   Widget Next_to_dynamic_resume(BuildContext context, int index) {
     if (index == 1) {
-      return Template_1( edu_list = _educationTable,
-          work_list = _workTable,
-          project_list = _projectTable,
-          profile_list = _profileTable,
-          achievement_list = _achievementTable,
-          skill_list = _skillTable,
-          language_list = _languageTable);
+      return Template_1( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
 
     } else if (index == 2) {
-      return Template_2( edu_list = _educationTable,
-          work_list = _workTable,
-          project_list = _projectTable,
-          profile_list = _profileTable,
-          achievement_list = _achievementTable,
-          skill_list = _skillTable,
-          language_list = _languageTable);
+      return Template_2( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
+
 
     } else if (index == 3) {
-      return Template_3( edu_list = _educationTable,
-          work_list = _workTable,
-          project_list = _projectTable,
-          profile_list = _profileTable,
-          achievement_list = _achievementTable,
-          skill_list = _skillTable,
-          language_list = _languageTable);
+      return Template_3( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
+
 
     } else if (index == 4) {
-      return Template_4( edu_list = _educationTable,
-          work_list = _workTable,
-          project_list = _projectTable,
-          profile_list = _profileTable,
-          achievement_list = _achievementTable,
-          skill_list = _skillTable,
-          language_list = _languageTable);
+      return Template_4( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
+
     } else if (index == 6) {
-      return Template_6( edu_list = _educationTable,
-          work_list = _workTable,
-          project_list = _projectTable,
-          profile_list = _profileTable,
-          achievement_list = _achievementTable,
-          skill_list = _skillTable,
-          language_list = _languageTable);
+      return Template_6( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
+
     } else if (index == 5) {
-      return Template_5( edu_list = _educationTable,
-          work_list = _workTable,
-          project_list = _projectTable,
-          profile_list = _profileTable,
-          achievement_list = _achievementTable,
-          skill_list = _skillTable,
-          language_list = _languageTable);
+      return Template_5( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
+
     } else {
       return Text("hello ji");
     }

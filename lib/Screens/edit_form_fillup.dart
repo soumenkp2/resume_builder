@@ -22,19 +22,9 @@ import '../UserModels/Profile_UserModel.dart';
 import '../UserModels/Work_Projects_UserModel.dart';
 import 'dart:developer';
 
-class info_fillup extends StatefulWidget {
-
-
-
-  int index;
-
-  info_fillup(this.index);
-
-  @override
-  State<StatefulWidget> createState() => info_fillup_state();
-}
-
 String? category_head_name;
+
+String? form_name;
 List<Education_UserModel>? edu_list;
 List<Work_Projects_UserModel>? work_list;
 List<Work_Projects_UserModel>? project_list;
@@ -42,8 +32,33 @@ List<Skills_Languages_UserModel>? skill_list;
 List<Achievements_UserModel>? achievement_list;
 List<Profile_UserModel>? profile_list;
 List<Skills_Languages_UserModel>? language_list;
-String? form_name;
 
+
+
+class edit_form_fillup extends StatefulWidget {
+  List<Education_UserModel>? edu;
+  List<Work_Projects_UserModel>? work;
+  List<Work_Projects_UserModel>? project;
+  List<Skills_Languages_UserModel>? skill;
+  List<Achievements_UserModel>? achievement;
+  List<Profile_UserModel>? profile;
+  List<Skills_Languages_UserModel>? language;
+  int index;
+
+  edit_form_fillup(
+      this.index,
+      this.edu,
+      this.project,
+      this.skill,
+      this.language,
+      this.work,
+      this.achievement,
+      this.profile
+      );
+
+  @override
+  State<StatefulWidget> createState() => edit_form_fillup_state();
+}
 
 
 Map<String,List>? final_data;
@@ -51,7 +66,7 @@ bool? send_flag;
 
 Map<String, bool>? categories;
 
-class info_fillup_state extends State<info_fillup> {
+class edit_form_fillup_state extends State<edit_form_fillup> {
   @override
   void initState() {
     super.initState();
@@ -74,18 +89,41 @@ class info_fillup_state extends State<info_fillup> {
 
     category_head_name = "Education";
 
-    edu_list?.add(new Education_UserModel());
-    achievement_list?.add(new Achievements_UserModel());
-    work_list?.add(new Work_Projects_UserModel());
-    project_list?.add(new Work_Projects_UserModel());
-    skill_list?.add(new Skills_Languages_UserModel());
-    profile_list?.add(new Profile_UserModel());
-    language_list?.add(new Skills_Languages_UserModel());
+    if(widget.edu == null)
+      {
+        print("Null list");
+      }
+
+    edu_list = widget.edu?.toList();
+    profile_list = widget.profile?.toList();
+    achievement_list = widget.achievement?.toList();
+    project_list = widget.project?.toList();
+    work_list = widget.work?.toList();
+    skill_list = widget.skill?.toList();
+    language_list = widget.language?.toList();
+
+
+    print(widget.edu?.length);
+
+    print("\n\nEducation");
+    edu_list?.forEach((element) {
+      print(element.qualification_name);
+      print(element.organization_name);
+      print(element.year_duration);
+    });
+
+    // edu_list?.add(new Education_UserModel());
+    // achievement_list?.add(new Achievements_UserModel());
+    // work_list?.add(new Work_Projects_UserModel());
+    // project_list?.add(new Work_Projects_UserModel());
+    // skill_list?.add(new Skills_Languages_UserModel());
+    // profile_list?.add(new Profile_UserModel());
+    // language_list?.add(new Skills_Languages_UserModel());
 
 
     // final_data = new Map<String,List>();
-    // final_data!["Education_details"] = edu_list!;
-    // final_data!["Achievement_details"] = achievement_list!;
+    // final_data!["Education_details"] = widget.edu_list!;
+    // final_data!["Achievement_details"] = widget.achievement_list!;
     // final_data!["Project_details"] = project_list!;
     // final_data!["Skill_details"] = skill_list!;
     // final_data!["Work_details"] = work_list!;
@@ -96,84 +134,84 @@ class info_fillup_state extends State<info_fillup> {
 
   }
 
-  void add_card(String categoryName)
+  void add_card(String category_name)
   {
     setState(()
     {
-      if(categoryName == "Education")
+      if(category_name == "Education")
+      {
+        if(edu_list!.length >1)
         {
-          if(edu_list!.length >1)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-            {
-              edu_list?.add(new Education_UserModel());
-            }
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+        else
+        {
+          edu_list?.add(new Education_UserModel());
+        }
 
-        }
-      else if(categoryName == "Achievements")
+      }
+      else if(category_name == "Achievements")
+      {
+        if(achievement_list!.length >1)
         {
-          if(achievement_list!.length >1)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-          {
-            achievement_list?.add(new Achievements_UserModel());
-          }
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
-      else if(categoryName == "Work")
+        else
         {
-          if(work_list!.length >1)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-          {
-            work_list?.add(new Work_Projects_UserModel());
-          }
+          achievement_list?.add(new Achievements_UserModel());
         }
-      else if(categoryName == "Projects")
+      }
+      else if(category_name == "Work")
+      {
+        if(work_list!.length >1)
         {
-          if(project_list!.length >1)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-          {
-            project_list?.add(new Work_Projects_UserModel());
-          }
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
-      else if(categoryName == "Skills")
+        else
         {
-          if(skill_list!.length >1)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-          {
-            skill_list?.add(new Skills_Languages_UserModel());
-          }
+          work_list?.add(new Work_Projects_UserModel());
         }
-      else if(categoryName == "Profile")
+      }
+      else if(category_name == "Projects")
+      {
+        if(project_list!.length >1)
         {
-          if(profile_list!.length >=0)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-          {
-            profile_list?.add(new Profile_UserModel());
-          }
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
-      else if(categoryName == "Languages")
+        else
+        {
+          project_list?.add(new Work_Projects_UserModel());
+        }
+      }
+      else if(category_name == "Skills")
+      {
+        if(skill_list!.length >1)
+        {
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+        else
+        {
+          skill_list?.add(new Skills_Languages_UserModel());
+        }
+      }
+      else if(category_name == "Profile")
+      {
+        if(profile_list!.length >=0)
+        {
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+        else
+        {
+          profile_list?.add(new Profile_UserModel());
+        }
+      }
+      else if(category_name == "Languages")
       {
         if(language_list!.length >4)
         {
@@ -186,19 +224,19 @@ class info_fillup_state extends State<info_fillup> {
         }
       }
       else
-        {
-          var snackBar = SnackBar(content: Text('Unwanted Behaviour Noticed'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
+      {
+        var snackBar = SnackBar(content: Text('Unwanted Behaviour Noticed'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
 
     });
   }
 
-  void delete_card(String categoryName)
+  void delete_card(String category_name)
   {
     setState(()
     {
-      if(categoryName == "Education")
+      if(category_name == "Education")
       {
         if(edu_list!.length <=1)
         {
@@ -211,7 +249,7 @@ class info_fillup_state extends State<info_fillup> {
         }
 
       }
-      else if(categoryName == "Achievements")
+      else if(category_name == "Achievements")
       {
         if(achievement_list!.length <=1)
         {
@@ -223,7 +261,7 @@ class info_fillup_state extends State<info_fillup> {
           achievement_list?.removeLast();
         }
       }
-      else if(categoryName == "Work")
+      else if(category_name == "Work")
       {
         if(work_list!.length <=1)
         {
@@ -235,7 +273,7 @@ class info_fillup_state extends State<info_fillup> {
           work_list?.removeLast();
         }
       }
-      else if(categoryName == "Projects")
+      else if(category_name == "Projects")
       {
         if(project_list!.length <=1)
         {
@@ -247,7 +285,7 @@ class info_fillup_state extends State<info_fillup> {
           project_list?.removeLast();
         }
       }
-      else if(categoryName == "Skills")
+      else if(category_name == "Skills")
       {
         if(skill_list!.length <=1)
         {
@@ -259,7 +297,7 @@ class info_fillup_state extends State<info_fillup> {
           skill_list?.removeLast();
         }
       }
-      else if(categoryName == "Profile")
+      else if(category_name == "Profile")
       {
         if(profile_list!.length <=1)
         {
@@ -271,7 +309,7 @@ class info_fillup_state extends State<info_fillup> {
           profile_list?.removeLast();
         }
       }
-      else if(categoryName == "Languages")
+      else if(category_name == "Languages")
       {
         if(language_list!.length <=1)
         {
@@ -292,12 +330,12 @@ class info_fillup_state extends State<info_fillup> {
     });
   }
 
-  void category_observation(String categoryName) {
+  void category_observation(String category_name) {
     setState(() {
 
       categories?.forEach((key, value) {
-        if (key == categoryName) {
-          category_head_name = categoryName;
+        if (key == category_name) {
+          category_head_name = category_name;
           categories![key] = true;
         } else {
           categories![key] = false;
@@ -362,16 +400,16 @@ class info_fillup_state extends State<info_fillup> {
 
   }
 
-  Color detect_gesture_byColor(String categName)
+  Color detect_gesture_byColor(String categ_name)
   {
-    if(category_head_name == categName)
-      {
-        return Colors.white10;
-      }
-    else 
-      {
-        return Colors.white;
-      }
+    if(category_head_name == categ_name)
+    {
+      return Colors.white10;
+    }
+    else
+    {
+      return Colors.white;
+    }
   }
 
   @override
@@ -379,306 +417,306 @@ class info_fillup_state extends State<info_fillup> {
     return Scaffold(
         body: SingleChildScrollView(
             child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        new SingleChildScrollView(
-          child: new Padding(
-            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                new SingleChildScrollView(
+                  child: new Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
 
-            child : new SizedBox(
-              height: 60,
-              child: new ListView(
-                  scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.all(5),
-                  children: <Widget> [
+                      child : new SizedBox(
+                        height: 60,
+                        child: new ListView(
+                            scrollDirection: Axis.horizontal,
+                            padding: EdgeInsets.all(5),
+                            children: <Widget> [
 
 
-                    new InkWell(
-                        onTap: () {
-                          category_observation("Education");
-                        },
-                        child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: detect_gesture_byColor("Education"),
-                              borderRadius: BorderRadius.all(Radius.circular(25)),
-                              boxShadow: [
-                                BoxShadow(color: Colors.teal, spreadRadius: 2),
-                              ],
-                            ),
-                            margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: new Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: new Image.asset(
-                                  'assets/images/education.png',
-                                  //height: 15.0,
-                                  fit: BoxFit.cover,
-                                )))),
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Skills");
-                      },
-                      child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Skills"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: new Padding(
+                              new InkWell(
+                                  onTap: () {
+                                    category_observation("Education");
+                                  },
+                                  child: Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: detect_gesture_byColor("Education"),
+                                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                                        boxShadow: [
+                                          BoxShadow(color: Colors.teal, spreadRadius: 2),
+                                        ],
+                                      ),
+                                      margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                      child: new Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: new Image.asset(
+                                            'assets/images/education.png',
+                                            //height: 15.0,
+                                            fit: BoxFit.cover,
+                                          )))),
+                              new InkWell(
+                                onTap: () {
+                                  category_observation("Skills");
+                                },
+                                child: Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: detect_gesture_byColor("Skills"),
+                                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                                      boxShadow: [
+                                        BoxShadow(color: Colors.teal, spreadRadius: 2),
+                                      ],
+                                    ),
+                                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    child: new Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: new Image.asset(
+                                        'assets/images/skill.png',
+                                        //height: 15.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )),
+                              ),
+                              new InkWell(
+                                onTap: () {
+                                  category_observation("Achievements");
+                                },
+                                child: Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: detect_gesture_byColor("Achievements"),
+                                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                                      boxShadow: [
+                                        BoxShadow(color: Colors.teal, spreadRadius: 2),
+                                      ],
+                                    ),
+                                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    child: new Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: new Image.asset(
+                                          'assets/images/trophy.png',
+                                          // height: 35.0,
+                                          // fit: BoxFit.cover,
+                                        ))),
+                              ),
+                              new InkWell(
+                                onTap: () {
+                                  category_observation("Work");
+                                },
+                                child: Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: detect_gesture_byColor("Work"),
+                                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                                      boxShadow: [
+                                        BoxShadow(color: Colors.teal, spreadRadius: 2),
+                                      ],
+                                    ),
+                                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    child: new Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: new Image.asset(
+                                        'assets/images/work_experience.png',
+                                        //height: 15.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )),
+                              ),
+                              new InkWell(
+                                onTap: () {
+                                  category_observation("Profile");
+                                },
+                                child: Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: detect_gesture_byColor("Profile"),
+                                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                                      boxShadow: [
+                                        BoxShadow(color: Colors.teal, spreadRadius: 2),
+                                      ],
+                                    ),
+                                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    child: new Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: new Image.asset(
+                                        'assets/images/profile.png',
+                                        //height: 15.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )),
+                              ),
+                              new InkWell(
+                                onTap: () {
+                                  category_observation("Projects");
+                                },
+                                child: new Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: detect_gesture_byColor("Projects"),
+                                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                                      boxShadow: [
+                                        BoxShadow(color: Colors.teal, spreadRadius: 2),
+                                      ],
+                                    ),
+                                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    child: new Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: new Image.asset(
+                                        'assets/images/projects.png',
+                                        //height: 15.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )),
+                              ),
+
+                              new InkWell(
+                                onTap: () {
+                                  category_observation("Languages");
+                                },
+                                child: new Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: detect_gesture_byColor("Languages"),
+                                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                                      boxShadow: [
+                                        BoxShadow(color: Colors.teal, spreadRadius: 2),
+                                      ],
+                                    ),
+                                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    child: new Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: new Image.asset(
+                                        'assets/images/projects.png',
+                                        //height: 15.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )),
+                              ),
+
+
+
+                            ]
+                        ),
+
+
+
+                      )
+
+
+
+
+                  ),
+                ),
+                //Termination of Categories
+
+
+                new Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue: form_name ,
+                    onChanged: (text) => form_name=text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'You cannot save anything until you fill this';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter Form Name',
+                    ),),),
+
+                new Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: Row(children: <Widget>[
+                      new Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 80, 0),
+                        child: new Text(category_head_name!,
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold))),
+                      ),
+                      new InkWell(
+                        onTap: (){add_card(category_head_name!);},
+                        child: new Padding(
                             padding: const EdgeInsets.all(10),
                             child: new Image.asset(
-                              'assets/images/skill.png',
-                              //height: 15.0,
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-                    ),
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Achievements");
-                      },
-                      child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Achievements"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              'assets/images/addbtn.png',
+                              height: 35.0,
+                              // fit: BoxFit.cover,
+                            )),
+                      ),
+                      new InkWell(
+                        onTap: (){delete_card(category_head_name!);},
+                        child: new Visibility(
+                          visible: true,
                           child: new Padding(
                               padding: const EdgeInsets.all(10),
                               child: new Image.asset(
-                                'assets/images/trophy.png',
-                                // height: 35.0,
+                                'assets/images/minusbtn.png',
+                                height: 35.0,
                                 // fit: BoxFit.cover,
-                              ))),
-                    ),
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Work");
-                      },
-                      child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Work"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: new Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: new Image.asset(
-                              'assets/images/work_experience.png',
-                              //height: 15.0,
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-                    ),
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Profile");
-                      },
-                      child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Profile"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: new Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: new Image.asset(
-                              'assets/images/profile.png',
-                              //height: 15.0,
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-                    ),
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Projects");
-                      },
-                      child: new Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Projects"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: new Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: new Image.asset(
-                              'assets/images/projects.png',
-                              //height: 15.0,
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-                    ),
+                              )),
+                        ),
+                      )
 
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Languages");
-                      },
-                      child: new Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Languages"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: new Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: new Image.asset(
-                              'assets/images/projects.png',
-                              //height: 15.0,
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-                    ),
-
-
-
-                  ]
-              ),
-
-
-
-            )
-
-
-
-
-          ),
-        ),
-        //Termination of Categories
-
-
-        new Padding(
-          padding:
-          const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextFormField(
-            initialValue: form_name ,
-            onChanged: (text) => form_name=text,
-            autovalidateMode: AutovalidateMode.always,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return 'You cannot save anything until you fill this';
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Enter Form Name',
-            ),),),
-
-        new Padding(
-            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-            child: Row(children: <Widget>[
-              new Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 80, 0),
-                child: new Text(category_head_name!,
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold))),
-              ),
-              new InkWell(
-                onTap: (){add_card(category_head_name!);},
-                child: new Padding(
-                padding: const EdgeInsets.all(10),
-                child: new Image.asset(
-                'assets/images/addbtn.png',
-                height: 35.0,
-                // fit: BoxFit.cover,
-                )),
-                ),
-                new InkWell(
-                onTap: (){delete_card(category_head_name!);},
-                child: new Visibility(
-                visible: true,
-                child: new Padding(
-                padding: const EdgeInsets.all(10),
-                child: new Image.asset(
-                'assets/images/minusbtn.png',
-                height: 35.0,
-                // fit: BoxFit.cover,
-                )),
-                ),
-                )
-
-                ])),
+                    ])),
 
                 new Divider(
-          color: Colors.black,
-          thickness: 3,
-        ),
+                  color: Colors.black,
+                  thickness: 3,
+                ),
 
-        new Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
+                new Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
 
-              ListView.separated(
-                  shrinkWrap: true,
-                  physics: const ScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Column(children: <Widget>[
-                      current_category(index),
-                    ]);
-                  },
-                  separatorBuilder: (context, index) => const Divider(),
-                  itemCount: list_len())
-            ]),
+                      ListView.separated(
+                          shrinkWrap: true,
+                          physics: const ScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Column(children: <Widget>[
+                              current_category(index),
+                            ]);
+                          },
+                          separatorBuilder: (context, index) => const Divider(),
+                          itemCount: list_len())
+                    ]),
 
-        new Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child:
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                    //Resume_temp2()));
-                Next_to_dynamic_resume(context,widget.index)));
-                    //Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list)));
-                //edu_data_upload(context);
-              },
-              child: Text('Next',
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold))
-              ),
-            )
+                new Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child:
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                        //Resume_temp2()));
+                        Next_to_dynamic_resume(context,widget.index)));
+                        //Resume_temp2(widget.edu_list, work_list, project_list, profile_list, widget.achievement_list, skill_list, language_list)));
+                        //edu_data_upload(context);
+                      },
+                      child: Text('Next',
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold))
+                      ),
+                    )
 
-        ),
+                ),
 
 
 
-      ],
-    )));
+              ],
+            )));
   }
 
 
@@ -691,9 +729,9 @@ Widget Next_to_dynamic_resume(BuildContext context, int index)
 
   edu_list?.forEach((value) {
     if(value.tableName==null|| value.organization_name == null || value.qualification_name==null || value.year_duration==null)
-      {
-        check = false;
-      }
+    {
+      check = false;
+    }
   });
 
   project_list?.forEach((value) {
@@ -739,66 +777,66 @@ Widget Next_to_dynamic_resume(BuildContext context, int index)
   });
 
   if(form_name == null)
-    {
-      check = false;
-    }
+  {
+    check = false;
+  }
 
 
 
 
 
   if(check == true)
+  {
+    insertDataBase(index);
+
+
+    if(index==1)
     {
-      insertDataBase(index);
-
-
-      if(index==1)
-      {
-        return Template_1(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-      }
-      else if(index==2)
-      {
-        return Template_2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-      }
-      else if(index==3)
-      {
-        return Template_3(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>info_fillup()));
-      }
-      else if(index==4)
-      {
-        return Template_4(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-      }
-      else if(index==6)
-      {
-        return Template_6(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-      }
-      else if(index==5)
-      {
-        return Template_5(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-      }
-      else
-      {
-        return Text("hello ji");
-      }
-
-      //return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      return Template_1(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
     }
+    else if(index==2)
+    {
+      return Template_2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+    }
+    else if(index==3)
+    {
+      return Template_3(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>info_fillup()));
+    }
+    else if(index==4)
+    {
+      return Template_4(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+    }
+    else if(index==6)
+    {
+      return Template_6(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+    }
+    else if(index==5)
+    {
+      return Template_5(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+    }
+    else
+    {
+      return Text("hello ji");
+    }
+
+    //return Resume_temp2(widget.edu_list, work_list, project_list, profile_list, widget.achievement_list, skill_list, language_list);
+  }
   else
-    {
+  {
 
-      return new Text("Fill all the blanks properly!!",
-          textAlign: TextAlign.left,
-          style: GoogleFonts.poppins(
-              textStyle: TextStyle(
-                  fontSize: 30, fontWeight: FontWeight.bold)));
+    return new Text("Fill all the blanks properly!!",
+        textAlign: TextAlign.left,
+        style: GoogleFonts.poppins(
+            textStyle: TextStyle(
+                fontSize: 30, fontWeight: FontWeight.bold)));
 
-    }
+  }
 }
 
 void insertDataBase(int index){
@@ -849,9 +887,9 @@ int list_len()
     return language_list!.length;
   }
   else
-    {
-      return 0;
-    }
+  {
+    return 0;
+  }
 }
 
 
@@ -869,9 +907,9 @@ Widget current_category(int index) {
   } else if (categories!["Skills"] == true) {
     return Skill_fillup_widget(index: index);
   } else if(categories!["Languages"] == true)
-    {
-      return language_fillup_widget(index: index);
-    }
+  {
+    return language_fillup_widget(index: index);
+  }
   else {
     return Text("Invalid Widget");
   }
@@ -890,7 +928,7 @@ class Profile_fillup_widget extends StatelessWidget {
 
   Profile_fillup_widget({
     this.index,
-});
+  });
 
 
   @override
@@ -1003,17 +1041,17 @@ class Profile_fillup_widget extends StatelessWidget {
                     ),),),
 
                 new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child:
-                  ElevatedButton(
-                    onPressed: () {
-                       profile_data_upload(context);
-                    },
-                    child: Text('Save'),
-                  )
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child:
+                    ElevatedButton(
+                      onPressed: () {
+                        profile_data_upload(context);
+                      },
+                      child: Text('Save'),
+                    )
 
-                  ),
+                ),
               ])),
 
 
@@ -1023,49 +1061,49 @@ class Profile_fillup_widget extends StatelessWidget {
   void profile_data_upload(BuildContext context)
   {
     if(name==null)
-     {
-       name = profile_list?.elementAt(index!).name;
-     }
+    {
+      name = profile_list?.elementAt(index!).name;
+    }
     if(location==null)
-      {
-        location = profile_list?.elementAt(index!).location;
-      }
+    {
+      location = profile_list?.elementAt(index!).location;
+    }
     if(mail==null)
-      {
-        mail= profile_list?.elementAt(index!).mail;
-      }
+    {
+      mail= profile_list?.elementAt(index!).mail;
+    }
     if(phone_no==null)
-      {
-        phone_no= profile_list?.elementAt(index!).phone_no;
-      }
+    {
+      phone_no= profile_list?.elementAt(index!).phone_no;
+    }
     if(link==null )
-      {
-        link = profile_list?.elementAt(index!).social_link;
-      }
+    {
+      link = profile_list?.elementAt(index!).social_link;
+    }
 
 
     if(name!.isEmpty || location!.isEmpty || phone_no!.isEmpty || mail!.isEmpty || link!.isEmpty || name==null || location==null || phone_no==null || link==null || mail==null)
-      {
-        var snackBar = SnackBar(content: Text('data not filled'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
+    {
+      var snackBar = SnackBar(content: Text('data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
     else if(name!.isNotEmpty && location!.isNotEmpty && phone_no!.isNotEmpty && mail!.isNotEmpty && link!.isNotEmpty && name!=null && location!=null && phone_no!=null && link!=null && mail!=null)
-      {
-        profile_list?.elementAt(index!).name = name;
-        profile_list?.elementAt(index!).location = location;
-        profile_list?.elementAt(index!).mail = mail;
-        profile_list?.elementAt(index!).social_link = link;
-        profile_list?.elementAt(index!).phone_no = phone_no;
-        profile_list?.elementAt(index!).tableName=form_name;
-        profile_list?.elementAt(index!).id=form_name!+index.toString();
-        var snackBar = SnackBar(content: Text('data filled'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
+    {
+      profile_list?.elementAt(index!).name = name;
+      profile_list?.elementAt(index!).location = location;
+      profile_list?.elementAt(index!).mail = mail;
+      profile_list?.elementAt(index!).social_link = link;
+      profile_list?.elementAt(index!).phone_no = phone_no;
+      profile_list?.elementAt(index!).tableName=form_name;
+      profile_list?.elementAt(index!).id=form_name!+index.toString();
+      var snackBar = SnackBar(content: Text('data filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
     else
-      {
-        var snackBar = SnackBar(content: Text('data not filled'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
+    {
+      var snackBar = SnackBar(content: Text('data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
 
   }
 
@@ -1742,8 +1780,8 @@ class Education_fillup_widget extends StatelessWidget {
     return new Padding(
       padding: const EdgeInsets.all(10),
       child: new Container(
-          // width: 50,
-          // height: 50,
+        // width: 50,
+        // height: 50,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -1758,7 +1796,7 @@ class Education_fillup_widget extends StatelessWidget {
 
                 new Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
                     initialValue: edu_list?.elementAt(index!).qualification_name,
                     autovalidateMode: AutovalidateMode.always,
@@ -1776,7 +1814,7 @@ class Education_fillup_widget extends StatelessWidget {
 
                 new Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
                     initialValue: edu_list?.elementAt(index!).organization_name,
                     autovalidateMode: AutovalidateMode.always,
@@ -1794,7 +1832,7 @@ class Education_fillup_widget extends StatelessWidget {
 
                 new Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
                     initialValue: edu_list?.elementAt(index!).year_duration,
                     onChanged: (text) => edu_duration=text,
