@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:resume_builder/Screens/main.dart';
+import 'package:resume_builder/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/Screens/your_resume.dart';
 
@@ -34,7 +34,7 @@ class Achievements_UserModel{
 
   Achievements_UserModel.fromDbMap(Map<String, dynamic> map)
       : organization_name = map['organization_name'],
-        qualification_name = map['organization_name'],
+        qualification_name = map['qualification_name'],
         tableName=map['tableName'],
         id=map['id'];
 

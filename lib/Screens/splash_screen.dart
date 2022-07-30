@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:resume_builder/Screens/main.dart';
+import 'package:resume_builder/main.dart';
 import 'package:resume_builder/Screens/onboarding_screen.dart';
 
-import 'main.dart';
+import '../main.dart';
 import 'main_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 

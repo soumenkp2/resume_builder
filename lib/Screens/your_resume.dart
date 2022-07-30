@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/AppUtils/BoxImage.dart';
 import 'package:resume_builder/AppUtils/CurvedWidget.dart';
 import 'package:resume_builder/AppUtils/TextWidget.dart';
-import 'package:resume_builder/Screens/main.dart';
+import 'package:resume_builder/main.dart';
 
 import '../DataBase/DataBaseManager.dart';
 import '../DataBase/TableName.dart';

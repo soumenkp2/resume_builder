@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:resume_builder/ResumeTemplates/Resume_temp1.dart';
 import 'package:resume_builder/Screens/FormListPage.dart';
 import '../ResumeTemplates/Resume_temp2.dart';
-import 'info_fillup.dart';
+import 'Screens/splash_screen.dart';
 import 'package:flutter/services.dart';
-import 'splash_screen.dart';
+
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

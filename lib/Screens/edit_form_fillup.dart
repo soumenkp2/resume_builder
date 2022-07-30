@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:resume_builder/DataBase/TableName.dart';
 import 'package:resume_builder/ResumeTemplates/Resume_temp2.dart';
-import 'package:resume_builder/Screens/main.dart';
+import 'package:resume_builder/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/Screens/your_resume.dart';
 import 'package:resume_builder/UserModels/Skills_Languages_UserModel.dart';
@@ -44,8 +44,10 @@ class edit_form_fillup extends StatefulWidget {
   List<Profile_UserModel>? profile;
   List<Skills_Languages_UserModel>? language;
   int index;
+  String? form_name1;
 
   edit_form_fillup(
+      this.form_name1,
       this.index,
       this.edu,
       this.project,
@@ -69,6 +71,7 @@ Map<String, bool>? categories;
 class edit_form_fillup_state extends State<edit_form_fillup> {
   @override
   void initState() {
+   form_name=widget.form_name1;
     super.initState();
     edu_list = new List<Education_UserModel>.empty(growable: true);
     work_list = new List<Work_Projects_UserModel>.empty(growable: true);
@@ -697,12 +700,15 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child:
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: ()async {
+                        var db=DataBaseManager.instance;
+                        db.delete(form_name!);
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
                         //Resume_temp2()));
                         Next_to_dynamic_resume(context,widget.index)));
                         //Resume_temp2(widget.edu_list, work_list, project_list, profile_list, widget.achievement_list, skill_list, language_list)));
                         //edu_data_upload(context);
+
                       },
                       child: Text('Next',
                           style: GoogleFonts.poppins(
@@ -787,8 +793,9 @@ Widget Next_to_dynamic_resume(BuildContext context, int index)
 
   if(check == true)
   {
-    insertDataBase(index);
-
+    DataBaseManager.instance.delete(form_name??"No Table Name").then((_) async {
+      insertDataBase(index);
+    });
 
     if(index==1)
     {
