@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:resume_builder/Screens/info_fillup.dart';
-import 'package:resume_builder/Screens/main.dart';
+import 'package:resume_builder/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/Screens/your_resume.dart';
 

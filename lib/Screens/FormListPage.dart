@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resume_builder/DataBase/DataBaseManager.dart';
-import 'package:resume_builder/Screens/EditForm.dart';
+
 import 'package:resume_builder/Screens/edit_form_fillup.dart';
 //import 'package:resume_builder/Screens/info_fillup.dart';
 import 'package:resume_builder/UserModels/Achievements_UserModel.dart';
@@ -158,7 +158,9 @@ class _FormListPageState extends State<FormListPage> {
                                             .tableName ?? 'NO LIST');
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) =>
-                                            edit_form_fillup(widget.tableIndex, _educationTable, _projectTable, _skillTable, _languageTable, _workTable, _achievementTable, _profileTable))) ;
+                                            edit_form_fillup(  _tableName
+                                                ?.elementAt(index!)
+                                                .tableName ?? 'NO LIST',widget.tableIndex, _educationTable, _projectTable, _skillTable, _languageTable, _workTable, _achievementTable, _profileTable))) ;
 
                                   },
                                   child: Container(
@@ -177,7 +179,11 @@ class _FormListPageState extends State<FormListPage> {
                                 SizedBox(width: 20.0),
                                 InkWell(
                                   onTap: ()async{
-
+                                  DataBaseManager.instance.delete(data?.elementAt(index!).tableName??"No Table Name").then((_) async {
+                                    setState(() {
+                                      list = DataBaseManager.instance.queryTableData();
+                                    });
+                                  });
                                   },
                                   child: Container(
                                     height: 40.0,

@@ -128,7 +128,7 @@ class Template_6state extends State<Template_6>
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-
+            SizedBox(height: 35,),
             new header_Widget(
               color: "blueGrey",
               height: 120,

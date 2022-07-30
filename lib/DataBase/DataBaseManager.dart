@@ -190,4 +190,16 @@ class DataBaseManager {
     }
     return null;
   }
+  Future  delete(String tableName) async {
+    Database db = await instance.database;
+    await db.delete("PROJECT", where: 'tableName= ?', whereArgs: [tableName]);
+    await db.delete("LANGUAGE", where: 'tableName= ?', whereArgs: [tableName]);
+    await db.delete("TABLENAME", where: 'tableName= ?', whereArgs: [tableName]);
+    await db.delete("WORK", where: 'tableName= ?', whereArgs: [tableName]);
+    await db.delete("PROFILE", where: 'tableName= ?', whereArgs: [tableName]);
+    await db.delete("ACHIEVEMENT", where: 'tableName= ?', whereArgs: [tableName]);
+    await db.delete("EDUCATION", where: 'tableName= ?', whereArgs: [tableName]);
+    await db.delete("SKILLS", where: 'tableName= ?', whereArgs: [tableName]);
+  }
+
 }
