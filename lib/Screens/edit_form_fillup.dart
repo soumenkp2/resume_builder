@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:resume_builder/DataBase/TableName.dart';
 import 'package:resume_builder/ResumeTemplates/Resume_temp2.dart';
+import 'package:resume_builder/ResumeWidgets/language_Widget.dart';
 import 'package:resume_builder/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/Screens/your_resume.dart';
@@ -71,7 +72,7 @@ Map<String, bool>? categories;
 class edit_form_fillup_state extends State<edit_form_fillup> {
   @override
   void initState() {
-   form_name=widget.form_name1;
+    form_name=widget.form_name1;
     super.initState();
     edu_list = new List<Education_UserModel>.empty(growable: true);
     work_list = new List<Work_Projects_UserModel>.empty(growable: true);
@@ -701,11 +702,10 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
                     child:
                     ElevatedButton(
                       onPressed: ()async {
-                        var db=DataBaseManager.instance;
-                        db.delete(form_name!);
+
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
                         //Resume_temp2()));
-                        Next_to_dynamic_resume(context,widget.index)));
+                        Next_to_dynamic_resume(context,widget.index,widget.form_name1)));
                         //Resume_temp2(widget.edu_list, work_list, project_list, profile_list, widget.achievement_list, skill_list, language_list)));
                         //edu_data_upload(context);
 
@@ -729,7 +729,7 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
 }
 
 
-Widget Next_to_dynamic_resume(BuildContext context, int index)
+Widget Next_to_dynamic_resume(BuildContext context, int index, String? form_name1)
 {
   bool check = true;
 
@@ -793,9 +793,11 @@ Widget Next_to_dynamic_resume(BuildContext context, int index)
 
   if(check == true)
   {
-    DataBaseManager.instance.delete(form_name??"No Table Name").then((_) async {
+    DataBaseManager.instance.delete(form_name1??"No Table Name").then((_) async {
       insertDataBase(index);
     });
+
+
 
     if(index==1)
     {
