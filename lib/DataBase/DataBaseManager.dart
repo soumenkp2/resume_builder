@@ -94,7 +94,7 @@ class DataBaseManager {
         ")");
 
     await db.execute("CREATE TABLE TABLENAME("
-        "id TEXT UNIQUE,"
+        "id TEXT,"
         "tableName TEXT UNIQUE"
         ")");
     await db.execute("CREATE TABLE LANGUAGE("
@@ -192,6 +192,7 @@ class DataBaseManager {
   }
   Future  delete(String tableName) async {
     Database db = await instance.database;
+    print("hey the table name is ${tableName}");
     await db.delete("PROJECT", where: 'tableName= ?', whereArgs: [tableName]);
     await db.delete("LANGUAGE", where: 'tableName= ?', whereArgs: [tableName]);
     await db.delete("TABLENAME", where: 'tableName= ?', whereArgs: [tableName]);

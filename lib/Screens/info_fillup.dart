@@ -750,9 +750,12 @@ Widget Next_to_dynamic_resume(BuildContext context, int index)
 
   if(check == true)
     {
-      DataBaseManager.instance.delete(form_name??"No Table Name").then((_) async {
-        insertDataBase(index);
-      });
+
+
+        DataBaseManager.instance.delete(form_name??"No Table Name").then((_) async {
+          insertDataBase(index);
+        });
+
 
 
 

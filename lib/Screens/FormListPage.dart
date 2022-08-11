@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:resume_builder/DataBase/DataBaseManager.dart';
 
 import 'package:resume_builder/Screens/edit_form_fillup.dart';
+import 'package:resume_builder/Screens/home.dart';
+import 'package:resume_builder/Screens/main_screen.dart';
 //import 'package:resume_builder/Screens/info_fillup.dart';
 import 'package:resume_builder/UserModels/Achievements_UserModel.dart';
 import 'package:resume_builder/UserModels/Education_UserModel.dart';
@@ -88,154 +90,174 @@ class _FormListPageState extends State<FormListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Form Name'),
-      ),
-      body: FutureBuilder<List<TableName>?>(
-        builder: (ctx, snapshot) {
-          // Checking if future is resolved or not
-          if (snapshot.connectionState == ConnectionState.done) {
-            // If we got an error
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  '${snapshot.error} occurred',
-                  style: TextStyle(fontSize: 18),
-                ),
-              );
+    return WillPopScope(
+      onWillPop:  ()async {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+          main_screen() ));
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Form Name'),
+        ),
+        body: FutureBuilder<List<TableName>?>(
+          builder: (ctx, snapshot) {
+            // Checking if future is resolved or not
+            if (snapshot.connectionState == ConnectionState.done) {
+              // If we got an error
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    '${snapshot.error} occurred',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                );
 
-              // if we got our data
-            } else if (snapshot.hasData) {
-              // Extracting data from snapshot object
-              var data = snapshot.data;
-              return ListView.builder(
-                  itemCount: data?.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: Colors.white12,
-                      margin: const EdgeInsets.all(15),
-                      child:Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                SizedBox(width: 20.0),
-                                Expanded(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      InkWell(
-                                        onTap: ()async{
-                                          await _getDataBase(
-                                              _tableName
-                                                  ?.elementAt(index!)
-                                                  .tableName ?? 'NO LIST');
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Next_to_dynamic_resume(context, widget.tableIndex))) ;
-                                        },
-                                        child: Text(
-                                          data?.elementAt(index!).tableName??"No Table Name",
-                                          style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w500,
+                // if we got our data
+              } else if (snapshot.hasData) {
+                // Extracting data from snapshot object
+                var data = snapshot.data;
+                return ListView.builder(
+                    itemCount: data?.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        color: Colors.white12,
+                        margin: const EdgeInsets.all(15),
+                        child:Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 20.0),
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        InkWell(
+                                          onTap: ()async{
+                                            await _getDataBase(
+                                                _tableName
+                                                    ?.elementAt(index!)
+                                                    .tableName ?? 'NO LIST');
+                                            Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Next_to_dynamic_resume(context, widget.tableIndex))) ;
+                                          },
+                                          child: Text(
+                                            _tableName
+                                                ?.elementAt(index!)
+                                                .tableName ?? 'NO LIST',
+                                            style: TextStyle(
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                         ),
+
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(width: 20.0),
+                                  InkWell(
+                                    onTap: ()async{
+
+                                      await _getDataBase(
+                                          _tableName
+                                              ?.elementAt(index!)
+                                              .tableName ?? 'NO LIST');
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (context) =>
+                                              edit_form_fillup(  _tableName
+                                                  ?.elementAt(index!)
+                                                  .tableName ?? 'NO LIST',widget.tableIndex, _educationTable, _projectTable, _skillTable, _languageTable, _workTable, _achievementTable, _profileTable)))
+                                          .then((_) async {
+                                        setState(() {
+                                          list = DataBaseManager.instance.queryTableData();
+                                          _getTableName();
+                                        });
+                                      });
+
+
+                                    },
+                                    child: Container(
+                                      height: 40.0,
+                                      width: 40.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.grey[200],
                                       ),
-
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(width: 20.0),
-                                InkWell(
-                                  onTap: ()async{
-
-                                    await _getDataBase(
-                                        _tableName
-                                            ?.elementAt(index!)
-                                            .tableName ?? 'NO LIST');
-                                    Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            edit_form_fillup(  _tableName
-                                                ?.elementAt(index!)
-                                                .tableName ?? 'NO LIST',widget.tableIndex, _educationTable, _projectTable, _skillTable, _languageTable, _workTable, _achievementTable, _profileTable))) ;
-
-                                  },
-                                  child: Container(
-                                    height: 40.0,
-                                    width: 40.0,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.grey[200],
+                                      alignment: Alignment.center,
+                                      child: Icon(Icons.edit, color: Colors.orange[800]),
                                     ),
-                                    alignment: Alignment.center,
-                                    child: Icon(Icons.edit, color: Colors.orange[800]),
                                   ),
-                                ),
 
 
-                                SizedBox(width: 20.0),
-                                InkWell(
-                                  onTap: ()async{
-                                  DataBaseManager.instance.delete(data?.elementAt(index!).tableName??"No Table Name").then((_) async {
-                                    setState(() {
-                                      list = DataBaseManager.instance.queryTableData();
+                                  SizedBox(width: 20.0),
+                                  InkWell(
+                                    onTap: ()async{
+                                    DataBaseManager.instance.delete(  _tableName
+                                        ?.elementAt(index!)
+                                        .tableName ?? 'NO LIST').then((_) async {
+                                      setState(() {
+                                        list = DataBaseManager.instance.queryTableData();
+                                        _getTableName();
+                                      });
                                     });
-                                  });
-                                  },
-                                  child: Container(
-                                    height: 40.0,
-                                    width: 40.0,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.grey[200],
+                                    },
+                                    child: Container(
+                                      height: 40.0,
+                                      width: 40.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.grey[200],
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: Icon(Icons.delete, color: Colors.red[400]),
                                     ),
-                                    alignment: Alignment.center,
-                                    child: Icon(Icons.delete, color: Colors.red[400]),
                                   ),
-                                ),
 
 
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
 
-                        ],
-                      ),
+                          ],
+                        ),
 
 
-                    );
-                  });
+                      );
+                    });
+              }
             }
-          }
 
-          // Displaying LoadingSpinner to indicate waiting state
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+            // Displaying LoadingSpinner to indicate waiting state
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
 
-        // Future that needs to be resolved
-        // inorder to display something on the Canvas
-        future: list,
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          //Navigator.of(context).push(MaterialPageRoute(builder: (context) => edit_form_fillup(widget.tableIndex, _educationTable, _projectTable, _skillTable, _languageTable, _workTable, _achievementTable, _profileTable)));
-          //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(1)));
+          // Future that needs to be resolved
+          // inorder to display something on the Canvas
+          future: list,
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            //Navigator.of(context).push(MaterialPageRoute(builder: (context) => edit_form_fillup(widget.tableIndex, _educationTable, _projectTable, _skillTable, _languageTable, _workTable, _achievementTable, _profileTable)));
+            //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup(1)));
 
-          Navigator.of(context)
-              .push(MaterialPageRoute(
-                  builder: (builder) => info_fillup(widget.tableIndex)))
-              .then((_) async {
-            setState(() {
-              list = DataBaseManager.instance.queryTableData();
+            Navigator.of(context)
+                .push(MaterialPageRoute(
+                    builder: (builder) => info_fillup(widget.tableIndex)))
+                .then((_) async {
+              setState(() {
+                list = DataBaseManager.instance.queryTableData();
+                _getTableName();
+              });
             });
-          });
-        },
+          },
+        ),
       ),
     );
   }

@@ -21,6 +21,7 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../ResumeWidgets/header_Widget.dart';
+import '../Screens/FormListPage.dart';
 import '../UserModels/Achievements_UserModel.dart';
 import '../UserModels/Education_UserModel.dart';
 import '../UserModels/Profile_UserModel.dart';
@@ -121,119 +122,126 @@ class Template_5state extends State<Template_5>
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-        body: SingleChildScrollView(
+    return WillPopScope(
+      onWillPop:  ()async {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+            FormListPage(tableIndex: 5) ));
+        return false;
+      },
+      child: Scaffold(
+          body: SingleChildScrollView(
 
-            child: new Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  SizedBox(height: 35,),
-                  new header_Widget(
-                    color: "teal",
-                    height: 120,
-                    margin_top: 0,
-                    margin_left: 0,
-                    margin_bottom: 10,
-                    margin_right: 0,
-                    profile_list: widget.profile_list,
-                  ),
+              child: new Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    SizedBox(height: 35,),
+                    new header_Widget(
+                      color: "teal",
+                      height: 120,
+                      margin_top: 0,
+                      margin_left: 0,
+                      margin_bottom: 10,
+                      margin_right: 0,
+                      profile_list: widget.profile_list,
+                    ),
 
-                  new education_Widget(
-                    margin_top: 20,
-                    margin_left: 10,
-                    margin_bottom: 0,
-                    margin_right: 10,
-                    edu_list: widget.edu_list,
-                    color: "white",
-                    txt_color: "black",
-                    high_color: "teal",
-                  ),
+                    new education_Widget(
+                      margin_top: 20,
+                      margin_left: 10,
+                      margin_bottom: 0,
+                      margin_right: 10,
+                      edu_list: widget.edu_list,
+                      color: "white",
+                      txt_color: "black",
+                      high_color: "teal",
+                    ),
 
-                  new experience_Widget(
-                    margin_top: 20,
-                    margin_left: 10,
-                    margin_bottom: 0,
-                    margin_right: 10,
-                    work_list: widget.work_list,
-                    color: "white",
-                    txt_color: "black",
-                    high_color: "teal",
-                  ),
+                    new experience_Widget(
+                      margin_top: 20,
+                      margin_left: 10,
+                      margin_bottom: 0,
+                      margin_right: 10,
+                      work_list: widget.work_list,
+                      color: "white",
+                      txt_color: "black",
+                      high_color: "teal",
+                    ),
 
-                  new skill_Widget(
-                    margin_left: 10,
-                    margin_top: 20,
-                    margin_bottom: 0,
-                    margin_right: 10,
-                    skill_list: widget.skill_list,
-                    color: "white",
-                    txt_color: "black",
-                    high_color: "teal",
-                  ),
+                    new skill_Widget(
+                      margin_left: 10,
+                      margin_top: 20,
+                      margin_bottom: 0,
+                      margin_right: 10,
+                      skill_list: widget.skill_list,
+                      color: "white",
+                      txt_color: "black",
+                      high_color: "teal",
+                    ),
 
-                  new achievement_Widget(
-                    margin_top: 20,
-                    margin_left: 10,
-                    margin_bottom: 0,
-                    margin_right: 10,
-                    achievement_list: widget.achievement_list,
-                    color: "white",
-                    txt_color: "black",
-                    high_color: "teal",
-                  ),
+                    new achievement_Widget(
+                      margin_top: 20,
+                      margin_left: 10,
+                      margin_bottom: 0,
+                      margin_right: 10,
+                      achievement_list: widget.achievement_list,
+                      color: "white",
+                      txt_color: "black",
+                      high_color: "teal",
+                    ),
 
-                  new project_Widget(
-                    margin_left: 10,
-                    margin_top: 20,
-                    margin_bottom: 0,
-                    margin_right: 10,
-                    project_list: widget.project_list,
-                    color: "white",
-                    txt_color: "black",
-                    high_color: "teal",
-                  ),
-
-
-                  // new Language_Widget(
-                  //   height: 180,
-                  //   margin_top: 20,
-                  //   margin_left: 10,
-                  //   margin_bottom: 0,
-                  //   margin_right: 10,
-                  //   skill1: "English",
-                  //   skill2: "Hindi",
-                  //   skill3: "Bengali",
-                  //
-                  // )
-
-                  new Language_Widget(
-                    margin_top: 20,
-                    margin_left: 10,
-                    margin_bottom: 0,
-                    margin_right: 10,
-                    color: "white",
-                    txt_color: "black",
-                    high_color: "teal",
-                    language_list: widget.language_list,
-
-                  ),
+                    new project_Widget(
+                      margin_left: 10,
+                      margin_top: 20,
+                      margin_bottom: 0,
+                      margin_right: 10,
+                      project_list: widget.project_list,
+                      color: "white",
+                      txt_color: "black",
+                      high_color: "teal",
+                    ),
 
 
-                ]
+                    // new Language_Widget(
+                    //   height: 180,
+                    //   margin_top: 20,
+                    //   margin_left: 10,
+                    //   margin_bottom: 0,
+                    //   margin_right: 10,
+                    //   skill1: "English",
+                    //   skill2: "Hindi",
+                    //   skill3: "Bengali",
+                    //
+                    // )
 
-            )
+                    new Language_Widget(
+                      margin_top: 20,
+                      margin_left: 10,
+                      margin_bottom: 0,
+                      margin_right: 10,
+                      color: "white",
+                      txt_color: "black",
+                      high_color: "teal",
+                      language_list: widget.language_list,
 
+                    ),
+
+
+                  ]
+
+              )
+
+          ),
+
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.print),
+          onPressed: _createPDF,
+          //_printScreen ,
         ),
 
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.print),
-        onPressed: _createPDF,
-        //_printScreen ,
+
+
+
       ),
-
-
-
-
     );
   }
 
