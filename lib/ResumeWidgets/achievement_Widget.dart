@@ -78,6 +78,7 @@ class achievement_Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
+
       //color: Colors.limeAccent,
       margin: EdgeInsets.fromLTRB(margin_left!, margin_top!, margin_right!, margin_bottom!),
       //padding: const EdgeInsets.all(10),

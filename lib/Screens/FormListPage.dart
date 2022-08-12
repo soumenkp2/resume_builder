@@ -249,7 +249,7 @@ class _FormListPageState extends State<FormListPage> {
 
             Navigator.of(context)
                 .push(MaterialPageRoute(
-                    builder: (builder) => info_fillup(widget.tableIndex)))
+                builder: (builder) => info_fillup(widget.tableIndex)))
                 .then((_) async {
               setState(() {
                 list = DataBaseManager.instance.queryTableData();
@@ -265,6 +265,11 @@ class _FormListPageState extends State<FormListPage> {
 
 
   Widget Next_to_dynamic_resume(BuildContext context, int index) {
+
+    print("form: ");
+    print(index);
+
+
     if (index == 1) {
       return Template_1( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
 

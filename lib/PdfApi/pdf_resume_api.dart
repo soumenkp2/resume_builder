@@ -1,9 +1,11 @@
 import 'dart:io';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 import 'package:resume_builder/ResumeTemplates/Template_6.dart';
+import 'package:resume_builder/Screens/info_fillup.dart';
 import 'package:resume_builder/UserModels/Education_UserModel.dart';
 import 'package:resume_builder/PdfApi/pdf_api.dart';
 
@@ -62,6 +64,131 @@ Widget set_template(List<Profile_UserModel>? profile_list, List<Education_UserMo
 }
 
 
+
+
+
+bool check_visibility_work_project(List<Work_Projects_UserModel> list) {
+  bool check = true;
+
+  list.forEach((value) {
+    if (value.tableName == null || value.organization_name == null ||
+        value.qualification_name == null || value.year_duration == null && value.brief == null) {
+      check = false;
+    }
+    else {
+      check = true;
+    }
+  });
+
+  return check;
+}
+
+bool check_visibility_skills_lang(List<Skills_Languages_UserModel> list) {
+  bool check = true;
+
+  list?.forEach((value) {
+    if(value.tableName==null||value.value == null)
+    {
+      check = false;
+    }
+    else
+      {
+        check = true;
+      }
+  });
+
+  return check;
+}
+
+bool check_visibility_education(List<Education_UserModel> list) {
+  bool check = true;
+
+  list.forEach((value) {
+    if (value.tableName == null || value.organization_name == null ||
+        value.qualification_name == null || value.year_duration == null) {
+      check = false;
+    }
+    else {
+      check = true;
+    }
+  });
+
+  return check;
+}
+
+bool check_visibility_achievement(List<Achievements_UserModel> list) {
+  bool check = true;
+
+  list.forEach((value) {
+    if(value.tableName==null||value.organization_name == null || value.qualification_name==null)
+    {
+      check = false;
+    }
+    else
+      {
+        check = true;
+      }
+  });
+
+  return check;
+}
+
+
+
+List<Widget> createRow_1(List<Education_UserModel>? edu_list, List<Work_Projects_UserModel>? work_list,  List<Skills_Languages_UserModel>? lang_list,String color, String txt_color, String high_color)
+{
+  List<Widget> row1 = [];
+  if(row1.isEmpty)
+    {
+      if(check_visibility_education(edu_list!)==true)
+      {
+        row1.add(pdf_education(edu_list,color,txt_color,high_color));
+
+      }
+      if(check_visibility_work_project(work_list!)==true)
+      {
+        row1.add(pdf_project_work(work_list, color, txt_color, high_color, "Work Experience"));
+      }
+      if(check_visibility_skills_lang(lang_list!)==true)
+      {
+        row1.add(pdf_skill_lang(lang_list, color, txt_color, high_color, "Languages"));
+      }
+    }
+  else
+    {
+
+    }
+
+  return row1;
+}
+
+List<Widget> createRow_2(List<Achievements_UserModel>? ach_list, List<Work_Projects_UserModel>? project_list,  List<Skills_Languages_UserModel>? skill_list,String color, String txt_color, String high_color)
+{
+  List<Widget> row2 = [];
+  if(row2.isEmpty)
+  {
+    if(check_visibility_achievement(ach_list!)==true)
+    {
+      row2.add(pdf_achievement(ach_list, color, txt_color, high_color),);
+    }
+    if(check_visibility_work_project(project_list!)==true)
+    {
+      row2.add( pdf_project_work(project_list, color, txt_color, high_color, "Projects"),);
+    }
+    if(check_visibility_skills_lang(skill_list!)==true)
+    {
+      row2.add(pdf_skill_lang(skill_list, color, txt_color, high_color, "Skills"));
+    }
+  }
+  else
+  {
+
+  }
+
+  return row2;
+}
+
+
 Widget Template_1(List<Profile_UserModel>? profile_list, List<Education_UserModel>? edu_list, List<Work_Projects_UserModel>? work_list, List<Work_Projects_UserModel>? project_list,  List<Achievements_UserModel>? ach_list, List<Skills_Languages_UserModel>? skill_list, List<Skills_Languages_UserModel>? lang_list,String color, String txt_color, String high_color)
 {
   return Column(
@@ -101,29 +228,33 @@ Widget Template_1(List<Profile_UserModel>? profile_list, List<Education_UserMode
       new Padding(padding: const EdgeInsets.all(10),
           child: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
 
                 new Flexible(child: new Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      pdf_education(edu_list,color,txt_color,high_color),
-                      pdf_project_work(work_list, color, txt_color, high_color, "Work Experience"),
-                      pdf_skill_lang(lang_list, color, txt_color, high_color, "Languages"),
+                    children: createRow_1(edu_list,work_list,lang_list,color,txt_color,high_color),
 
-                    ]
+                    // <Widget>[
+                    //   createRow_1()
+                    //   // pdf_education(edu_list,color,txt_color,high_color),
+                    //   // pdf_project_work(work_list, color, txt_color, high_color, "Work Experience"),
+                    //   // pdf_skill_lang(lang_list, color, txt_color, high_color, "Languages"),
+                    //
+                    // ]
                 )),
 
                 new Flexible(child: new Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      pdf_achievement(ach_list, color, txt_color, high_color),
-                      pdf_project_work(project_list, color, txt_color, high_color, "Projects"),
-                      pdf_skill_lang(skill_list, color, txt_color, high_color, "Skills"),
-
-                    ]
+                    children: createRow_2(ach_list, project_list, skill_list, color, txt_color, high_color),
+                    // <Widget>[
+                    //   pdf_achievement(ach_list, color, txt_color, high_color),
+                    //   pdf_project_work(project_list, color, txt_color, high_color, "Projects"),
+                    //   pdf_skill_lang(skill_list, color, txt_color, high_color, "Skills"),
+                    //
+                    // ]
                 )),
 
               ]
@@ -142,24 +273,38 @@ Widget Template_3(List<Profile_UserModel>? profile_list, List<Education_UserMode
   return Column(
     children: <Widget>[
       pdf_headers(profile_list, high_color),
-      new Padding(padding: const EdgeInsets.all(10),
-        child: pdf_education(edu_list,color,txt_color,high_color),
-      ),
-      new Padding(padding: const EdgeInsets.all(10),
-          child: pdf_project_work(work_list, color, txt_color, high_color, "Work Experience"),
-      ),
-      new Padding(padding: const EdgeInsets.all(10),
-          child: pdf_achievement(ach_list, color, txt_color, high_color),
-      ),
-      new Padding(padding: const EdgeInsets.all(10),
-          child: pdf_project_work(project_list, color, txt_color, high_color, "Projects"),
-      ),
-      new Padding(padding: const EdgeInsets.all(10),
-          child: pdf_skill_lang(skill_list, color, txt_color, high_color, "Skills"),
-      ),
-      new Padding(padding: const EdgeInsets.all(10),
-          child: pdf_skill_lang(lang_list, color, txt_color, high_color, "Languages"),
-      ),
+
+      new Flexible(child: new Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: createRow_1(edu_list,work_list,lang_list,color,txt_color,high_color),
+      )),
+
+      new Flexible(child: new Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: createRow_2(ach_list, project_list, skill_list, color, txt_color, high_color),
+      )),
+
+
+      // new Padding(padding: const EdgeInsets.all(10),
+      //   child: pdf_education(edu_list,color,txt_color,high_color),
+      // ),
+      // new Padding(padding: const EdgeInsets.all(10),
+      //     child: pdf_project_work(work_list, color, txt_color, high_color, "Work Experience"),
+      // ),
+      // new Padding(padding: const EdgeInsets.all(10),
+      //     child: pdf_achievement(ach_list, color, txt_color, high_color),
+      // ),
+      // new Padding(padding: const EdgeInsets.all(10),
+      //     child: pdf_project_work(project_list, color, txt_color, high_color, "Projects"),
+      // ),
+      // new Padding(padding: const EdgeInsets.all(10),
+      //     child: pdf_skill_lang(skill_list, color, txt_color, high_color, "Skills"),
+      // ),
+      // new Padding(padding: const EdgeInsets.all(10),
+      //     child: pdf_skill_lang(lang_list, color, txt_color, high_color, "Languages"),
+      // ),
 
 
     ],

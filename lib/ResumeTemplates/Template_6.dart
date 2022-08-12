@@ -146,60 +146,94 @@ class Template_6state extends State<Template_6>
                 profile_list: widget.profile_list,
               ),
 
-              new education_Widget(
-                margin_top: 20,
-                margin_left: 10,
-                margin_bottom: 0,
-                margin_right: 10,
-                edu_list: widget.edu_list,
-                color: "white",
-                txt_color: "black",
-                high_color: "blueGrey",
+              Visibility(
+                  child:new education_Widget(
+                    margin_top: 20,
+                    margin_left: 10,
+                    margin_bottom: 0,
+                    margin_right: 10,
+                    edu_list: widget.edu_list,
+                    color: "white",
+                    txt_color: "black",
+                    high_color: "blueGrey",
+                  ),
+
+                  visible: check_visibility_education(widget.edu_list!)
+
+
               ),
 
-              new experience_Widget(
-                margin_top: 20,
-                margin_left: 10,
-                margin_bottom: 0,
-                margin_right: 10,
-                work_list: widget.work_list,
-                color: "white",
-                txt_color: "black",
-                high_color: "blueGrey",
+
+              Visibility(
+                  child:new experience_Widget(
+                    margin_top: 20,
+                    margin_left: 10,
+                    margin_bottom: 0,
+                    margin_right: 10,
+                    work_list: widget.work_list,
+                    color: "white",
+                    txt_color: "black",
+                    high_color: "blueGrey",
+                  ),
+
+                  visible: check_visibility_work_project(widget.work_list!)
+
+
               ),
 
-              new skill_Widget(
-                margin_left: 10,
-                margin_top: 20,
-                margin_bottom: 0,
-                margin_right: 10,
-                skill_list: widget.skill_list,
-                  color: "white",
-                  txt_color: "black",
-                  high_color: "blueGrey",
+
+              Visibility(
+                  child:new skill_Widget(
+                    margin_left: 10,
+                    margin_top: 20,
+                    margin_bottom: 0,
+                    margin_right: 10,
+                    skill_list: widget.skill_list,
+                    color: "white",
+                    txt_color: "black",
+                    high_color: "blueGrey",
+                  ),
+                  
+                  visible: check_visibility_skills_lang(widget.skill_list!)
+
+
               ),
 
-              new achievement_Widget(
-                margin_top: 20,
-                margin_left: 10,
-                margin_bottom: 0,
-                margin_right: 10,
-                achievement_list: widget.achievement_list,
-                  color: "white",
-                  txt_color: "black",
-                  high_color: "blueGrey",
+              Visibility(
+                  child:new achievement_Widget(
+                    margin_top: 20,
+                    margin_left: 10,
+                    margin_bottom: 0,
+                    margin_right: 10,
+                    achievement_list: widget.achievement_list,
+                    color: "white",
+                    txt_color: "black",
+                    high_color: "blueGrey",
+                  ),
+
+                  visible: check_visibility_achievement(widget.achievement_list!)
+
+
               ),
 
-              new project_Widget(
-                margin_left: 10,
-                margin_top: 20,
-                margin_bottom: 0,
-                margin_right: 10,
-                project_list: widget.project_list,
-                color: "white",
-                txt_color: "black",
-                high_color: "blueGrey",
+
+              Visibility(
+                  child: new project_Widget(
+                    margin_left: 10,
+                    margin_top: 20,
+                    margin_bottom: 0,
+                    margin_right: 10,
+                    project_list: widget.project_list,
+                    color: "white",
+                    txt_color: "black",
+                    high_color: "blueGrey",
+                  ),
+
+                  visible: check_visibility_work_project(widget.project_list!)
+
+
               ),
+              
 
 
               // new Language_Widget(
@@ -214,17 +248,24 @@ class Template_6state extends State<Template_6>
               //
               // )
 
-              new Language_Widget(
-                margin_top: 20,
-                margin_left: 10,
-                margin_bottom: 0,
-                margin_right: 10,
-                color: "white",
-                txt_color: "black",
-                high_color: "blueGrey",
-                language_list: widget.language_list,
+              Visibility(
+                  child: new Language_Widget(
+                    margin_top: 20,
+                    margin_left: 10,
+                    margin_bottom: 0,
+                    margin_right: 10,
+                    color: "white",
+                    txt_color: "black",
+                    high_color: "blueGrey",
+                    language_list: widget.language_list,
+
+                  ),
+
+                  visible: check_visibility_skills_lang(widget.language_list!)
+
 
               ),
+              
 
 
             ]

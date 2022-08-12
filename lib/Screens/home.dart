@@ -33,8 +33,13 @@ class home_state extends State<home> {
 
   void moveToResume(int index)
   {
+    print("Home: ");
+    print(index);
+
+
     if(index==1)
       {
+        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Resume_temp2()));
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => FormListPage(tableIndex: 1)));
       }
     else if(index==2)

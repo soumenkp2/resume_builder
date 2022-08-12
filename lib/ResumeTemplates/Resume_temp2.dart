@@ -161,7 +161,7 @@ class Resume_temp2state extends State<Resume_temp2>
                   new Padding(padding: const EdgeInsets.all(10),
                       child: new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
 
                             new Flexible(
@@ -214,7 +214,8 @@ class Resume_temp2state extends State<Resume_temp2>
 
                             new Flexible(
                                 child: new Column(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: <Widget>[
 
                                       new achievement_Widget(

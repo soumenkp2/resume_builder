@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/%20CustomResumeWidgets/Header_Widget.dart';
+import 'package:resume_builder/Screens/info_fillup.dart';
 
 import '../ CustomResumeWidgets/Education_Widget.dart';
 import '../ResumeWidgets/language_Widget.dart';
@@ -140,6 +141,24 @@ class Template_1state extends State<Template_1>
 
   }
 
+  bool check_visibility(List<Education_UserModel> list)
+  {
+    bool check = true;
+
+    list.forEach((value) {
+      if(value.tableName==null|| value.organization_name == null || value.qualification_name==null || value.year_duration==null)
+      {
+        check = false;
+      }
+      else
+        {
+          check = true;
+        }
+    });
+
+    return check;
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -166,7 +185,7 @@ class Template_1state extends State<Template_1>
                     new Padding(padding: const EdgeInsets.all(10),
                         child: new Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
 
                               new Flexible(
@@ -175,41 +194,53 @@ class Template_1state extends State<Template_1>
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: <Widget>[
 
-                                        new education_Widget(
+                                        Visibility(
+                                          child: new education_Widget(
+                                              margin_top: 20,
+                                              margin_left: 0,
+                                              margin_bottom: 0,
+                                              margin_right: 10,
+                                              edu_list: widget.edu_list,
+                                              color: "white",
+                                              txt_color: "black",
+                                              high_color: "teal"
+                                          ),
+                                          visible: check_visibility_education(widget.edu_list!),
+                                        ),
+
+
+                                        Visibility(
+                                          child: new experience_Widget(
+                                              margin_top: 20,
+                                              margin_left: 0,
+                                              margin_bottom: 0,
+                                              margin_right: 10,
+                                              work_list: widget.work_list,
+                                              color: "white",
+                                              txt_color: "black",
+                                              high_color: "teal"
+                                          ),
+                                          visible: check_visibility_work_project(widget.work_list!),
+
+                                        ),
+
+
+
+                                        Visibility(
+                                          child: Language_Widget(
                                             margin_top: 20,
                                             margin_left: 0,
                                             margin_bottom: 0,
                                             margin_right: 10,
-                                            edu_list: widget.edu_list,
                                             color: "white",
                                             txt_color: "black",
-                                            high_color: "teal"
+                                            high_color: "teal",
+                                            language_list: widget.language_list,
+
+                                          ),
+                                        visible: check_visibility_skills_lang(widget.language_list!)
                                         ),
 
-                                        new experience_Widget(
-                                            margin_top: 20,
-                                            margin_left: 0,
-                                            margin_bottom: 0,
-                                            margin_right: 10,
-                                            work_list: widget.work_list,
-                                            color: "white",
-                                            txt_color: "black",
-                                            high_color: "teal"
-                                        ),
-
-
-
-                                        Language_Widget(
-                                          margin_top: 20,
-                                          margin_left: 0,
-                                          margin_bottom: 0,
-                                          margin_right: 10,
-                                          color: "white",
-                                          txt_color: "black",
-                                          high_color: "teal",
-                                          language_list: widget.language_list,
-
-                                        )
 
 
 
@@ -222,38 +253,52 @@ class Template_1state extends State<Template_1>
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
 
-                                        new achievement_Widget(
-                                            margin_top: 20,
-                                            margin_left: 10,
-                                            margin_bottom: 0,
-                                            margin_right: 0,
-                                            achievement_list: widget.achievement_list,
-                                            color: "white",
-                                            txt_color: "black",
-                                            high_color: "teal"
+                                        Visibility(
+                                          child: new achievement_Widget(
+                                              margin_top: 20,
+                                              margin_left: 10,
+                                              margin_bottom: 0,
+                                              margin_right: 0,
+                                              achievement_list: widget.achievement_list,
+                                              color: "white",
+                                              txt_color: "black",
+                                              high_color: "teal"
+                                          ),
+                                          visible: check_visibility_achievement(widget.achievement_list!)
                                         ),
 
-                                        new project_Widget(
-                                            margin_left: 10,
-                                            margin_top: 20,
-                                            margin_bottom: 0,
-                                            margin_right: 0,
-                                            project_list: widget.project_list,
-                                            color: "white",
-                                            txt_color: "black",
-                                            high_color: "teal"
+                                        Visibility(
+                                            child:  new project_Widget(
+                                                margin_left: 10,
+                                                margin_top: 20,
+                                                margin_bottom: 0,
+                                                margin_right: 0,
+                                                project_list: widget.project_list,
+                                                color: "white",
+                                                txt_color: "black",
+                                                high_color: "teal",
+                                            ),
+                                            visible: check_visibility_work_project(widget.project_list!),
                                         ),
 
-                                        new skill_Widget(
-                                            margin_left: 10,
-                                            margin_top: 20,
-                                            margin_bottom: 0,
-                                            margin_right: 0,
-                                            skill_list: widget.skill_list,
-                                            color: "white",
-                                            txt_color: "black",
-                                            high_color: "teal"
+                                        Visibility(
+                                            child: new skill_Widget(
+                                                margin_left: 10,
+                                                margin_top: 20,
+                                                margin_bottom: 0,
+                                                margin_right: 0,
+                                                skill_list: widget.skill_list,
+                                                color: "white",
+                                                txt_color: "black",
+                                                high_color: "teal"
+                                            ),
+                                            visible: check_visibility_skills_lang(widget.skill_list!)
+
                                         ),
+
+
+
+
 
 
 
