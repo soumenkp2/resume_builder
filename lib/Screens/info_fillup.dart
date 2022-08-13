@@ -479,7 +479,7 @@ class info_fillup_state extends State<info_fillup> {
                             child: new Padding(
                               padding: const EdgeInsets.all(10),
                               child: new Image.asset(
-                                'assets/images/projects.png',
+                                'assets/images/language.png',
                                 //height: 15.0,
                                 fit: BoxFit.cover,
                               ),
