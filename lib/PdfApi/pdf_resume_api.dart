@@ -274,17 +274,32 @@ Widget Template_3(List<Profile_UserModel>? profile_list, List<Education_UserMode
     children: <Widget>[
       pdf_headers(profile_list, high_color),
 
-      new Flexible(child: new Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: createRow_1(edu_list,work_list,lang_list,color,txt_color,high_color),
-      )),
+      new Padding(padding: const EdgeInsets.all(10),
+        child: new Column(
+               mainAxisAlignment: MainAxisAlignment.start,
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: createRow_1(edu_list,work_list,lang_list,color,txt_color,high_color),
+             )),
 
-      new Flexible(child: new Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: createRow_2(ach_list, project_list, skill_list, color, txt_color, high_color),
-      )),
+      new Padding(padding: const EdgeInsets.all(10),
+          child: new Column(
+  mainAxisAlignment: MainAxisAlignment.start,
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: createRow_2(ach_list, project_list, skill_list, color, txt_color, high_color),
+)),
+
+
+      // new Flexible(child: new Column(
+      //   mainAxisAlignment: MainAxisAlignment.start,
+      //   crossAxisAlignment: CrossAxisAlignment.start,
+      //   children: createRow_1(edu_list,work_list,lang_list,color,txt_color,high_color),
+      // )),
+      //
+      // new Flexible(child: new Column(
+      //   mainAxisAlignment: MainAxisAlignment.start,
+      //   crossAxisAlignment: CrossAxisAlignment.start,
+      //   children: createRow_2(ach_list, project_list, skill_list, color, txt_color, high_color),
+      // )),
 
 
       // new Padding(padding: const EdgeInsets.all(10),
