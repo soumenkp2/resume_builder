@@ -158,13 +158,16 @@ class onboarding_screen_state extends State<onboarding_screen> {
                   ),
 
                   new ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(110, 12) // put the width and height you want
+                      ),
                     child: new Text(
                       "Skip",
                       style: GoogleFonts.poppins(
                           textStyle: TextStyle(
-                              color: Colors.black87,
+                              color: Colors.white,
                               fontSize: 20,
-                              fontWeight: FontWeight.bold)),
+                              fontWeight: FontWeight.w700)),
                       maxLines: 4,
                     ),
                     onPressed: (){
