@@ -581,13 +581,18 @@ class info_fillup_state extends State<info_fillup> {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        //Resume_temp2()));
-                        Next_to_dynamic_resume(context, widget.index,this.runtimeType)));
-                //Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list)));
-                //edu_data_upload(context);
-              },
+                if(checkValidator()== true){
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                      //Resume_temp2()));
+                      Next_to_dynamic_resume(context, widget.index,this.runtimeType)));
+                  //Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list)));
+                  //edu_data_upload(context);
+                }else {
+                  alertDialouge(context);
+                }
+                }
+            ,
               child: Text('Next',
                   style: GoogleFonts.poppins(
                       textStyle: TextStyle(
@@ -597,6 +602,36 @@ class info_fillup_state extends State<info_fillup> {
     )));
   }
 }
+
+ bool checkValidator(){
+   bool check = true;
+
+   edu_list?.forEach((value) {
+     if (value.tableName == null ||
+         value.organization_name == null ||
+         value.qualification_name == null ||
+         value.year_duration == null) {
+       check = false;
+     }
+   });
+
+   profile_list?.forEach((value) {
+     if (value.tableName == null ||
+         value.name == null ||
+         value.location == null ||
+         value.phone_no == null) {
+       check = false;
+     }
+   });
+
+   skill_list?.forEach((value) {
+     if (value.tableName == null || value.value == null) {
+       check = false;
+     }
+   });
+
+   return check;
+ }
 
 Widget Next_to_dynamic_resume(BuildContext context, int index, Type runtimeType) {
   bool check = true;
@@ -696,8 +731,8 @@ Widget Next_to_dynamic_resume(BuildContext context, int index, Type runtimeType)
 
     //return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
   } else {
-    //alertDialouge(context, check);
-    return Text("Fill education , skills and profile");
+
+    return alertDialouge(context);
 
     //ScaffoldMessenger.of(context).showSnackBar(snackBar);
     // return new Text("Fill all the blanks properly!!",
@@ -1758,17 +1793,17 @@ class Education_fillup_widget extends StatelessWidget {
 
 }
 
- // Widget alertDialouge(BuildContext context, bool flag){
- //  return AlertDialog(
- //    title: Text('Alert'),           // To display the title it is optional
- //    content: Text('Fill education , skills and profile'),   // Message which will be pop up on the screen
- //    // Action widget which will provide the user to acknowledge the choice
- //    actions: [
- //      FlatButton(
- //        textColor: Colors.black,
- //        onPressed: () {},
- //        child: Text('ACCEPT'),
- //      ),
- //    ],
- //  );
- // }
+ Widget alertDialouge(BuildContext context){
+  return AlertDialog(
+    title: Text('Alert'),           // To display the title it is optional
+    content: Text('Fill education , skills and profile'),   // Message which will be pop up on the screen
+    // Action widget which will provide the user to acknowledge the choice
+    actions: [
+      FlatButton(
+        textColor: Colors.black,
+        onPressed: () {},
+        child: Text('ACCEPT'),
+      ),
+    ],
+  );
+ }
