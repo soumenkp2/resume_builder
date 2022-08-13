@@ -589,7 +589,7 @@ class info_fillup_state extends State<info_fillup> {
                   //Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list)));
                   //edu_data_upload(context);
                 }else {
-                  alertDialouge(context);
+                  //alertDialouge(context);
                 }
                 }
             ,
@@ -732,7 +732,8 @@ Widget Next_to_dynamic_resume(BuildContext context, int index, Type runtimeType)
     //return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
   } else {
 
-    return alertDialouge(context);
+    return Text("s");
+    //alertDialouge(context);
 
     //ScaffoldMessenger.of(context).showSnackBar(snackBar);
     // return new Text("Fill all the blanks properly!!",
@@ -1793,17 +1794,17 @@ class Education_fillup_widget extends StatelessWidget {
 
 }
 
- Widget alertDialouge(BuildContext context){
-  return AlertDialog(
-    title: Text('Alert'),           // To display the title it is optional
-    content: Text('Fill education , skills and profile'),   // Message which will be pop up on the screen
-    // Action widget which will provide the user to acknowledge the choice
-    actions: [
-      FlatButton(
-        textColor: Colors.black,
-        onPressed: () {},
-        child: Text('ACCEPT'),
-      ),
-    ],
-  );
- }
+ // Widget alertDialouge(BuildContext context){
+ //  return AlertDialog(
+ //    title: Text('Alert'),           // To display the title it is optional
+ //    content: Text('Fill education , skills and profile'),   // Message which will be pop up on the screen
+ //    // Action widget which will provide the user to acknowledge the choice
+ //    actions: [
+ //      FlatButton(
+ //        textColor: Colors.black,
+ //        onPressed: () {},
+ //        child: Text('ACCEPT'),
+ //      ),
+ //    ],
+ //  );
+ // }
