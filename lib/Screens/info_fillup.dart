@@ -696,7 +696,7 @@ Widget Next_to_dynamic_resume(BuildContext context, int index, Type runtimeType)
 
     //return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
   } else {
-    alertDialouge(context, check);
+    //alertDialouge(context, check);
     return Text("Fill education , skills and profile");
 
     //ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -1758,17 +1758,17 @@ class Education_fillup_widget extends StatelessWidget {
 
 }
 
- Widget alertDialouge(BuildContext context, bool flag){
-  return AlertDialog(
-    title: Text('Alert'),           // To display the title it is optional
-    content: Text('Fill education , skills and profile'),   // Message which will be pop up on the screen
-    // Action widget which will provide the user to acknowledge the choice
-    actions: [
-      FlatButton(
-        textColor: Colors.black,
-        onPressed: () {},
-        child: Text('ACCEPT'),
-      ),
-    ],
-  );
- }
+ // Widget alertDialouge(BuildContext context, bool flag){
+ //  return AlertDialog(
+ //    title: Text('Alert'),           // To display the title it is optional
+ //    content: Text('Fill education , skills and profile'),   // Message which will be pop up on the screen
+ //    // Action widget which will provide the user to acknowledge the choice
+ //    actions: [
+ //      FlatButton(
+ //        textColor: Colors.black,
+ //        onPressed: () {},
+ //        child: Text('ACCEPT'),
+ //      ),
+ //    ],
+ //  );
+ // }

@@ -734,116 +734,109 @@ Widget Next_to_dynamic_resume(BuildContext context, int index, String? form_name
   bool check = true;
 
   edu_list?.forEach((value) {
-    if(value.tableName==null|| value.organization_name == null || value.qualification_name==null || value.year_duration==null)
-    {
+    if (value.tableName == null ||
+        value.organization_name == null ||
+        value.qualification_name == null ||
+        value.year_duration == null) {
       check = false;
     }
   });
-
-  project_list?.forEach((value) {
-    if(value.tableName==null||value.organization_name == null || value.qualification_name==null || value.year_duration==null || value.brief==null)
-    {
-      check = false;
-    }
-  });
-
-  work_list?.forEach((value) {
-    if(value.tableName==null||value.organization_name == null || value.qualification_name==null || value.year_duration==null || value.brief==null)
-    {
-      check = false;
-    }
-  });
-
-  achievement_list?.forEach((value) {
-    if(value.tableName==null||value.organization_name == null || value.qualification_name==null)
-    {
-      check = false;
-    }
-  });
-
+  //
+  // project_list?.forEach((value) {
+  //   if(value.tableName==null||value.organization_name == null || value.qualification_name==null || value.year_duration==null || value.brief==null)
+  //   {
+  //     check = false;
+  //   }
+  // });
+  //
+  // work_list?.forEach((value) {
+  //   if(value.tableName==null||value.organization_name == null || value.qualification_name==null || value.year_duration==null || value.brief==null)
+  //   {
+  //     check = false;
+  //   }
+  // });
+  //
+  // achievement_list?.forEach((value) {
+  //   if(value.tableName==null||value.organization_name == null || value.qualification_name==null)
+  //   {
+  //     check = false;
+  //   }
+  // });
+  //
   profile_list?.forEach((value) {
-    if(value.tableName==null||value.name == null || value.location==null || value.phone_no==null)
-    {
+    if (value.tableName == null ||
+        value.name == null ||
+        value.location == null ||
+        value.phone_no == null) {
       check = false;
     }
   });
 
   skill_list?.forEach((value) {
-    if(value.tableName==null||value.value == null)
-    {
+    if (value.tableName == null || value.value == null) {
       check = false;
     }
   });
+  //
+  // language_list?.forEach((value) {
+  //   if(value.tableName==null||value.value == null)
+  //   {
+  //     check = false;
+  //   }
+  // });
 
-  language_list?.forEach((value) {
-    if(value.tableName==null||value.value == null)
-    {
-      check = false;
-    }
-  });
+  // if(form_name == null)
+  //   {
+  //     check = false;
+  //   }
 
-  if(form_name == null)
-  {
-    check = false;
-  }
-
-
-
-
-
-  if(check == true)
-  {
-    DataBaseManager.instance.delete(form_name1??"No Table Name").then((_) async {
+  if (check == true) {
+    DataBaseManager.instance
+        .delete(form_name ?? "No Table Name")
+        .then((_) async {
       insertDataBase(index);
     });
 
-
-
-    if(index==1)
-    {
-      return Template_1(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+    if (index == 1) {
+      return Template_1(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-    }
-    else if(index==2)
-    {
-      return Template_2(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+    } else if (index == 2) {
+      return Template_2(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-    }
-    else if(index==3)
-    {
-      return Template_3(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+    } else if (index == 3) {
+      return Template_3(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>info_fillup()));
-    }
-    else if(index==4)
-    {
-      return Template_4(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+    } else if (index == 4) {
+      return Template_4(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-    }
-    else if(index==6)
-    {
-      return Template_6(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+    } else if (index == 6) {
+      print("soumen 6");
+      return Template_6(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-    }
-    else if(index==5)
-    {
-      return Template_5(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+    } else if (index == 5) {
+      return Template_5(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-    }
-    else
-    {
+    } else {
       return Text("hello ji");
     }
 
-    //return Resume_temp2(widget.edu_list, work_list, project_list, profile_list, widget.achievement_list, skill_list, language_list);
-  }
-  else
-  {
+    //return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+  } else {
+    //alertDialouge(context, check);
+    return Text("Fill education , skills and profile");
 
-    return new Text("Fill all the blanks properly!!",
-        textAlign: TextAlign.left,
-        style: GoogleFonts.poppins(
-            textStyle: TextStyle(
-                fontSize: 30, fontWeight: FontWeight.bold)));
+    //ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // return new Text("Fill all the blanks properly!!",
+    //     textAlign: TextAlign.left,
+    //     style: GoogleFonts.poppins(
+    //         textStyle: TextStyle(
+    //             fontSize: 30, fontWeight: FontWeight.bold)));
 
   }
 }
