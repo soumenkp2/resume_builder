@@ -100,29 +100,46 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
 
     edu_list = widget.edu?.toList();
     profile_list = widget.profile?.toList();
-    achievement_list = widget.achievement?.toList();
-    project_list = widget.project?.toList();
-    work_list = widget.work?.toList();
-    skill_list = widget.skill?.toList();
-    language_list = widget.language?.toList();
+
+    if(widget.achievement?.toList() != null)
+      {
+        achievement_list = widget.achievement?.toList();
+      }
+    else
+      {
+        achievement_list?.add(new Achievements_UserModel());
+      }
+
+    if(widget.project?.toList != null)
+      {
+        project_list = widget.project?.toList();
+      }
+    else
+      {
+        project_list?.add(new Work_Projects_UserModel());
+      }
 
 
-    print(widget.edu?.length);
+    if(widget.work?.toList != null)
+      {
+        work_list = widget.work?.toList();
+      }
+    else
+      {
+        work_list?.add(new Work_Projects_UserModel());
+      }
 
-    print("\n\nEducation");
-    edu_list?.forEach((element) {
-      print(element.qualification_name);
-      print(element.organization_name);
-      print(element.year_duration);
-    });
 
-    // edu_list?.add(new Education_UserModel());
-    // achievement_list?.add(new Achievements_UserModel());
-    // work_list?.add(new Work_Projects_UserModel());
-    // project_list?.add(new Work_Projects_UserModel());
-    // skill_list?.add(new Skills_Languages_UserModel());
-    // profile_list?.add(new Profile_UserModel());
-    // language_list?.add(new Skills_Languages_UserModel());
+    if(widget.language?.toList != null)
+      {
+        language_list = widget.language?.toList();
+      }
+    else
+      {
+        language_list?.add(new Skills_Languages_UserModel());
+      }
+
+
 
 
     // final_data = new Map<String,List>();
@@ -731,6 +748,8 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
 
 Widget Next_to_dynamic_resume(BuildContext context, int index, String? form_name1, Type runtimeType)
 {
+  print(index);
+
   bool check = true;
 
   edu_list?.forEach((value) {
@@ -789,6 +808,8 @@ Widget Next_to_dynamic_resume(BuildContext context, int index, String? form_name
   //   {
   //     check = false;
   //   }
+
+  print(index);
 
   if (check == true) {
     DataBaseManager.instance
@@ -889,20 +910,23 @@ void insertDataBase(int index){
 
 int list_len()
 {
+  print("List len achivement  : ");
+  print(edu_list!.length);
+
   if (categories!["Education"] == true) {
     return edu_list!.length;
-  } else if (categories!["Achievements"] == true) {
+  } else if (categories!["Achievements"] == true && achievement_list!=null) {
     return achievement_list!.length;
   } else if (categories!["Profile"] == true) {
     return profile_list!.length;
-  } else if (categories!["Work"] == true) {
+  } else if (categories!["Work"] == true && work_list!=null) {
     return work_list!.length;
-  } else if (categories!["Projects"] == true) {
+  } else if (categories!["Projects"] == true && project_list!=null) {
     return project_list!.length;
   } else if (categories!["Skills"] == true) {
     return skill_list!.length;
   }
-  else if (categories!["Languages"] == true) {
+  else if (categories!["Languages"] == true && language_list!=null) {
     return language_list!.length;
   }
   else
