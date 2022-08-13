@@ -705,7 +705,7 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
 
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
                         //Resume_temp2()));
-                        Next_to_dynamic_resume(context,widget.index,widget.form_name1)));
+                        Next_to_dynamic_resume(context,widget.index,widget.form_name1,this.runtimeType)));
                         //Resume_temp2(widget.edu_list, work_list, project_list, profile_list, widget.achievement_list, skill_list, language_list)));
                         //edu_data_upload(context);
 
@@ -729,7 +729,7 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
 }
 
 
-Widget Next_to_dynamic_resume(BuildContext context, int index, String? form_name1)
+Widget Next_to_dynamic_resume(BuildContext context, int index, String? form_name1, Type runtimeType)
 {
   bool check = true;
 
@@ -801,32 +801,32 @@ Widget Next_to_dynamic_resume(BuildContext context, int index, String? form_name
 
     if(index==1)
     {
-      return Template_1(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      return Template_1(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
     }
     else if(index==2)
     {
-      return Template_2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      return Template_2(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
     }
     else if(index==3)
     {
-      return Template_3(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      return Template_3(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>info_fillup()));
     }
     else if(index==4)
     {
-      return Template_4(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      return Template_4(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
     }
     else if(index==6)
     {
-      return Template_6(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      return Template_6(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
     }
     else if(index==5)
     {
-      return Template_5(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+      return Template_5(runtimeType,edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
     }
     else
@@ -851,25 +851,42 @@ Widget Next_to_dynamic_resume(BuildContext context, int index, String? form_name
 void insertDataBase(int index){
   var db= DataBaseManager.instance;
   skill_list?.forEach((element) {
-    db.insertKeys("SKILLS", element);
+    if(element.tableName!.isNotEmpty && element.value!.isNotEmpty && element.id!.isNotEmpty){
+      db.insertKeys("SKILLS", element);
+    }
   });
   edu_list?.forEach((element) {
-    db.insertKeys("EDUCATION", element);
+    if(element.tableName!.isNotEmpty && element.qualification_name!.isNotEmpty && element.id!.isNotEmpty && element.year_duration!.isNotEmpty && element.organization_name!.isNotEmpty){
+      db.insertKeys("EDUCATION", element);
+    }
   });
   work_list?.forEach((element) {
-    db.insertKeys("WORK", element);
+    if(element.organization_name!.isNotEmpty && element.year_duration!.isNotEmpty && element.id!.isNotEmpty && element.qualification_name!.isNotEmpty && element.brief!.isNotEmpty
+        && element.tableName!.isNotEmpty && element.id!.isNotEmpty){
+      db.insertKeys("WORK", element);
+    }
+
   });
   project_list?.forEach((element) {
-    db.insertKeys("PROJECT", element);
+    if(element.id!.isNotEmpty && element.tableName!.isNotEmpty && element.brief!.isNotEmpty && element.qualification_name!.isNotEmpty && element.year_duration!.isNotEmpty && element.organization_name!.isNotEmpty){
+      db.insertKeys("PROJECT", element);
+    }
+
   });
   profile_list?.forEach((element) {
-    db.insertKeys("PROFILE", element);
+    if(element.tableName!.isNotEmpty && element.id!.isNotEmpty && element.social_link!.isNotEmpty && element.mail!.isNotEmpty && element.location!.isNotEmpty && element.phone_no!.isNotEmpty && element.name!.isNotEmpty){
+      db.insertKeys("PROFILE", element);
+    }
+
   });
   language_list?.forEach((element) {
-    db.insertKeys("LANGUAGE", element);
+    if(element.tableName!.isNotEmpty && element.value!.isNotEmpty && element.id!.isNotEmpty ){
+      db.insertKeys("LANGUAGE", element);}
   });
   achievement_list?.forEach((element) {
-    db.insertKeys("ACHIEVEMENT", element);
+    if(element.tableName!.isNotEmpty && element.organization_name!.isNotEmpty && element.qualification_name!.isNotEmpty && element.id!.isNotEmpty){
+      db.insertKeys("ACHIEVEMENT", element);
+    }
   });
   TableName t =new TableName(tableName: form_name,id:index.toString());
   db.insertKeys("TABLENAME",t);

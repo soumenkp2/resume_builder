@@ -93,7 +93,7 @@ class _FormListPageState extends State<FormListPage> {
     return WillPopScope(
       onWillPop:  ()async {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-          main_screen() ));
+          main_screen(0) ));
         return false;
       },
       child: Scaffold(
@@ -142,7 +142,7 @@ class _FormListPageState extends State<FormListPage> {
                                                     .tableName ?? 'NO LIST');
                                             Navigator.of(context).push(MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Next_to_dynamic_resume(context, widget.tableIndex))) ;
+                                                    Next_to_dynamic_resume(context, widget.tableIndex,this.runtimeType))) ;
                                           },
                                           child: Text(
                                             _tableName
@@ -264,31 +264,31 @@ class _FormListPageState extends State<FormListPage> {
 
 
 
-  Widget Next_to_dynamic_resume(BuildContext context, int index) {
+  Widget Next_to_dynamic_resume(BuildContext context, int index, Type runtimeType,) {
 
     print("form: ");
     print(index);
 
 
     if (index == 1) {
-      return Template_1( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
+      return Template_1(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
 
     } else if (index == 2) {
-      return Template_2( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
+      return Template_2(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
 
 
     } else if (index == 3) {
-      return Template_3( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
+      return Template_3(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
 
 
     } else if (index == 4) {
-      return Template_4( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
+      return Template_4(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
 
     } else if (index == 6) {
-      return Template_6( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
+      return Template_6(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
 
     } else if (index == 5) {
-      return Template_5( _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
+      return Template_5(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
 
     } else {
       return Text("hello ji");

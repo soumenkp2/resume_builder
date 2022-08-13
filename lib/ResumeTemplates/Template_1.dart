@@ -2,7 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/%20CustomResumeWidgets/Header_Widget.dart';
+import 'package:resume_builder/Screens/home.dart';
 import 'package:resume_builder/Screens/info_fillup.dart';
+import 'package:resume_builder/Screens/main_screen.dart';
+import 'package:resume_builder/Screens/your_resume.dart';
 
 import '../ CustomResumeWidgets/Education_Widget.dart';
 import '../ResumeWidgets/language_Widget.dart';
@@ -39,6 +42,7 @@ import '../PdfApi/pdf_api.dart';
 
 class Template_1 extends StatefulWidget
 {
+  Type previousPage;
   List<Education_UserModel>? edu_list;
   List<Work_Projects_UserModel>? work_list;
   List<Work_Projects_UserModel>? project_list;
@@ -48,7 +52,7 @@ class Template_1 extends StatefulWidget
   List<Skills_Languages_UserModel>? language_list;
 
 
-  Template_1(this.edu_list, this.work_list, this.project_list, this.profile_list, this.achievement_list, this.skill_list, this.language_list);
+  Template_1(this.previousPage,this.edu_list, this.work_list, this.project_list, this.profile_list, this.achievement_list, this.skill_list, this.language_list);
 
   @override
   State<StatefulWidget> createState() => Template_1state();
@@ -59,9 +63,7 @@ class Template_1 extends StatefulWidget
 //const Resume_temp2_state ({ Key? key, this.serverIP }): super(key: key);
 
 
-class Template_1state extends State<Template_1>
-{
-
+class Template_1state extends State<Template_1> {
 
 
   @override
@@ -136,24 +138,32 @@ class Template_1state extends State<Template_1>
 
   void _createPDF() async
   {
-    final file = await pdfResumeApi.generate(widget.profile_list,widget.edu_list,widget.work_list,widget.project_list,widget.achievement_list,widget.skill_list,widget.language_list,"white","black","teal",1);
+    final file = await pdfResumeApi.generate(
+        widget.profile_list,
+        widget.edu_list,
+        widget.work_list,
+        widget.project_list,
+        widget.achievement_list,
+        widget.skill_list,
+        widget.language_list,
+        "white",
+        "black",
+        "teal",
+        1);
     PdfApi.openFile(file);
-
   }
 
-  bool check_visibility(List<Education_UserModel> list)
-  {
+  bool check_visibility(List<Education_UserModel> list) {
     bool check = true;
 
     list.forEach((value) {
-      if(value.tableName==null|| value.organization_name == null || value.qualification_name==null || value.year_duration==null)
-      {
+      if (value.tableName == null || value.organization_name == null ||
+          value.qualification_name == null || value.year_duration == null) {
         check = false;
       }
-      else
-        {
-          check = true;
-        }
+      else {
+        check = true;
+      }
     });
 
     return check;
@@ -162,39 +172,40 @@ class Template_1state extends State<Template_1>
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async {
+      onWillPop: () async {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-            FormListPage(tableIndex: 1) ));
+          route()));
         return false;
       },
       child: Scaffold(
-          body: SingleChildScrollView(
-              child: Column(
-                  children: <Widget>[
-                    SizedBox(height: 35,),
-                    new header_Widget(
-                        height: 100,
-                        margin_top: 0,
-                        margin_left: 0,
-                        margin_bottom: 0,
-                        margin_right: 0,
-                        profile_list: widget.profile_list,
-                        color: "teal"
-                    ),
+        body: SingleChildScrollView(
+            child: Column(
+                children: <Widget>[
+                  SizedBox(height: 35,),
+                  new header_Widget(
+                      height: 100,
+                      margin_top: 0,
+                      margin_left: 0,
+                      margin_bottom: 0,
+                      margin_right: 0,
+                      profile_list: widget.profile_list,
+                      color: "teal"
+                  ),
 
-                    new Padding(padding: const EdgeInsets.all(10),
-                        child: new Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
+                  new Padding(padding: const EdgeInsets.all(10),
+                      child: new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
 
-                              new Flexible(
-                                  child: new Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
+                            new Flexible(
+                                child: new Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .start,
+                                    children: <Widget>[
 
-                                        Visibility(
+                                      Visibility(
                                           child: new education_Widget(
                                               margin_top: 20,
                                               margin_left: 0,
@@ -205,28 +216,29 @@ class Template_1state extends State<Template_1>
                                               txt_color: "black",
                                               high_color: "teal"
                                           ),
-                                          visible: check_visibility_education(widget.edu_list!),
+                                          visible: check_visibility_education(
+                                              widget.edu_list)
+                                      ),
+
+
+                                      Visibility(
+                                        child: new experience_Widget(
+                                            margin_top: 20,
+                                            margin_left: 0,
+                                            margin_bottom: 0,
+                                            margin_right: 10,
+                                            work_list: widget.work_list,
+                                            color: "white",
+                                            txt_color: "black",
+                                            high_color: "teal"
                                         ),
+                                        visible: check_visibility_work_project(
+                                            widget.work_list),
+
+                                      ),
 
 
-                                        Visibility(
-                                          child: new experience_Widget(
-                                              margin_top: 20,
-                                              margin_left: 0,
-                                              margin_bottom: 0,
-                                              margin_right: 10,
-                                              work_list: widget.work_list,
-                                              color: "white",
-                                              txt_color: "black",
-                                              high_color: "teal"
-                                          ),
-                                          visible: check_visibility_work_project(widget.work_list!),
-
-                                        ),
-
-
-
-                                        Visibility(
+                                      Visibility(
                                           child: Language_Widget(
                                             margin_top: 20,
                                             margin_left: 0,
@@ -238,83 +250,80 @@ class Template_1state extends State<Template_1>
                                             language_list: widget.language_list,
 
                                           ),
-                                        visible: check_visibility_skills_lang(widget.language_list!)
-                                        ),
+                                          visible: check_visibility_skills_lang(
+                                              widget.language_list)
+                                      ),
 
 
+                                    ]
 
+                                )),
 
-                                      ]
+                            new Flexible(
+                                child: new Column(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .spaceEvenly,
+                                    children: <Widget>[
 
-                                  )),
-
-                              new Flexible(
-                                  child: new Column(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-
-                                        Visibility(
+                                      Visibility(
                                           child: new achievement_Widget(
                                               margin_top: 20,
                                               margin_left: 10,
                                               margin_bottom: 0,
                                               margin_right: 0,
-                                              achievement_list: widget.achievement_list,
+                                              achievement_list: widget
+                                                  .achievement_list,
                                               color: "white",
                                               txt_color: "black",
                                               high_color: "teal"
                                           ),
-                                          visible: check_visibility_achievement(widget.achievement_list!)
+                                          visible: check_visibility_achievement(widget.achievement_list)
+                                      ),
+
+                                      Visibility(
+                                        child: new project_Widget(
+                                          margin_left: 10,
+                                          margin_top: 20,
+                                          margin_bottom: 0,
+                                          margin_right: 0,
+                                          project_list: widget.project_list,
+                                          color: "white",
+                                          txt_color: "black",
+                                          high_color: "teal",
                                         ),
+                                        visible: check_visibility_work_project(widget.project_list),
+                                      ),
 
-                                        Visibility(
-                                            child:  new project_Widget(
-                                                margin_left: 10,
-                                                margin_top: 20,
-                                                margin_bottom: 0,
-                                                margin_right: 0,
-                                                project_list: widget.project_list,
-                                                color: "white",
-                                                txt_color: "black",
-                                                high_color: "teal",
-                                            ),
-                                            visible: check_visibility_work_project(widget.project_list!),
-                                        ),
+                                      Visibility(
+                                          child: new skill_Widget(
+                                              margin_left: 10,
+                                              margin_top: 20,
+                                              margin_bottom: 0,
+                                              margin_right: 0,
+                                              skill_list: widget.skill_list,
+                                              color: "white",
+                                              txt_color: "black",
+                                              high_color: "teal"
+                                          ),
+                                          visible: check_visibility_skills_lang(
+                                              widget.skill_list)
 
-                                        Visibility(
-                                            child: new skill_Widget(
-                                                margin_left: 10,
-                                                margin_top: 20,
-                                                margin_bottom: 0,
-                                                margin_right: 0,
-                                                skill_list: widget.skill_list,
-                                                color: "white",
-                                                txt_color: "black",
-                                                high_color: "teal"
-                                            ),
-                                            visible: check_visibility_skills_lang(widget.skill_list!)
-
-                                        ),
+                                      ),
 
 
+                                    ]
+
+                                )),
+
+                          ]
+                      )
+
+                  )
 
 
-
-
-
-                                      ]
-
-                                  )),
-
-                            ]
-                        )
-
-                    )
-
-
-                  ]
-              )
-          ),
+                ]
+            )
+        ),
 
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.print),
@@ -323,9 +332,14 @@ class Template_1state extends State<Template_1>
         ),
 
 
-
       ),
     );
   }
+
+  Widget route() {
+    if(widget.previousPage.toString() == 'your_resume_state' ) return main_screen(1);
+    else return FormListPage(tableIndex: 1);
+  }
+
 
 }

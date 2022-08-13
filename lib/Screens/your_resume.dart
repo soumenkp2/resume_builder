@@ -78,22 +78,28 @@ class your_resume_state extends State<your_resume> {
   void moveToResume(int index) {
     if (index == 1) {
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => navigateResume(context, index)));
+          builder: (context) =>
+              navigateResume(context, index, this.runtimeType)));
     } else if (index == 2) {
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => navigateResume(context, index)));
+          builder: (context) =>
+              navigateResume(context, index, this.runtimeType)));
     } else if (index == 3) {
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => navigateResume(context, index)));
+          builder: (context) =>
+              navigateResume(context, index, this.runtimeType)));
     } else if (index == 4) {
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => navigateResume(context, index)));
+          builder: (context) =>
+              navigateResume(context, index, this.runtimeType)));
     } else if (index == 6) {
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => navigateResume(context, index)));
+          builder: (context) =>
+              navigateResume(context, index, this.runtimeType)));
     } else if (index == 5) {
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => navigateResume(context, index)));
+          builder: (context) =>
+              navigateResume(context, index, this.runtimeType)));
     } else {}
   }
 
@@ -122,27 +128,28 @@ class your_resume_state extends State<your_resume> {
                     child: new Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                    new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          new Text("View",
-                              style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold))),
-                        ]),
+                          new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Text("View",
+                                    style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold))),
+                              ]),
 
-                    new Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text("Your Previous Templates",
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold))),
+                          new Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("Your Previous Templates",
+                                textAlign: TextAlign.left,
+                                style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold))),
 
-                    ),
-                    ]),),)]),
+                          ),
+                        ]),),)
+              ]),
               SizedBox(
                 height: 400,
                 child: FutureBuilder<List<TableName>?>(
@@ -168,10 +175,14 @@ class your_resume_state extends State<your_resume> {
                               return InkWell(
                                 onTap: () async {
                                   await _getDataBase(
-                                      _tableName?.elementAt(index!).tableName ??
+                                      _tableName
+                                          ?.elementAt(index!)
+                                          .tableName ??
                                           'Na');
                                   moveToResume(int.parse(
-                                      _tableName?.elementAt(index!).id ?? '1'));
+                                      _tableName
+                                          ?.elementAt(index!)
+                                          .id ?? '1'));
                                 },
                                 child: Column(
                                   children: [
@@ -188,13 +199,19 @@ class your_resume_state extends State<your_resume> {
                                           child: new Padding(
                                             padding: const EdgeInsets.all(0),
                                             child: Image.asset(
-                                              'assets/images/template_${_tableName?.elementAt(index).id}.png',
+                                              'assets/images/template_${_tableName
+                                                  ?.elementAt(index)
+                                                  .id}.png',
                                               fit: BoxFit.scaleDown,
                                             ),
                                           )),
                                     ),
                                     SizedBox(height: 10),
-                                    TextWidget(text: _tableName?.elementAt(index!).tableName??'Na', size: 16, color: Color(0xFF000000)),
+                                    TextWidget(text: _tableName
+                                        ?.elementAt(index!)
+                                        .tableName ?? 'Na',
+                                        size: 16,
+                                        color: Color(0xFF000000)),
                                   ],
                                 ),
                               );
@@ -215,9 +232,10 @@ class your_resume_state extends State<your_resume> {
     );
   }
 
-  Widget navigateResume(BuildContext context, int index) {
+  Widget navigateResume(BuildContext context, int index, Type runtimeType) {
     if (index == 1) {
       return Template_1(
+          runtimeType,
           edu_list = _educationTable,
           work_list = _workTable,
           project_list = _projectTable,
@@ -227,6 +245,7 @@ class your_resume_state extends State<your_resume> {
           language_list = _languageTable);
     } else if (index == 2) {
       return Template_2(
+          runtimeType,
           edu_list = _educationTable,
           work_list = _workTable,
           project_list = _projectTable,
@@ -236,6 +255,7 @@ class your_resume_state extends State<your_resume> {
           language_list = _languageTable);
     } else if (index == 3) {
       return Template_3(
+          runtimeType,
           edu_list = _educationTable,
           work_list = _workTable,
           project_list = _projectTable,
@@ -245,6 +265,7 @@ class your_resume_state extends State<your_resume> {
           language_list = _languageTable);
     } else if (index == 4) {
       return Template_4(
+          runtimeType,
           edu_list = _educationTable,
           work_list = _workTable,
           project_list = _projectTable,
@@ -254,6 +275,7 @@ class your_resume_state extends State<your_resume> {
           language_list = _languageTable);
     } else if (index == 6) {
       return Template_6(
+          runtimeType,
           edu_list = _educationTable,
           work_list = _workTable,
           project_list = _projectTable,
@@ -263,6 +285,7 @@ class your_resume_state extends State<your_resume> {
           language_list = _languageTable);
     } else if (index == 5) {
       return Template_5(
+          runtimeType,
           edu_list = _educationTable,
           work_list = _workTable,
           project_list = _projectTable,

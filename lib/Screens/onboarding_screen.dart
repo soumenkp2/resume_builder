@@ -171,7 +171,7 @@ class onboarding_screen_state extends State<onboarding_screen> {
 
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => main_screen()),
+                        MaterialPageRoute(builder: (context) => main_screen(0)),
                       );
                     },
 

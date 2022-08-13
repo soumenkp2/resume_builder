@@ -67,10 +67,10 @@ Widget set_template(List<Profile_UserModel>? profile_list, List<Education_UserMo
 
 
 
-bool check_visibility_work_project(List<Work_Projects_UserModel> list) {
+bool check_visibility_work_project(List<Work_Projects_UserModel>? list) {
   bool check = true;
-
-  list.forEach((value) {
+  if(list ==null) check =false;
+  list?.forEach((value) {
     if (value.tableName == null || value.organization_name == null ||
         value.qualification_name == null || value.year_duration == null && value.brief == null) {
       check = false;
@@ -83,9 +83,9 @@ bool check_visibility_work_project(List<Work_Projects_UserModel> list) {
   return check;
 }
 
-bool check_visibility_skills_lang(List<Skills_Languages_UserModel> list) {
+bool check_visibility_skills_lang(List<Skills_Languages_UserModel>? list) {
   bool check = true;
-
+  if(list ==null) check =false;
   list?.forEach((value) {
     if(value.tableName==null||value.value == null)
     {
@@ -100,10 +100,10 @@ bool check_visibility_skills_lang(List<Skills_Languages_UserModel> list) {
   return check;
 }
 
-bool check_visibility_education(List<Education_UserModel> list) {
+bool check_visibility_education(List<Education_UserModel>? list) {
   bool check = true;
-
-  list.forEach((value) {
+  if(list ==null) check =false;
+  list?.forEach((value) {
     if (value.tableName == null || value.organization_name == null ||
         value.qualification_name == null || value.year_duration == null) {
       check = false;
@@ -116,10 +116,10 @@ bool check_visibility_education(List<Education_UserModel> list) {
   return check;
 }
 
-bool check_visibility_achievement(List<Achievements_UserModel> list) {
+bool check_visibility_achievement(List<Achievements_UserModel>? list) {
   bool check = true;
-
-  list.forEach((value) {
+  if(list ==null) check =false;
+  list?.forEach((value) {
     if(value.tableName==null||value.organization_name == null || value.qualification_name==null)
     {
       check = false;

@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/%20CustomResumeWidgets/Header_Widget.dart';
+import 'package:resume_builder/Screens/home.dart';
+import 'package:resume_builder/Screens/main_screen.dart';
 
 import '../ CustomResumeWidgets/Education_Widget.dart';
 import '../ResumeWidgets/language_Widget.dart';
@@ -22,6 +24,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../ResumeWidgets/header_Widget.dart';
 import '../Screens/FormListPage.dart';
+import '../Screens/your_resume.dart';
 import '../UserModels/Achievements_UserModel.dart';
 import '../UserModels/Education_UserModel.dart';
 import '../UserModels/Profile_UserModel.dart';
@@ -35,6 +38,7 @@ import '../PdfApi/pdf_api.dart';
 
 class Template_6 extends StatefulWidget
 {
+  Type previousPage;
   List<Education_UserModel>? edu_list;
   List<Work_Projects_UserModel>? work_list;
   List<Work_Projects_UserModel>? project_list;
@@ -44,7 +48,7 @@ class Template_6 extends StatefulWidget
   List<Skills_Languages_UserModel>? language_list;
 
 
-  Template_6(this.edu_list, this.work_list, this.project_list, this.profile_list, this.achievement_list, this.skill_list, this.language_list);
+  Template_6(this.previousPage,this.edu_list, this.work_list, this.project_list, this.profile_list, this.achievement_list, this.skill_list, this.language_list);
 
   @override
   State<StatefulWidget> createState() => Template_6state();
@@ -126,7 +130,7 @@ class Template_6state extends State<Template_6>
     return WillPopScope(
       onWillPop:  ()async {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-            FormListPage(tableIndex: 6) ));
+           route()));
         return false;
       },
       child: Scaffold(
@@ -286,7 +290,10 @@ class Template_6state extends State<Template_6>
       ),
     );
   }
-
+  Widget route() {
+    if(widget.previousPage.toString() == 'your_resume_state' ) return main_screen(1);
+    else return FormListPage(tableIndex: 6);
+  }
 }
 
 
