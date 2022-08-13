@@ -187,7 +187,7 @@ class Template_2state extends State<Template_2>
                                                 txt_color: "black",
                                                 high_color: "blueGrey"
                                             ),
-                                            visible: check_visibility_education(widget.edu_list!)
+                                            visible: check_visibility_education(widget.edu_list)
 
                                         ),
 
@@ -203,7 +203,7 @@ class Template_2state extends State<Template_2>
                                                 txt_color: "black",
                                                 high_color: "blueGrey"
                                             ),
-                                            visible: check_visibility_work_project(widget.work_list!)
+                                            visible: check_visibility_work_project(widget.work_list)
 
                                         ),
 
@@ -219,7 +219,7 @@ class Template_2state extends State<Template_2>
                                               high_color: "blueGrey",
                                               language_list: widget.language_list,
                                             ),
-                                            visible: check_visibility_skills_lang(widget.language_list!)
+                                            visible: check_visibility_skills_lang(widget.language_list)
 
                                         ),
 
@@ -247,7 +247,7 @@ class Template_2state extends State<Template_2>
                                                 txt_color: "black",
                                                 high_color: "blueGrey"
                                             ),
-                                            visible: check_visibility_achievement(widget.achievement_list!)
+                                            visible: check_visibility_achievement(widget.achievement_list)
 
                                         ),
 
@@ -262,7 +262,7 @@ class Template_2state extends State<Template_2>
                                                 txt_color: "black",
                                                 high_color: "blueGrey"
                                             ),
-                                            visible: check_visibility_work_project(widget.project_list!)
+                                            visible: check_visibility_work_project(widget.project_list)
 
                                         ),
 
@@ -277,7 +277,7 @@ class Template_2state extends State<Template_2>
                                                 txt_color: "black",
                                                 high_color: "blueGrey"
                                             ),
-                                            visible: check_visibility_skills_lang(widget.skill_list!)
+                                            visible: check_visibility_skills_lang(widget.skill_list)
 
                                         ),
                                         
