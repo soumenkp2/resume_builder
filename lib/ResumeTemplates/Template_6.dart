@@ -162,7 +162,7 @@ class Template_6state extends State<Template_6>
                     high_color: "blueGrey",
                   ),
 
-                  visible: check_visibility_education(widget.edu_list!)
+                  visible: check_visibility_education(widget.edu_list)
 
 
               ),
@@ -180,7 +180,7 @@ class Template_6state extends State<Template_6>
                     high_color: "blueGrey",
                   ),
 
-                  visible: check_visibility_work_project(widget.work_list!)
+                  visible: check_visibility_work_project(widget.work_list)
 
 
               ),
@@ -198,7 +198,7 @@ class Template_6state extends State<Template_6>
                     high_color: "blueGrey",
                   ),
                   
-                  visible: check_visibility_skills_lang(widget.skill_list!)
+                  visible: check_visibility_skills_lang(widget.skill_list)
 
 
               ),
@@ -215,7 +215,7 @@ class Template_6state extends State<Template_6>
                     high_color: "blueGrey",
                   ),
 
-                  visible: check_visibility_achievement(widget.achievement_list!)
+                  visible: check_visibility_achievement(widget.achievement_list)
 
 
               ),
@@ -233,7 +233,7 @@ class Template_6state extends State<Template_6>
                     high_color: "blueGrey",
                   ),
 
-                  visible: check_visibility_work_project(widget.project_list!)
+                  visible: check_visibility_work_project(widget.project_list)
 
 
               ),
@@ -265,7 +265,7 @@ class Template_6state extends State<Template_6>
 
                   ),
 
-                  visible: check_visibility_skills_lang(widget.language_list!)
+                  visible: check_visibility_skills_lang(widget.language_list)
 
 
               ),
