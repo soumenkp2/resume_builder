@@ -7,6 +7,7 @@ import 'package:resume_builder/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/Screens/your_resume.dart';
 import 'package:resume_builder/UserModels/Skills_Languages_UserModel.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 import '../DataBase/DataBaseManager.dart';
 import '../ResumeTemplates/Resume_temp1.dart';
@@ -23,9 +24,6 @@ import '../UserModels/Work_Projects_UserModel.dart';
 import 'dart:developer';
 
 class info_fillup extends StatefulWidget {
-
-
-
   int index;
 
   info_fillup(this.index);
@@ -44,9 +42,7 @@ List<Profile_UserModel>? profile_list;
 List<Skills_Languages_UserModel>? language_list;
 String? form_name;
 
-
-
-Map<String,List>? final_data;
+Map<String, List>? final_data;
 bool? send_flag;
 
 Map<String, bool>? categories;
@@ -82,7 +78,6 @@ class info_fillup_state extends State<info_fillup> {
     profile_list?.add(new Profile_UserModel());
     language_list?.add(new Skills_Languages_UserModel());
 
-
     // final_data = new Map<String,List>();
     // final_data!["Education_details"] = edu_list!;
     // final_data!["Achievement_details"] = achievement_list!;
@@ -91,210 +86,126 @@ class info_fillup_state extends State<info_fillup> {
     // final_data!["Work_details"] = work_list!;
     // final_data!["Profile_details"] = profile_list!;
     // send_flag = false;
-
-
-
   }
 
-  void add_card(String categoryName)
-  {
-    setState(()
-    {
-      if(categoryName == "Education")
-        {
-          if(edu_list!.length >1)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-            {
-              edu_list?.add(new Education_UserModel());
-            }
-
-        }
-      else if(categoryName == "Achievements")
-        {
-          if(achievement_list!.length >1)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-          {
-            achievement_list?.add(new Achievements_UserModel());
-          }
-        }
-      else if(categoryName == "Work")
-        {
-          if(work_list!.length >1)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-          {
-            work_list?.add(new Work_Projects_UserModel());
-          }
-        }
-      else if(categoryName == "Projects")
-        {
-          if(project_list!.length >1)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-          {
-            project_list?.add(new Work_Projects_UserModel());
-          }
-        }
-      else if(categoryName == "Skills")
-        {
-          if(skill_list!.length >1)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-          {
-            skill_list?.add(new Skills_Languages_UserModel());
-          }
-        }
-      else if(categoryName == "Profile")
-        {
-          if(profile_list!.length >=0)
-          {
-            var snackBar = SnackBar(content: Text('Max Limit Reached'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          }
-          else
-          {
-            profile_list?.add(new Profile_UserModel());
-          }
-        }
-      else if(categoryName == "Languages")
-      {
-        if(language_list!.length >4)
-        {
+  void add_card(String categoryName) {
+    setState(() {
+      if (categoryName == "Education") {
+        if (edu_list!.length > 1) {
           var snackBar = SnackBar(content: Text('Max Limit Reached'));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          edu_list?.add(new Education_UserModel());
         }
-        else
-        {
+      } else if (categoryName == "Achievements") {
+        if (achievement_list!.length > 1) {
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          achievement_list?.add(new Achievements_UserModel());
+        }
+      } else if (categoryName == "Work") {
+        if (work_list!.length > 1) {
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          work_list?.add(new Work_Projects_UserModel());
+        }
+      } else if (categoryName == "Projects") {
+        if (project_list!.length > 1) {
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          project_list?.add(new Work_Projects_UserModel());
+        }
+      } else if (categoryName == "Skills") {
+        if (skill_list!.length > 1) {
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          skill_list?.add(new Skills_Languages_UserModel());
+        }
+      } else if (categoryName == "Profile") {
+        if (profile_list!.length >= 0) {
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          profile_list?.add(new Profile_UserModel());
+        }
+      } else if (categoryName == "Languages") {
+        if (language_list!.length > 4) {
+          var snackBar = SnackBar(content: Text('Max Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
           language_list?.add(new Skills_Languages_UserModel());
         }
-      }
-      else
-        {
-          var snackBar = SnackBar(content: Text('Unwanted Behaviour Noticed'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
-
-    });
-  }
-
-  void delete_card(String categoryName)
-  {
-    setState(()
-    {
-      if(categoryName == "Education")
-      {
-        if(edu_list!.length <=1)
-        {
-          var snackBar = SnackBar(content: Text('Min Limit Reached'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
-        else
-        {
-          edu_list?.removeLast();
-        }
-
-      }
-      else if(categoryName == "Achievements")
-      {
-        if(achievement_list!.length <=1)
-        {
-          var snackBar = SnackBar(content: Text('Min Limit Reached'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
-        else
-        {
-          achievement_list?.removeLast();
-        }
-      }
-      else if(categoryName == "Work")
-      {
-        if(work_list!.length <=1)
-        {
-          var snackBar = SnackBar(content: Text('Min Limit Reached'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
-        else
-        {
-          work_list?.removeLast();
-        }
-      }
-      else if(categoryName == "Projects")
-      {
-        if(project_list!.length <=1)
-        {
-          var snackBar = SnackBar(content: Text('Min Limit Reached'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
-        else
-        {
-          project_list?.removeLast();
-        }
-      }
-      else if(categoryName == "Skills")
-      {
-        if(skill_list!.length <=1)
-        {
-          var snackBar = SnackBar(content: Text('Min Limit Reached'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
-        else
-        {
-          skill_list?.removeLast();
-        }
-      }
-      else if(categoryName == "Profile")
-      {
-        if(profile_list!.length <=1)
-        {
-          var snackBar = SnackBar(content: Text('Min Limit Reached'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
-        else
-        {
-          profile_list?.removeLast();
-        }
-      }
-      else if(categoryName == "Languages")
-      {
-        if(language_list!.length <=1)
-        {
-          var snackBar = SnackBar(content: Text('Min Limit Reached'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
-        else
-        {
-          language_list?.removeLast();
-        }
-      }
-      else
-      {
+      } else {
         var snackBar = SnackBar(content: Text('Unwanted Behaviour Noticed'));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
+    });
+  }
 
+  void delete_card(String categoryName) {
+    setState(() {
+      if (categoryName == "Education") {
+        if (edu_list!.length <= 1) {
+          var snackBar = SnackBar(content: Text('Min Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          edu_list?.removeLast();
+        }
+      } else if (categoryName == "Achievements") {
+        if (achievement_list!.length <= 1) {
+          var snackBar = SnackBar(content: Text('Min Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          achievement_list?.removeLast();
+        }
+      } else if (categoryName == "Work") {
+        if (work_list!.length <= 1) {
+          var snackBar = SnackBar(content: Text('Min Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          work_list?.removeLast();
+        }
+      } else if (categoryName == "Projects") {
+        if (project_list!.length <= 1) {
+          var snackBar = SnackBar(content: Text('Min Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          project_list?.removeLast();
+        }
+      } else if (categoryName == "Skills") {
+        if (skill_list!.length <= 1) {
+          var snackBar = SnackBar(content: Text('Min Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          skill_list?.removeLast();
+        }
+      } else if (categoryName == "Profile") {
+        if (profile_list!.length <= 1) {
+          var snackBar = SnackBar(content: Text('Min Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          profile_list?.removeLast();
+        }
+      } else if (categoryName == "Languages") {
+        if (language_list!.length <= 1) {
+          var snackBar = SnackBar(content: Text('Min Limit Reached'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          language_list?.removeLast();
+        }
+      } else {
+        var snackBar = SnackBar(content: Text('Unwanted Behaviour Noticed'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
     });
   }
 
   void category_observation(String categoryName) {
     setState(() {
-
       categories?.forEach((key, value) {
         if (key == categoryName) {
           category_head_name = categoryName;
@@ -304,8 +215,6 @@ class info_fillup_state extends State<info_fillup> {
         }
       });
 
-
-
       print("\n\nProfile");
       profile_list?.forEach((element) {
         print(element.name);
@@ -313,7 +222,6 @@ class info_fillup_state extends State<info_fillup> {
         print(element.mail);
         print(element.location);
         print(element.social_link);
-
       });
 
       print("\n\nEducation");
@@ -357,56 +265,34 @@ class info_fillup_state extends State<info_fillup> {
     });
 
     print(form_name);
-
-
-
   }
 
-  String pointer_categ()
-  {
-    if(category_head_name == "Education")
-      {
-        return"1/7";
-      }
-    else if(category_head_name == "Skills")
-      {
-        return "2/7";
-      }
-    else if(category_head_name == "Achievements")
-    {
+  String pointer_categ() {
+    if (category_head_name == "Education") {
+      return "1/7";
+    } else if (category_head_name == "Skills") {
+      return "2/7";
+    } else if (category_head_name == "Achievements") {
       return "3/7";
-    }
-    else if(category_head_name == "Work")
-    {
+    } else if (category_head_name == "Work") {
       return "4/7";
-    }
-    else if(category_head_name == "Profile")
-    {
+    } else if (category_head_name == "Profile") {
       return "5/7";
-    }
-    else if(category_head_name == "Projects")
-    {
+    } else if (category_head_name == "Projects") {
       return "6/7";
-    }
-    else if(category_head_name == "Languages")
-    {
+    } else if (category_head_name == "Languages") {
       return "7/7";
     }
 
-    return"1/n";
+    return "1/n";
   }
 
-
-  Color detect_gesture_byColor(String categName)
-  {
-    if(category_head_name == categName)
-      {
-        return Colors.white10;
-      }
-    else 
-      {
-        return Colors.white;
-      }
+  Color detect_gesture_byColor(String categName) {
+    if (category_head_name == categName) {
+      return Colors.white10;
+    } else {
+      return Colors.white;
+    }
   }
 
   @override
@@ -419,26 +305,73 @@ class info_fillup_state extends State<info_fillup> {
       children: <Widget>[
         new SingleChildScrollView(
           child: new Padding(
-            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-
-            child : new SizedBox(
-              height: 60,
-              child: new ListView(
-                  scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.all(5),
-                  children: <Widget> [
-
-
-                    new InkWell(
+              padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: new SizedBox(
+                height: 60,
+                child: new ListView(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.all(5),
+                    children: <Widget>[
+                      new InkWell(
+                          onTap: () {
+                            category_observation("Education");
+                          },
+                          child: Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: detect_gesture_byColor("Education"),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25)),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.teal, spreadRadius: 2),
+                                ],
+                              ),
+                              margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              child: new Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: new Image.asset(
+                                    'assets/images/education.png',
+                                    //height: 15.0,
+                                    fit: BoxFit.cover,
+                                  )))),
+                      new InkWell(
                         onTap: () {
-                          category_observation("Education");
+                          category_observation("Skills");
                         },
                         child: Container(
                             width: 50,
                             height: 50,
                             decoration: BoxDecoration(
-                              color: detect_gesture_byColor("Education"),
-                              borderRadius: BorderRadius.all(Radius.circular(25)),
+                              color: detect_gesture_byColor("Skills"),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                              boxShadow: [
+                                BoxShadow(color: Colors.teal, spreadRadius: 2),
+                              ],
+                            ),
+                            margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: new Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: new Image.asset(
+                                'assets/images/skill.png',
+                                //height: 15.0,
+                                fit: BoxFit.cover,
+                              ),
+                            )),
+                      ),
+                      new InkWell(
+                        onTap: () {
+                          category_observation("Achievements");
+                        },
+                        child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: detect_gesture_byColor("Achievements"),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
                               boxShadow: [
                                 BoxShadow(color: Colors.teal, spreadRadius: 2),
                               ],
@@ -447,188 +380,129 @@ class info_fillup_state extends State<info_fillup> {
                             child: new Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: new Image.asset(
-                                  'assets/images/education.png',
-                                  //height: 15.0,
-                                  fit: BoxFit.cover,
-                                )))),
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Skills");
-                      },
-                      child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Skills"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: new Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: new Image.asset(
-                              'assets/images/skill.png',
-                              //height: 15.0,
-                              fit: BoxFit.cover,
+                                  'assets/images/trophy.png',
+                                  // height: 35.0,
+                                  // fit: BoxFit.cover,
+                                ))),
+                      ),
+                      new InkWell(
+                        onTap: () {
+                          category_observation("Work");
+                        },
+                        child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: detect_gesture_byColor("Work"),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                              boxShadow: [
+                                BoxShadow(color: Colors.teal, spreadRadius: 2),
+                              ],
                             ),
-                          )),
-                    ),
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Achievements");
-                      },
-                      child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Achievements"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: new Padding(
+                            margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: new Padding(
                               padding: const EdgeInsets.all(10),
                               child: new Image.asset(
-                                'assets/images/trophy.png',
-                                // height: 35.0,
-                                // fit: BoxFit.cover,
-                              ))),
-                    ),
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Work");
-                      },
-                      child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Work"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: new Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: new Image.asset(
-                              'assets/images/work_experience.png',
-                              //height: 15.0,
-                              fit: BoxFit.cover,
+                                'assets/images/work_experience.png',
+                                //height: 15.0,
+                                fit: BoxFit.cover,
+                              ),
+                            )),
+                      ),
+                      new InkWell(
+                        onTap: () {
+                          category_observation("Profile");
+                        },
+                        child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: detect_gesture_byColor("Profile"),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                              boxShadow: [
+                                BoxShadow(color: Colors.teal, spreadRadius: 2),
+                              ],
                             ),
-                          )),
-                    ),
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Profile");
-                      },
-                      child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Profile"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: new Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: new Image.asset(
-                              'assets/images/profile.png',
-                              //height: 15.0,
-                              fit: BoxFit.cover,
+                            margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: new Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: new Image.asset(
+                                'assets/images/profile.png',
+                                //height: 15.0,
+                                fit: BoxFit.cover,
+                              ),
+                            )),
+                      ),
+                      new InkWell(
+                        onTap: () {
+                          category_observation("Projects");
+                        },
+                        child: new Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: detect_gesture_byColor("Projects"),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                              boxShadow: [
+                                BoxShadow(color: Colors.teal, spreadRadius: 2),
+                              ],
                             ),
-                          )),
-                    ),
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Projects");
-                      },
-                      child: new Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Projects"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: new Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: new Image.asset(
-                              'assets/images/projects.png',
-                              //height: 15.0,
-                              fit: BoxFit.cover,
+                            margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: new Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: new Image.asset(
+                                'assets/images/projects.png',
+                                //height: 15.0,
+                                fit: BoxFit.cover,
+                              ),
+                            )),
+                      ),
+                      new InkWell(
+                        onTap: () {
+                          category_observation("Languages");
+                        },
+                        child: new Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: detect_gesture_byColor("Languages"),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
+                              boxShadow: [
+                                BoxShadow(color: Colors.teal, spreadRadius: 2),
+                              ],
                             ),
-                          )),
-                    ),
-
-                    new InkWell(
-                      onTap: () {
-                        category_observation("Languages");
-                      },
-                      child: new Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: detect_gesture_byColor("Languages"),
-                            borderRadius: BorderRadius.all(Radius.circular(25)),
-                            boxShadow: [
-                              BoxShadow(color: Colors.teal, spreadRadius: 2),
-                            ],
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: new Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: new Image.asset(
-                              'assets/images/projects.png',
-                              //height: 15.0,
-                              fit: BoxFit.cover,
-                            ),
-                          )),
-                    ),
-
-
-
-                  ]
-              ),
-
-
-
-            )
-
-
-
-
-          ),
+                            margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: new Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: new Image.asset(
+                                'assets/images/projects.png',
+                                //height: 15.0,
+                                fit: BoxFit.cover,
+                              ),
+                            )),
+                      ),
+                    ]),
+              )),
         ),
         //Termination of Categories
 
-
         new Padding(
-          padding:
-          const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: Text(pointer_categ(),
               style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.w500))
-          ),),
-
+                  textStyle:
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.w500))),
+        ),
 
         new Padding(
-          padding:
-          const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextFormField(
-            initialValue: form_name ,
-            onChanged: (text) => form_name=text,
+            initialValue: form_name,
+            onChanged: (text) => form_name = text,
             autovalidateMode: AutovalidateMode.always,
             validator: (text) {
               if (text == null || text.isEmpty) {
@@ -639,7 +513,9 @@ class info_fillup_state extends State<info_fillup> {
             decoration: const InputDecoration(
               border: UnderlineInputBorder(),
               labelText: 'Enter Form Name',
-            ),),),
+            ),
+          ),
+        ),
 
         new Padding(
             padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -653,32 +529,35 @@ class info_fillup_state extends State<info_fillup> {
                             fontSize: 25, fontWeight: FontWeight.bold))),
               ),
               new InkWell(
-                onTap: (){add_card(category_head_name!);},
+                onTap: () {
+                  add_card(category_head_name!);
+                },
                 child: new Padding(
-                padding: const EdgeInsets.all(10),
-                child: new Image.asset(
-                'assets/images/addbtn.png',
-                height: 35.0,
-                // fit: BoxFit.cover,
-                )),
-                ),
-                new InkWell(
-                onTap: (){delete_card(category_head_name!);},
+                    padding: const EdgeInsets.all(10),
+                    child: new Image.asset(
+                      'assets/images/addbtn.png',
+                      height: 35.0,
+                      // fit: BoxFit.cover,
+                    )),
+              ),
+              new InkWell(
+                onTap: () {
+                  delete_card(category_head_name!);
+                },
                 child: new Visibility(
-                visible: true,
-                child: new Padding(
-                padding: const EdgeInsets.all(10),
-                child: new Image.asset(
-                'assets/images/minusbtn.png',
-                height: 35.0,
-                // fit: BoxFit.cover,
-                )),
+                  visible: true,
+                  child: new Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: new Image.asset(
+                        'assets/images/minusbtn.png',
+                        height: 35.0,
+                        // fit: BoxFit.cover,
+                      )),
                 ),
-                )
+              )
+            ])),
 
-                ])),
-
-                new Divider(
+        new Divider(
           color: Colors.black,
           thickness: 3,
         ),
@@ -686,7 +565,6 @@ class info_fillup_state extends State<info_fillup> {
         new Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-
               ListView.separated(
                   shrinkWrap: true,
                   physics: const ScrollPhysics(),
@@ -700,46 +578,36 @@ class info_fillup_state extends State<info_fillup> {
             ]),
 
         new Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child:
-            ElevatedButton(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                    //Resume_temp2()));
-                Next_to_dynamic_resume(context,widget.index)));
-                    //Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list)));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        //Resume_temp2()));
+                        Next_to_dynamic_resume(context, widget.index,this.runtimeType)));
+                //Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list)));
                 //edu_data_upload(context);
               },
               child: Text('Next',
                   style: GoogleFonts.poppins(
                       textStyle: TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold))
-              ),
-            )
-
-        ),
-
-
-
+                          fontSize: 20, fontWeight: FontWeight.bold))),
+            )),
       ],
     )));
   }
-
-
 }
 
-
-Widget Next_to_dynamic_resume(BuildContext context, int index)
-{
-
+Widget Next_to_dynamic_resume(BuildContext context, int index, Type runtimeType) {
   bool check = true;
 
   edu_list?.forEach((value) {
-    if(value.tableName==null|| value.organization_name == null || value.qualification_name==null || value.year_duration==null)
-      {
-        check = false;
-      }
+    if (value.tableName == null ||
+        value.organization_name == null ||
+        value.qualification_name == null ||
+        value.year_duration == null) {
+      check = false;
+    }
   });
   //
   // project_list?.forEach((value) {
@@ -764,15 +632,16 @@ Widget Next_to_dynamic_resume(BuildContext context, int index)
   // });
   //
   profile_list?.forEach((value) {
-    if(value.tableName==null||value.name == null || value.location==null || value.phone_no==null)
-    {
+    if (value.tableName == null ||
+        value.name == null ||
+        value.location == null ||
+        value.phone_no == null) {
       check = false;
     }
   });
 
   skill_list?.forEach((value) {
-    if(value.tableName==null||value.value == null)
-    {
+    if (value.tableName == null || value.value == null) {
       check = false;
     }
   });
@@ -789,107 +658,132 @@ Widget Next_to_dynamic_resume(BuildContext context, int index)
   //     check = false;
   //   }
 
+  if (check == true) {
+    DataBaseManager.instance
+        .delete(form_name ?? "No Table Name")
+        .then((_) async {
+      insertDataBase(index);
+    });
 
-
-
-
-  if(check == true)
-    {
-
-        DataBaseManager.instance.delete(form_name??"No Table Name").then((_) async {
-          insertDataBase(index);
-        });
-
-
-      if(index==1)
-      {
-        return Template_1(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-      }
-      else if(index==2)
-      {
-        return Template_2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-      }
-      else if(index==3)
-      {
-        return Template_3(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>info_fillup()));
-      }
-      else if(index==4)
-      {
-        return Template_4(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-      }
-      else if(index==6)
-      {
-        print("soumen 6");
-        return Template_6(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-      }
-      else if(index==5)
-      {
-        return Template_5(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
-        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-      }
-      else
-      {
-        return Text("hello ji");
-      }
-
-      //return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+    if (index == 1) {
+      return Template_1(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+    } else if (index == 2) {
+      return Template_2(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+    } else if (index == 3) {
+      return Template_3(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>info_fillup()));
+    } else if (index == 4) {
+      return Template_4(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+    } else if (index == 6) {
+      print("soumen 6");
+      return Template_6(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+    } else if (index == 5) {
+      return Template_5(runtimeType,edu_list, work_list, project_list, profile_list,
+          achievement_list, skill_list, language_list);
+      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+    } else {
+      return Text("hello ji");
     }
-  else
-    {
 
-      return Text("Fill education , skills and profile");
+    //return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+  } else {
+    alertDialouge(context, check);
+    return Text("Fill education , skills and profile");
 
+    //ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // return new Text("Fill all the blanks properly!!",
+    //     textAlign: TextAlign.left,
+    //     style: GoogleFonts.poppins(
+    //         textStyle: TextStyle(
+    //             fontSize: 30, fontWeight: FontWeight.bold)));
 
-
-
-      //ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      // return new Text("Fill all the blanks properly!!",
-      //     textAlign: TextAlign.left,
-      //     style: GoogleFonts.poppins(
-      //         textStyle: TextStyle(
-      //             fontSize: 30, fontWeight: FontWeight.bold)));
-
-    }
+  }
 }
 
+void insertDataBase(int index) {
+  var db = DataBaseManager.instance;
 
+  TableName t = new TableName(tableName: form_name, id: index.toString());
+  db.insertKeys("TABLENAME", t);
 
-void insertDataBase(int index){
-  var db= DataBaseManager.instance;
   skill_list?.forEach((element) {
-    db.insertKeys("SKILLS", element);
+    if (element.tableName!.isNotEmpty &&
+        element.value!.isNotEmpty &&
+        element.id!.isNotEmpty) {
+      db.insertKeys("SKILLS", element);
+    }
   });
+
   edu_list?.forEach((element) {
-    db.insertKeys("EDUCATION", element);
+    if (element.tableName!.isNotEmpty &&
+        element.qualification_name!.isNotEmpty &&
+        element.id!.isNotEmpty &&
+        element.year_duration!.isNotEmpty &&
+        element.organization_name!.isNotEmpty) {
+      db.insertKeys("EDUCATION", element);
+    }
   });
-  work_list?.forEach((element) {
-    db.insertKeys("WORK", element);
-  });
-  project_list?.forEach((element) {
-    db.insertKeys("PROJECT", element);
-  });
+
   profile_list?.forEach((element) {
-    db.insertKeys("PROFILE", element);
+    if (element.tableName!.isNotEmpty &&
+        element.id!.isNotEmpty &&
+        element.social_link!.isNotEmpty &&
+        element.mail!.isNotEmpty &&
+        element.location!.isNotEmpty &&
+        element.phone_no!.isNotEmpty &&
+        element.name!.isNotEmpty) {
+      db.insertKeys("PROFILE", element);
+    }
   });
   language_list?.forEach((element) {
-    db.insertKeys("LANGUAGE", element);
+    if (element.tableName!.isNotEmpty &&
+        element.value!.isNotEmpty &&
+        element.id!.isNotEmpty) {
+      db.insertKeys("LANGUAGE", element);
+    }
   });
+  work_list?.forEach((element) {
+    if (element.organization_name!.isNotEmpty &&
+        element.year_duration!.isNotEmpty &&
+        element.id!.isNotEmpty &&
+        element.qualification_name!.isNotEmpty &&
+        element.brief!.isNotEmpty &&
+        element.tableName!.isNotEmpty &&
+        element.id!.isNotEmpty) {
+      db.insertKeys("WORK", element);
+    }
+  });
+  project_list?.forEach((element) {
+    if (element.id!.isNotEmpty &&
+        element.tableName!.isNotEmpty &&
+        element.brief!.isNotEmpty &&
+        element.qualification_name!.isNotEmpty &&
+        element.year_duration!.isNotEmpty &&
+        element.organization_name!.isNotEmpty) {
+      db.insertKeys("PROJECT", element);
+    }
+  });
+
   achievement_list?.forEach((element) {
-    db.insertKeys("ACHIEVEMENT", element);
+    if (element.tableName!.isNotEmpty &&
+        element.organization_name!.isNotEmpty &&
+        element.qualification_name!.isNotEmpty &&
+        element.id!.isNotEmpty) {
+      db.insertKeys("ACHIEVEMENT", element);
+    }
   });
-  TableName t =new TableName(tableName: form_name,id:index.toString());
-  db.insertKeys("TABLENAME",t);
-
-
 }
 
-int list_len()
-{
+int list_len() {
   if (categories!["Education"] == true) {
     return edu_list!.length;
   } else if (categories!["Achievements"] == true) {
@@ -902,16 +796,12 @@ int list_len()
     return project_list!.length;
   } else if (categories!["Skills"] == true) {
     return skill_list!.length;
-  }
-  else if (categories!["Languages"] == true) {
+  } else if (categories!["Languages"] == true) {
     return language_list!.length;
+  } else {
+    return 0;
   }
-  else
-    {
-      return 0;
-    }
 }
-
 
 Widget current_category(int index) {
   if (categories!["Education"] == true) {
@@ -919,26 +809,23 @@ Widget current_category(int index) {
   } else if (categories!["Achievements"] == true) {
     return Achievement_fillup_widget(index: index);
   } else if (categories!["Profile"] == true) {
-    return Profile_fillup_widget(index: index,);
+    return Profile_fillup_widget(
+      index: index,
+    );
   } else if (categories!["Work"] == true) {
     return Work_fillup_widget(index: index);
   } else if (categories!["Projects"] == true) {
     return Project_fillup_widget(index: index);
   } else if (categories!["Skills"] == true) {
     return Skill_fillup_widget(index: index);
-  } else if(categories!["Languages"] == true)
-    {
-      return language_fillup_widget(index: index);
-    }
-  else {
+  } else if (categories!["Languages"] == true) {
+    return language_fillup_widget(index: index);
+  } else {
     return Text("Invalid Widget");
   }
 }
 
-
-
 class Profile_fillup_widget extends StatelessWidget {
-
   int? index;
   String? name;
   String? phone_no;
@@ -948,852 +835,7 @@ class Profile_fillup_widget extends StatelessWidget {
 
   Profile_fillup_widget({
     this.index,
-});
-
-
-  @override
-  Widget build(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.all(10),
-      child: new Container(
-        // width: 50,
-        // height: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(25)),
-            boxShadow: [
-              BoxShadow(color: Colors.teal, spreadRadius: 2),
-            ],
-          ),
-          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: profile_list?.elementAt(index!).name,
-                    onChanged: (text) => name=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter your name',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: profile_list?.elementAt(index!).phone_no,
-                    onChanged: (text) => phone_no=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter phone no',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: profile_list?.elementAt(index!).location,
-                    onChanged: (text) => location=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter address',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: profile_list?.elementAt(index!).mail,
-                    onChanged: (text) => mail=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter mail id',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: profile_list?.elementAt(index!).social_link,
-                    onChanged: (text) => link=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter social media link',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child:
-                  ElevatedButton(
-                    onPressed: () {
-                       profile_data_upload(context);
-                    },
-                    child: Text('Save'),
-                  )
-
-                  ),
-              ])),
-
-
-    );
-  }
-
-  void profile_data_upload(BuildContext context)
-  {
-    if(name==null)
-     {
-       name = profile_list?.elementAt(index!).name;
-     }
-    if(location==null)
-      {
-        location = profile_list?.elementAt(index!).location;
-      }
-    if(mail==null)
-      {
-        mail= profile_list?.elementAt(index!).mail;
-      }
-    if(phone_no==null)
-      {
-        phone_no= profile_list?.elementAt(index!).phone_no;
-      }
-    if(link==null )
-      {
-        link = profile_list?.elementAt(index!).social_link;
-      }
-
-
-    if(name!.isEmpty || location!.isEmpty || phone_no!.isEmpty || mail!.isEmpty || link!.isEmpty || name==null || location==null || phone_no==null || link==null || mail==null)
-      {
-        var snackBar = SnackBar(content: Text('data not filled'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
-    else if(name!.isNotEmpty && location!.isNotEmpty && phone_no!.isNotEmpty && mail!.isNotEmpty && link!.isNotEmpty && name!=null && location!=null && phone_no!=null && link!=null && mail!=null)
-      {
-        profile_list?.elementAt(index!).name = name;
-        profile_list?.elementAt(index!).location = location;
-        profile_list?.elementAt(index!).mail = mail;
-        profile_list?.elementAt(index!).social_link = link;
-        profile_list?.elementAt(index!).phone_no = phone_no;
-        profile_list?.elementAt(index!).tableName=form_name;
-        profile_list?.elementAt(index!).id=form_name!+index.toString();
-        var snackBar = SnackBar(content: Text('data filled'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
-    else
-      {
-        var snackBar = SnackBar(content: Text('data not filled'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
-
-  }
-
-
-}
-
-
-class Project_fillup_widget extends StatelessWidget {
-
-  int? index;
-  String? project_name;
-  String? project_brief;
-  String? project_type;
-  String? project_duration;
-
-  Project_fillup_widget({
-    this.index
   });
-
-
-  @override
-  Widget build(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.all(10),
-      child: new Container(
-        // width: 50,
-        // height: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(25)),
-            boxShadow: [
-              BoxShadow(color: Colors.teal, spreadRadius: 2),
-            ],
-          ),
-          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: project_list?.elementAt(index!).qualification_name,
-                    onChanged: (text) => project_name =text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter project name',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: project_list?.elementAt(index!).organization_name,
-                    onChanged: (text) => project_type =text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Project type - Group/Self',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: project_list?.elementAt(index!).brief,
-                    onChanged: (text) => project_brief=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Brief your project',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: project_list?.elementAt(index!).year_duration,
-                    onChanged: (text) => project_duration=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter starting-closing year',
-                    ),),),
-
-                new Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child:
-                    ElevatedButton(
-                      onPressed: () {
-                        project_data_upload(context);
-                      },
-                      child: Text('Save'),
-                    )
-
-                ),
-
-              ])),
-
-    );
-  }
-
-  void project_data_upload(BuildContext context) {
-
-    if(project_name==null)
-    {
-      project_name = project_list?.elementAt(index!).qualification_name;
-    }
-    if(project_type==null)
-    {
-      project_type = project_list?.elementAt(index!).organization_name;
-    }
-    if(project_brief==null)
-    {
-      project_brief= project_list?.elementAt(index!).brief;
-    }
-    if(project_duration==null)
-    {
-      project_duration= project_list?.elementAt(index!).year_duration;
-    }
-
-
-
-    if(project_name!.isEmpty || project_type!.isEmpty || project_brief!.isEmpty || project_duration!.isEmpty || project_name==null || project_type==null || project_brief==null || project_duration==null)
-    {
-      var snackBar = SnackBar(content: Text('data not filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else if(project_name!.isNotEmpty && project_type!.isNotEmpty && project_brief!.isNotEmpty && project_duration!.isNotEmpty && project_name!=null && project_type!=null && project_brief!=null && project_duration!=null)
-    {
-      project_list?.elementAt(index!).qualification_name = project_name;
-      project_list?.elementAt(index!).organization_name = project_type;
-      project_list?.elementAt(index!).brief = project_brief;
-      project_list?.elementAt(index!).year_duration = project_duration;
-      project_list?.elementAt(index!).tableName=form_name;
-      project_list?.elementAt(index!).id=form_name!+index.toString();
-      var snackBar = SnackBar(content: Text('Data filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else
-    {
-      var snackBar = SnackBar(content: Text('Data not filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-
-  }
-
-}
-
-class language_fillup_widget extends StatelessWidget {
-
-  int? index;
-  String? skill_name;
-
-  language_fillup_widget({
-    this.index,
-  });
-
-
-  @override
-  Widget build(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.all(10),
-      child: new Container(
-        // width: 50,
-        // height: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(25)),
-            boxShadow: [
-              BoxShadow(color: Colors.teal, spreadRadius: 2),
-            ],
-          ),
-          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    onChanged: (text) => skill_name=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    initialValue: language_list?.elementAt(index!).value,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter langauage name',
-                    ),
-                  ),),
-
-                new Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child:
-                    ElevatedButton(
-                      onPressed: () {
-                        language_data_upload(context);
-                      },
-                      child: Text('Save'),
-                    )
-
-                ),
-
-
-              ])),
-
-    );
-  }
-
-  void language_data_upload(BuildContext context) {
-
-    if(skill_name==null)
-    {
-      skill_name = language_list?.elementAt(index!).value;
-    }
-
-    if(skill_name!.isEmpty || skill_name==null)
-    {
-      var snackBar = SnackBar(content: Text('data not filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else if(skill_name!.isNotEmpty && skill_name!=null)
-    {
-      language_list?.elementAt(index!).value = skill_name;
-      language_list?.elementAt(index!).tableName=form_name;
-      language_list?.elementAt(index!).id=form_name!+index.toString();
-      var snackBar = SnackBar(content: Text('Data filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else
-    {
-      var snackBar = SnackBar(content: Text('Data not filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-
-
-  }}
-
-class Skill_fillup_widget extends StatelessWidget {
-
-  int? index;
-  String? skill_name;
-
-  Skill_fillup_widget({
-    this.index,
-  });
-
-
-  @override
-  Widget build(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.all(10),
-      child: new Container(
-        // width: 50,
-        // height: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(25)),
-            boxShadow: [
-              BoxShadow(color: Colors.teal, spreadRadius: 2),
-            ],
-          ),
-          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    onChanged: (text) => skill_name=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    initialValue: skill_list?.elementAt(index!).value,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter skill name',
-                    ),
-                  ),),
-
-                new Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child:
-                    ElevatedButton(
-                      onPressed: () {
-                        skill_data_upload(context);
-                      },
-                      child: Text('Save'),
-                    )
-
-                ),
-
-
-              ])),
-
-    );
-  }
-
-  void skill_data_upload(BuildContext context) {
-
-    if(skill_name==null)
-    {
-      skill_name = skill_list?.elementAt(index!).value;
-    }
-
-    if(skill_name!.isEmpty || skill_name==null)
-    {
-      var snackBar = SnackBar(content: Text('data not filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else if(skill_name!.isNotEmpty && skill_name!=null)
-    {
-      skill_list?.elementAt(index!).value = skill_name;
-      skill_list?.elementAt(index!).tableName=form_name;
-      skill_list?.elementAt(index!).id=form_name!+index.toString();
-      var snackBar = SnackBar(content: Text('Data filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else
-    {
-      var snackBar = SnackBar(content: Text('Data not filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-
-
-  }}
-
-
-class Achievement_fillup_widget extends StatelessWidget {
-
-  int? index;
-  String? ach_name;
-  String? ach_org;
-
-
-  Achievement_fillup_widget({
-    this.index,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.all(10),
-      child: new Container(
-        // width: 50,
-        // height: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(25)),
-            boxShadow: [
-              BoxShadow(color: Colors.teal, spreadRadius: 2),
-            ],
-          ),
-          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: achievement_list?.elementAt(index!).qualification_name,
-                    onChanged: (text) => ach_name=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter Achievement',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: achievement_list?.elementAt(index!).organization_name,
-                    onChanged: (text) => ach_org=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Issued by - ',
-                    ),),),
-
-                new Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child:
-                    ElevatedButton(
-                      onPressed: () {
-                        achievement_data_upload(context);
-                      },
-                      child: Text('Save'),
-                    )
-
-                ),
-
-              ])),
-
-    );
-  }
-
-  void achievement_data_upload(BuildContext context) {
-
-    if(ach_name==null)
-    {
-      ach_name = achievement_list?.elementAt(index!).qualification_name;
-    }
-    if(ach_org==null)
-    {
-      ach_org = achievement_list?.elementAt(index!).organization_name;
-    }
-
-
-    if(ach_name!.isEmpty || ach_org!.isEmpty || ach_name==null || ach_org==null)
-    {
-      var snackBar = SnackBar(content: Text('data not filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else if(ach_name!.isNotEmpty && ach_org!.isNotEmpty && ach_name!=null && ach_org!=null)
-    {
-      achievement_list?.elementAt(index!).qualification_name = ach_name;
-      achievement_list?.elementAt(index!).organization_name = ach_org;
-      achievement_list?.elementAt(index!).tableName=form_name;
-      achievement_list?.elementAt(index!).id=form_name!+index.toString();
-      var snackBar = SnackBar(content: Text('Data filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else
-    {
-      var snackBar = SnackBar(content: Text('Data not filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-
-
-  }}
-
-class Work_fillup_widget extends StatelessWidget {
-
-  int? index;
-  String? project_name;
-  String? project_brief;
-  String? project_type;
-  String? project_duration;
-
-
-  Work_fillup_widget({
-    this.index,
-  });
-
-
-  @override
-  Widget build(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.all(10),
-      child: new Container(
-        // width: 50,
-        // height: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(25)),
-            boxShadow: [
-              BoxShadow(color: Colors.teal, spreadRadius: 2),
-            ],
-          ),
-          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: work_list?.elementAt(index!).qualification_name,
-                    onChanged: (text) => project_name=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter work qualification',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: work_list?.elementAt(index!).organization_name,
-                    autovalidateMode: AutovalidateMode.always,
-                    onChanged: (text) => project_type=text,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter organization name',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: work_list?.elementAt(index!).brief,
-                    onChanged: (text) => project_brief=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Brief your work',
-                    ),),),
-
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    initialValue: work_list?.elementAt(index!).year_duration,
-                    onChanged: (text) => project_duration=text,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Can\'t be empty';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter starting-closing year',
-                    ),),),
-
-                new Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child:
-                    ElevatedButton(
-                      onPressed: () {
-                        work_data_upload(context);
-                      },
-                      child: Text('Save'),
-                    )
-
-                ),
-
-              ])),
-
-    );
-  }
-
-
-  void work_data_upload(BuildContext context) {
-
-    if(project_name==null)
-    {
-      project_name = work_list?.elementAt(index!).qualification_name;
-    }
-    if(project_type==null)
-    {
-      project_type = work_list?.elementAt(index!).organization_name;
-    }
-    if(project_brief==null)
-    {
-      project_brief= work_list?.elementAt(index!).brief;
-    }
-    if(project_duration==null)
-    {
-      project_duration= work_list?.elementAt(index!).year_duration;
-    }
-
-
-
-    if(project_name!.isEmpty || project_type!.isEmpty || project_brief!.isEmpty || project_duration!.isEmpty || project_name==null || project_type==null || project_brief==null || project_duration==null)
-    {
-      var snackBar = SnackBar(content: Text('data not filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else if(project_name!.isNotEmpty && project_type!.isNotEmpty && project_brief!.isNotEmpty && project_duration!.isNotEmpty && project_name!=null && project_type!=null && project_brief!=null && project_duration!=null)
-    {
-      work_list?.elementAt(index!).qualification_name = project_name;
-      work_list?.elementAt(index!).organization_name = project_type;
-      work_list?.elementAt(index!).brief = project_brief;
-      work_list?.elementAt(index!).year_duration = project_duration;
-      work_list?.elementAt(index!).tableName=form_name;
-      work_list?.elementAt(index!).id=form_name!+index.toString();
-      var snackBar = SnackBar(content: Text('Data filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else
-    {
-      var snackBar = SnackBar(content: Text('Data not filled'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-
-  }
-
-}
-
-
-class Education_fillup_widget extends StatelessWidget {
-
-  int? index;
-  String? edu_name;
-  String? edu_org;
-  String? edu_duration;
-
-  Education_fillup_widget({
-    this.index,
-  }) ;
 
   @override
   Widget build(BuildContext context) {
@@ -1813,14 +855,13 @@ class Education_fillup_widget extends StatelessWidget {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-
                 new Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
-                    initialValue: edu_list?.elementAt(index!).qualification_name,
+                    initialValue: profile_list?.elementAt(index!).name,
+                    onChanged: (text) => name = text,
                     autovalidateMode: AutovalidateMode.always,
-                    onChanged: (text) => edu_name=text,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -1829,16 +870,17 @@ class Education_fillup_widget extends StatelessWidget {
                     },
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
-                      labelText: 'Enter education qualification',
-                    ),),),
-
+                      labelText: 'Enter your name',
+                    ),
+                  ),
+                ),
                 new Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
-                    initialValue: edu_list?.elementAt(index!).organization_name,
+                    initialValue: profile_list?.elementAt(index!).phone_no,
+                    onChanged: (text) => phone_no = text,
                     autovalidateMode: AutovalidateMode.always,
-                    onChanged: (text) => edu_org=text,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Can\'t be empty';
@@ -1847,15 +889,227 @@ class Education_fillup_widget extends StatelessWidget {
                     },
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
-                      labelText: 'Enter organization name',
-                    ),),),
-
+                      labelText: 'Enter phone no',
+                    ),
+                  ),
+                ),
                 new Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
-                    initialValue: edu_list?.elementAt(index!).year_duration,
-                    onChanged: (text) => edu_duration=text,
+                    initialValue: profile_list?.elementAt(index!).location,
+                    onChanged: (text) => location = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter address',
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue: profile_list?.elementAt(index!).mail,
+                    onChanged: (text) => mail = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter mail id',
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue: profile_list?.elementAt(index!).social_link,
+                    onChanged: (text) => link = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter social media link',
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        profile_data_upload(context);
+                      },
+                      child: Text('Save'),
+                    )),
+              ])),
+    );
+  }
+
+  void profile_data_upload(BuildContext context) {
+    if (name == null) {
+      name = profile_list?.elementAt(index!).name;
+    }
+    if (location == null) {
+      location = profile_list?.elementAt(index!).location;
+    }
+    if (mail == null) {
+      mail = profile_list?.elementAt(index!).mail;
+    }
+    if (phone_no == null) {
+      phone_no = profile_list?.elementAt(index!).phone_no;
+    }
+    if (link == null) {
+      link = profile_list?.elementAt(index!).social_link;
+    }
+
+    if (name!.isEmpty ||
+        location!.isEmpty ||
+        phone_no!.isEmpty ||
+        mail!.isEmpty ||
+        link!.isEmpty ||
+        name == null ||
+        location == null ||
+        phone_no == null ||
+        link == null ||
+        mail == null) {
+      var snackBar = SnackBar(content: Text('data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (name!.isNotEmpty &&
+        location!.isNotEmpty &&
+        phone_no!.isNotEmpty &&
+        mail!.isNotEmpty &&
+        link!.isNotEmpty &&
+        name != null &&
+        location != null &&
+        phone_no != null &&
+        link != null &&
+        mail != null) {
+      profile_list?.elementAt(index!).name = name;
+      profile_list?.elementAt(index!).location = location;
+      profile_list?.elementAt(index!).mail = mail;
+      profile_list?.elementAt(index!).social_link = link;
+      profile_list?.elementAt(index!).phone_no = phone_no;
+      profile_list?.elementAt(index!).tableName = form_name;
+      profile_list?.elementAt(index!).id = form_name! + index.toString();
+      var snackBar = SnackBar(content: Text('data filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      var snackBar = SnackBar(content: Text('data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+}
+
+class Project_fillup_widget extends StatelessWidget {
+  int? index;
+  String? project_name;
+  String? project_brief;
+  String? project_type;
+  String? project_duration;
+
+  Project_fillup_widget({this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return new Padding(
+      padding: const EdgeInsets.all(10),
+      child: new Container(
+          // width: 50,
+          // height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(25)),
+            boxShadow: [
+              BoxShadow(color: Colors.teal, spreadRadius: 2),
+            ],
+          ),
+          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue:
+                        project_list?.elementAt(index!).qualification_name,
+                    onChanged: (text) => project_name = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter project name',
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue:
+                        project_list?.elementAt(index!).organization_name,
+                    onChanged: (text) => project_type = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Project type - Group/Self',
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue: project_list?.elementAt(index!).brief,
+                    onChanged: (text) => project_brief = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Brief your project',
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue: project_list?.elementAt(index!).year_duration,
+                    onChanged: (text) => project_duration = text,
                     autovalidateMode: AutovalidateMode.always,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
@@ -1866,64 +1120,655 @@ class Education_fillup_widget extends StatelessWidget {
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       labelText: 'Enter starting-closing year',
-                    ),),),
-
+                    ),
+                  ),
+                ),
                 new Padding(
                     padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child:
-                    ElevatedButton(
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        project_data_upload(context);
+                      },
+                      child: Text('Save'),
+                    )),
+              ])),
+    );
+  }
+
+  void project_data_upload(BuildContext context) {
+    if (project_name == null) {
+      project_name = project_list?.elementAt(index!).qualification_name;
+    }
+    if (project_type == null) {
+      project_type = project_list?.elementAt(index!).organization_name;
+    }
+    if (project_brief == null) {
+      project_brief = project_list?.elementAt(index!).brief;
+    }
+    if (project_duration == null) {
+      project_duration = project_list?.elementAt(index!).year_duration;
+    }
+
+    if (project_name!.isEmpty ||
+        project_type!.isEmpty ||
+        project_brief!.isEmpty ||
+        project_duration!.isEmpty ||
+        project_name == null ||
+        project_type == null ||
+        project_brief == null ||
+        project_duration == null) {
+      var snackBar = SnackBar(content: Text('data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (project_name!.isNotEmpty &&
+        project_type!.isNotEmpty &&
+        project_brief!.isNotEmpty &&
+        project_duration!.isNotEmpty &&
+        project_name != null &&
+        project_type != null &&
+        project_brief != null &&
+        project_duration != null) {
+      project_list?.elementAt(index!).qualification_name = project_name;
+      project_list?.elementAt(index!).organization_name = project_type;
+      project_list?.elementAt(index!).brief = project_brief;
+      project_list?.elementAt(index!).year_duration = project_duration;
+      project_list?.elementAt(index!).tableName = form_name;
+      project_list?.elementAt(index!).id = form_name! + index.toString();
+      var snackBar = SnackBar(content: Text('Data filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      var snackBar = SnackBar(content: Text('Data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+}
+
+class language_fillup_widget extends StatelessWidget {
+  int? index;
+  String? skill_name;
+
+  language_fillup_widget({
+    this.index,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return new Padding(
+      padding: const EdgeInsets.all(10),
+      child: new Container(
+          // width: 50,
+          // height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(25)),
+            boxShadow: [
+              BoxShadow(color: Colors.teal, spreadRadius: 2),
+            ],
+          ),
+          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    onChanged: (text) => skill_name = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    initialValue: language_list?.elementAt(index!).value,
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter langauage name',
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        language_data_upload(context);
+                      },
+                      child: Text('Save'),
+                    )),
+              ])),
+    );
+  }
+
+  void language_data_upload(BuildContext context) {
+    if (skill_name == null) {
+      skill_name = language_list?.elementAt(index!).value;
+    }
+
+    if (skill_name!.isEmpty || skill_name == null) {
+      var snackBar = SnackBar(content: Text('data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (skill_name!.isNotEmpty && skill_name != null) {
+      language_list?.elementAt(index!).value = skill_name;
+      language_list?.elementAt(index!).tableName = form_name;
+      language_list?.elementAt(index!).id = form_name! + index.toString();
+      var snackBar = SnackBar(content: Text('Data filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      var snackBar = SnackBar(content: Text('Data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+}
+
+class Skill_fillup_widget extends StatelessWidget {
+  int? index;
+  String? skill_name;
+
+  Skill_fillup_widget({
+    this.index,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return new Padding(
+      padding: const EdgeInsets.all(10),
+      child: new Container(
+          // width: 50,
+          // height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(25)),
+            boxShadow: [
+              BoxShadow(color: Colors.teal, spreadRadius: 2),
+            ],
+          ),
+          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    onChanged: (text) => skill_name = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    initialValue: skill_list?.elementAt(index!).value,
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter skill name',
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        skill_data_upload(context);
+                      },
+                      child: Text('Save'),
+                    )),
+              ])),
+    );
+  }
+
+  void skill_data_upload(BuildContext context) {
+    if (skill_name == null) {
+      skill_name = skill_list?.elementAt(index!).value;
+    }
+
+    if (skill_name!.isEmpty || skill_name == null) {
+      var snackBar = SnackBar(content: Text('data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (skill_name!.isNotEmpty && skill_name != null) {
+      skill_list?.elementAt(index!).value = skill_name;
+      skill_list?.elementAt(index!).tableName = form_name;
+      skill_list?.elementAt(index!).id = form_name! + index.toString();
+      var snackBar = SnackBar(content: Text('Data filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      var snackBar = SnackBar(content: Text('Data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+}
+
+class Achievement_fillup_widget extends StatelessWidget {
+  int? index;
+  String? ach_name;
+  String? ach_org;
+
+  Achievement_fillup_widget({
+    this.index,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return new Padding(
+      padding: const EdgeInsets.all(10),
+      child: new Container(
+          // width: 50,
+          // height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(25)),
+            boxShadow: [
+              BoxShadow(color: Colors.teal, spreadRadius: 2),
+            ],
+          ),
+          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue:
+                        achievement_list?.elementAt(index!).qualification_name,
+                    onChanged: (text) => ach_name = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter Achievement',
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue:
+                        achievement_list?.elementAt(index!).organization_name,
+                    onChanged: (text) => ach_org = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Issued by - ',
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        achievement_data_upload(context);
+                      },
+                      child: Text('Save'),
+                    )),
+              ])),
+    );
+  }
+
+  void achievement_data_upload(BuildContext context) {
+    if (ach_name == null) {
+      ach_name = achievement_list?.elementAt(index!).qualification_name;
+    }
+    if (ach_org == null) {
+      ach_org = achievement_list?.elementAt(index!).organization_name;
+    }
+
+    if (ach_name!.isEmpty ||
+        ach_org!.isEmpty ||
+        ach_name == null ||
+        ach_org == null) {
+      var snackBar = SnackBar(content: Text('data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (ach_name!.isNotEmpty &&
+        ach_org!.isNotEmpty &&
+        ach_name != null &&
+        ach_org != null) {
+      achievement_list?.elementAt(index!).qualification_name = ach_name;
+      achievement_list?.elementAt(index!).organization_name = ach_org;
+      achievement_list?.elementAt(index!).tableName = form_name;
+      achievement_list?.elementAt(index!).id = form_name! + index.toString();
+      var snackBar = SnackBar(content: Text('Data filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      var snackBar = SnackBar(content: Text('Data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+}
+
+class Work_fillup_widget extends StatelessWidget {
+  int? index;
+  String? project_name;
+  String? project_brief;
+  String? project_type;
+  String? project_duration;
+
+  Work_fillup_widget({
+    this.index,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return new Padding(
+      padding: const EdgeInsets.all(10),
+      child: new Container(
+          // width: 50,
+          // height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(25)),
+            boxShadow: [
+              BoxShadow(color: Colors.teal, spreadRadius: 2),
+            ],
+          ),
+          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue:
+                        work_list?.elementAt(index!).qualification_name,
+                    onChanged: (text) => project_name = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter work qualification',
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue:
+                        work_list?.elementAt(index!).organization_name,
+                    autovalidateMode: AutovalidateMode.always,
+                    onChanged: (text) => project_type = text,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter organization name',
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue: work_list?.elementAt(index!).brief,
+                    onChanged: (text) => project_brief = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Brief your work',
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue: work_list?.elementAt(index!).year_duration,
+                    onChanged: (text) => project_duration = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter starting-closing year',
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        work_data_upload(context);
+                      },
+                      child: Text('Save'),
+                    )),
+              ])),
+    );
+  }
+
+  void work_data_upload(BuildContext context) {
+    if (project_name == null) {
+      project_name = work_list?.elementAt(index!).qualification_name;
+    }
+    if (project_type == null) {
+      project_type = work_list?.elementAt(index!).organization_name;
+    }
+    if (project_brief == null) {
+      project_brief = work_list?.elementAt(index!).brief;
+    }
+    if (project_duration == null) {
+      project_duration = work_list?.elementAt(index!).year_duration;
+    }
+
+    if (project_name!.isEmpty ||
+        project_type!.isEmpty ||
+        project_brief!.isEmpty ||
+        project_duration!.isEmpty ||
+        project_name == null ||
+        project_type == null ||
+        project_brief == null ||
+        project_duration == null) {
+      var snackBar = SnackBar(content: Text('data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (project_name!.isNotEmpty &&
+        project_type!.isNotEmpty &&
+        project_brief!.isNotEmpty &&
+        project_duration!.isNotEmpty &&
+        project_name != null &&
+        project_type != null &&
+        project_brief != null &&
+        project_duration != null) {
+      work_list?.elementAt(index!).qualification_name = project_name;
+      work_list?.elementAt(index!).organization_name = project_type;
+      work_list?.elementAt(index!).brief = project_brief;
+      work_list?.elementAt(index!).year_duration = project_duration;
+      work_list?.elementAt(index!).tableName = form_name;
+      work_list?.elementAt(index!).id = form_name! + index.toString();
+      var snackBar = SnackBar(content: Text('Data filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      var snackBar = SnackBar(content: Text('Data not filled'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+}
+
+class Education_fillup_widget extends StatelessWidget {
+  int? index;
+  String? edu_name;
+  String? edu_org;
+  String? edu_duration;
+
+  Education_fillup_widget({
+    this.index,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return new Padding(
+      padding: const EdgeInsets.all(10),
+      child: new Container(
+          // width: 50,
+          // height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(25)),
+            boxShadow: [
+              BoxShadow(color: Colors.teal, spreadRadius: 2),
+            ],
+          ),
+          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue:
+                        edu_list?.elementAt(index!).qualification_name,
+                    autovalidateMode: AutovalidateMode.always,
+                    onChanged: (text) => edu_name = text,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter education qualification',
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue: edu_list?.elementAt(index!).organization_name,
+                    autovalidateMode: AutovalidateMode.always,
+                    onChanged: (text) => edu_org = text,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter organization name',
+                    ),
+                  ),
+                ),
+                new Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    initialValue: edu_list?.elementAt(index!).year_duration,
+                    onChanged: (text) => edu_duration = text,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Can\'t be empty';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Enter starting-closing year',
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: ElevatedButton(
                       onPressed: () {
                         edu_data_upload(context);
                       },
                       child: Text('Save'),
-                    )
-
-                ),
+                    )),
               ])),
-
     );
   }
 
   void edu_data_upload(BuildContext context) {
-
-    if(edu_name==null)
-    {
+    if (edu_name == null) {
       edu_name = edu_list?.elementAt(index!).qualification_name;
     }
-    if(edu_org==null)
-    {
+    if (edu_org == null) {
       edu_org = edu_list?.elementAt(index!).organization_name;
     }
-    if(edu_duration==null)
-    {
-      edu_duration= edu_list?.elementAt(index!).year_duration;
+    if (edu_duration == null) {
+      edu_duration = edu_list?.elementAt(index!).year_duration;
     }
 
-
-
-    if(edu_name!.isEmpty || edu_org!.isEmpty || edu_duration!.isEmpty || edu_name==null || edu_org==null || edu_duration==null)
-    {
+    if (edu_name!.isEmpty ||
+        edu_org!.isEmpty ||
+        edu_duration!.isEmpty ||
+        edu_name == null ||
+        edu_org == null ||
+        edu_duration == null) {
       var snackBar = SnackBar(content: Text('data not filled'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else if(edu_name!.isNotEmpty && edu_org!.isNotEmpty && edu_duration!.isNotEmpty && edu_name!=null && edu_org!=null && edu_duration!=null)
-    {
+    } else if (edu_name!.isNotEmpty &&
+        edu_org!.isNotEmpty &&
+        edu_duration!.isNotEmpty &&
+        edu_name != null &&
+        edu_org != null &&
+        edu_duration != null) {
       edu_list?.elementAt(index!).qualification_name = edu_name;
       edu_list?.elementAt(index!).organization_name = edu_org;
       edu_list?.elementAt(index!).year_duration = edu_duration;
-      edu_list?.elementAt(index!).tableName=form_name;
-      edu_list?.elementAt(index!).id=form_name!+index.toString();
+      edu_list?.elementAt(index!).tableName = form_name;
+      edu_list?.elementAt(index!).id = form_name! + index.toString();
       var snackBar = SnackBar(content: Text('Data filled'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else
-    {
+    } else {
       var snackBar = SnackBar(content: Text('Data not filled'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-
   }
 
-
 }
+
+ Widget alertDialouge(BuildContext context, bool flag){
+  return AlertDialog(
+    title: Text('Alert'),           // To display the title it is optional
+    content: Text('Fill education , skills and profile'),   // Message which will be pop up on the screen
+    // Action widget which will provide the user to acknowledge the choice
+    actions: [
+      FlatButton(
+        textColor: Colors.black,
+        onPressed: () {},
+        child: Text('ACCEPT'),
+      ),
+    ],
+  );
+ }

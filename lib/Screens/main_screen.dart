@@ -8,10 +8,10 @@ import 'faq.dart';
 
 class main_screen extends StatefulWidget
 {
-
+  int name;
   @override
   State<StatefulWidget> createState() => main_screen_state();
-
+  main_screen(this.name);
 }
 
 class main_screen_state extends State<main_screen>
@@ -25,6 +25,9 @@ class main_screen_state extends State<main_screen>
   void initState()
   {
     super.initState();
+    if(widget.name != null){
+      selected_item=widget.name;
+    }
     //onstart();
     //Navigator.of(context).pushNamed('splash_screen');
   }
@@ -48,7 +51,7 @@ class main_screen_state extends State<main_screen>
           onTap: (setValue)
           {
             setState(() {
-              selected_item = setValue;
+              selected_item =setValue;
             });
           },
         )
