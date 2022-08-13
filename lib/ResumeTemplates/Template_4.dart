@@ -136,7 +136,14 @@ class Template_4state extends State<Template_4>
 
   void _createPDF() async
   {
-    final file = await pdfResumeApi.generate(widget.profile_list,widget.edu_list,widget.work_list,widget.project_list,widget.achievement_list,widget.skill_list,widget.language_list,"blueGrey","white","blueGrey",4);
+    final file = await pdfResumeApi.generate(widget.profile_list,
+        widget.edu_list,
+        widget.work_list,
+        widget.project_list,
+        widget.achievement_list,
+        widget.skill_list,
+        widget.language_list,
+        "blueGrey","white","blueGrey",4);
     PdfApi.openFile(file);
 
   }

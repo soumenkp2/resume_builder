@@ -140,16 +140,16 @@ List<Widget> createRow_1(List<Education_UserModel>? edu_list, List<Work_Projects
   List<Widget> row1 = [];
   if(row1.isEmpty)
     {
-      if(check_visibility_education(edu_list!)==true)
+      if(check_visibility_education(edu_list)==true)
       {
         row1.add(pdf_education(edu_list,color,txt_color,high_color));
 
       }
-      if(check_visibility_work_project(work_list!)==true)
+      if(check_visibility_work_project(work_list)==true)
       {
         row1.add(pdf_project_work(work_list, color, txt_color, high_color, "Work Experience"));
       }
-      if(check_visibility_skills_lang(lang_list!)==true)
+      if(check_visibility_skills_lang(lang_list)==true)
       {
         row1.add(pdf_skill_lang(lang_list, color, txt_color, high_color, "Languages"));
       }
@@ -167,15 +167,15 @@ List<Widget> createRow_2(List<Achievements_UserModel>? ach_list, List<Work_Proje
   List<Widget> row2 = [];
   if(row2.isEmpty)
   {
-    if(check_visibility_achievement(ach_list!)==true)
+    if(check_visibility_achievement(ach_list)==true)
     {
       row2.add(pdf_achievement(ach_list, color, txt_color, high_color),);
     }
-    if(check_visibility_work_project(project_list!)==true)
+    if(check_visibility_work_project(project_list)==true)
     {
       row2.add( pdf_project_work(project_list, color, txt_color, high_color, "Projects"),);
     }
-    if(check_visibility_skills_lang(skill_list!)==true)
+    if(check_visibility_skills_lang(skill_list)==true)
     {
       row2.add(pdf_skill_lang(skill_list, color, txt_color, high_color, "Skills"));
     }
