@@ -9,16 +9,13 @@ class onboarding_screen extends StatefulWidget {
 }
 
 class onboarding_screen_state extends State<onboarding_screen> {
-
   final controller = PageController();
 
   @override
-  void dispose()
-  {
+  void dispose() {
     controller.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {

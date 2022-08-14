@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:path/path.dart';
 import 'package:resume_builder/UserModels/Achievements_UserModel.dart';
 import 'package:resume_builder/UserModels/Skills_Languages_UserModel.dart';
-
 import 'package:sqflite/sqflite.dart';
 
 import '../UserModels/Education_UserModel.dart';
@@ -50,7 +47,7 @@ class DataBaseManager {
 
   Future _createDB(Database db, int version) async {
     await db.execute("CREATE TABLE ACHIEVEMENT ("
-         "id TEXT UNIQUE,"
+        "id TEXT UNIQUE,"
         "tableName TEXT ,"
         "organization_name TEXT ,"
         "qualification_name TEXT "
@@ -115,7 +112,8 @@ class DataBaseManager {
   Future<List<Skills_Languages_UserModel>?> querySkillsData(
       String tableName) async {
     Database db = await instance.database;
-    List<Map<String, dynamic>> maps = await db.query("SKILLS",where: "tableName= ?",whereArgs: [tableName]);
+    List<Map<String, dynamic>> maps =
+        await db.query("SKILLS", where: "tableName= ?", whereArgs: [tableName]);
     if (maps.isNotEmpty) {
       return maps
           .map((map) => Skills_Languages_UserModel.fromDbMap(map))
@@ -126,7 +124,8 @@ class DataBaseManager {
 
   Future<List<Education_UserModel>?> queryEduData(String tableName) async {
     Database db = await instance.database;
-    List<Map<String, dynamic>> maps = await db.query("EDUCATION",where: "tableName= ?",whereArgs: [tableName]);
+    List<Map<String, dynamic>> maps = await db
+        .query("EDUCATION", where: "tableName= ?", whereArgs: [tableName]);
     if (maps.isNotEmpty) {
       return maps.map((map) => Education_UserModel.fromDbMap(map)).toList();
     }
@@ -136,7 +135,8 @@ class DataBaseManager {
   Future<List<Achievements_UserModel>?> queryAchievementData(
       String tableName) async {
     Database db = await instance.database;
-    List<Map<String, dynamic>> maps = await db.query(" ACHIEVEMENT",where: "tableName= ?",whereArgs: [tableName]);
+    List<Map<String, dynamic>> maps = await db
+        .query(" ACHIEVEMENT", where: "tableName= ?", whereArgs: [tableName]);
     if (maps.isNotEmpty) {
       return maps.map((map) => Achievements_UserModel.fromDbMap(map)).toList();
     }
@@ -145,7 +145,8 @@ class DataBaseManager {
 
   Future<List<Profile_UserModel>?> queryProfileData(String tableName) async {
     Database db = await instance.database;
-    List<Map<String, dynamic>> maps = await db.query("PROFILE",where: "tableName= ?",whereArgs: [tableName]);
+    List<Map<String, dynamic>> maps = await db
+        .query("PROFILE", where: "tableName= ?", whereArgs: [tableName]);
     if (maps.isNotEmpty) {
       return maps.map((map) => Profile_UserModel.fromDbMap(map)).toList();
     }
@@ -154,7 +155,8 @@ class DataBaseManager {
 
   Future<List<Work_Projects_UserModel>?> queryWorkData(String tableName) async {
     Database db = await instance.database;
-    List<Map<String, dynamic>> maps = await db.query("WORK",where: "tableName= ?",whereArgs: [tableName]);
+    List<Map<String, dynamic>> maps =
+        await db.query("WORK", where: "tableName= ?", whereArgs: [tableName]);
     if (maps.isNotEmpty) {
       return maps.map((map) => Work_Projects_UserModel.fromDbMap(map)).toList();
     }
@@ -165,14 +167,14 @@ class DataBaseManager {
     Database db = await instance.database;
     List<Map<String, dynamic>> maps = await db.query("TABLENAME");
 
-      return maps.map((map) => TableName.fromDB(map)).toList();
-
+    return maps.map((map) => TableName.fromDB(map)).toList();
   }
 
   Future<List<Skills_Languages_UserModel>?> queryLanguageData(
       String tableName) async {
     Database db = await instance.database;
-    List<Map<String, dynamic>> maps = await db.query("LANGUAGE",where: "tableName= ?",whereArgs: [tableName]);
+    List<Map<String, dynamic>> maps = await db
+        .query("LANGUAGE", where: "tableName= ?", whereArgs: [tableName]);
     if (maps.isNotEmpty) {
       return maps
           .map((map) => Skills_Languages_UserModel.fromDbMap(map))
@@ -184,15 +186,16 @@ class DataBaseManager {
   Future<List<Work_Projects_UserModel>?> queryProjectData(
       String tableName) async {
     Database db = await instance.database;
-    List<Map<String, dynamic>> maps = await db.query("PROJECT",where: "tableName= ?",whereArgs: [tableName]);
+    List<Map<String, dynamic>> maps = await db
+        .query("PROJECT", where: "tableName= ?", whereArgs: [tableName]);
     if (maps.isNotEmpty) {
       return maps.map((map) => Work_Projects_UserModel.fromDbMap(map)).toList();
     }
     return null;
   }
-  Future  delete(String tableName) async {
+
+  Future delete(String tableName) async {
     Database db = await instance.database;
-    print("hey the table name is ${tableName}");
     await db.delete("PROJECT", where: 'tableName= ?', whereArgs: [tableName]);
     await db.delete("LANGUAGE", where: 'tableName= ?', whereArgs: [tableName]);
     await db.delete("TABLENAME", where: 'tableName= ?', whereArgs: [tableName]);
@@ -202,5 +205,4 @@ class DataBaseManager {
     await db.delete("EDUCATION", where: 'tableName= ?', whereArgs: [tableName]);
     await db.delete("SKILLS", where: 'tableName= ?', whereArgs: [tableName]);
   }
-
 }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resume_builder/DataBase/DataBaseManager.dart';
-
 import 'package:resume_builder/Screens/edit_form_fillup.dart';
-import 'package:resume_builder/Screens/home.dart';
 import 'package:resume_builder/Screens/main_screen.dart';
 //import 'package:resume_builder/Screens/info_fillup.dart';
 import 'package:resume_builder/UserModels/Achievements_UserModel.dart';
@@ -11,7 +9,6 @@ import 'package:resume_builder/UserModels/Skills_Languages_UserModel.dart';
 import 'package:resume_builder/UserModels/Work_Projects_UserModel.dart';
 
 import '../DataBase/TableName.dart';
-import '../ResumeTemplates/Resume_temp2.dart';
 import '../ResumeTemplates/Template_1.dart';
 import '../ResumeTemplates/Template_2.dart';
 import '../ResumeTemplates/Template_3.dart';
@@ -78,22 +75,20 @@ class _FormListPageState extends State<FormListPage> {
     list = DataBaseManager.instance.queryTableData();
     super.initState();
 
-
     print("\n\nEducation");
     _educationTable?.forEach((element) {
       print(element.qualification_name);
       print(element.organization_name);
       print(element.year_duration);
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop:  ()async {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-          main_screen(0) ));
+      onWillPop: () async {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => main_screen(0)));
         return false;
       },
       child: Scaffold(
@@ -120,112 +115,126 @@ class _FormListPageState extends State<FormListPage> {
                 return ListView.builder(
                     itemCount: data?.length,
                     itemBuilder: (context, index) {
-                      return Card(
-                        color: Colors.white12,
-                        margin: const EdgeInsets.all(15),
-                        child:Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  SizedBox(width: 20.0),
-                                  Expanded(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        InkWell(
-                                          onTap: ()async{
-                                            await _getDataBase(
-                                                _tableName
-                                                    ?.elementAt(index!)
-                                                    .tableName ?? 'NO LIST');
-                                            Navigator.of(context).push(MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Next_to_dynamic_resume(context, widget.tableIndex,this.runtimeType))) ;
-                                          },
-                                          child: Text(
-                                            _tableName
-                                                ?.elementAt(index!)
-                                                .tableName ?? 'NO LIST',
-                                            style: TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.w500,
+                      return GestureDetector(
+                        onTap: () async {
+                          await _getDataBase(_tableName
+                              ?.elementAt(index!)
+                              .tableName ??
+                              'NO LIST');
+                          Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Next_to_dynamic_resume(
+                                          context,
+                                          widget.tableIndex,
+                                          this.runtimeType)));
+                        },
+                        child: Card(
+                          color: Colors.white12,
+                          margin: const EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    SizedBox(width: 20.0),
+                                    Expanded(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              _tableName
+                                                      ?.elementAt(index!)
+                                                      .tableName ??
+                                                  'NO LIST',
+                                              style: TextStyle(
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
-                                          ),
-                                        ),
-
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: 20.0),
-                                  InkWell(
-                                    onTap: ()async{
-
-                                      await _getDataBase(
-                                          _tableName
-                                              ?.elementAt(index!)
-                                              .tableName ?? 'NO LIST');
-                                      Navigator.of(context).push(MaterialPageRoute(
-                                          builder: (context) =>
-                                              edit_form_fillup(  _tableName
-                                                  ?.elementAt(index!)
-                                                  .tableName ?? 'NO LIST',widget.tableIndex, _educationTable, _projectTable, _skillTable, _languageTable, _workTable, _achievementTable, _profileTable)))
-                                          .then((_) async {
-                                        setState(() {
-                                          list = DataBaseManager.instance.queryTableData();
-                                          _getTableName();
+                                    SizedBox(width: 20.0),
+                                    InkWell(
+                                      onTap: () async {
+                                        await _getDataBase(_tableName
+                                                ?.elementAt(index!)
+                                                .tableName ??
+                                            'NO LIST');
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    edit_form_fillup(
+                                                        _tableName
+                                                                ?.elementAt(
+                                                                    index!)
+                                                                .tableName ??
+                                                            'NO LIST',
+                                                        widget.tableIndex,
+                                                        _educationTable,
+                                                        _projectTable,
+                                                        _skillTable,
+                                                        _languageTable,
+                                                        _workTable,
+                                                        _achievementTable,
+                                                        _profileTable)))
+                                            .then((_) async {
+                                          setState(() {
+                                            list = DataBaseManager.instance
+                                                .queryTableData();
+                                            _getTableName();
+                                          });
                                         });
-                                      });
-
-
-                                    },
-                                    child: Container(
-                                      height: 40.0,
-                                      width: 40.0,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.grey[200],
+                                      },
+                                      child: Container(
+                                        height: 40.0,
+                                        width: 40.0,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.grey[200],
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Icon(Icons.edit,
+                                            color: Colors.orange[800]),
                                       ),
-                                      alignment: Alignment.center,
-                                      child: Icon(Icons.edit, color: Colors.orange[800]),
                                     ),
-                                  ),
-
-
-                                  SizedBox(width: 20.0),
-                                  InkWell(
-                                    onTap: ()async{
-                                    DataBaseManager.instance.delete(  _tableName
-                                        ?.elementAt(index!)
-                                        .tableName ?? 'NO LIST').then((_) async {
-                                      setState(() {
-                                        list = DataBaseManager.instance.queryTableData();
-                                        _getTableName();
-                                      });
-                                    });
-                                    },
-                                    child: Container(
-                                      height: 40.0,
-                                      width: 40.0,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.grey[200],
+                                    SizedBox(width: 20.0),
+                                    InkWell(
+                                      onTap: () async {
+                                        DataBaseManager.instance
+                                            .delete(_tableName
+                                                    ?.elementAt(index!)
+                                                    .tableName ??
+                                                'NO LIST')
+                                            .then((_) async {
+                                          setState(() {
+                                            list = DataBaseManager.instance
+                                                .queryTableData();
+                                            _getTableName();
+                                          });
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 40.0,
+                                        width: 40.0,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.grey[200],
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Icon(Icons.delete,
+                                            color: Colors.red[400]),
                                       ),
-                                      alignment: Alignment.center,
-                                      child: Icon(Icons.delete, color: Colors.red[400]),
                                     ),
-                                  ),
-
-
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-
-                          ],
+                            ],
+                          ),
                         ),
-
-
                       );
                     });
               }
@@ -249,7 +258,7 @@ class _FormListPageState extends State<FormListPage> {
 
             Navigator.of(context)
                 .push(MaterialPageRoute(
-                builder: (builder) => info_fillup(widget.tableIndex)))
+                    builder: (builder) => info_fillup(widget.tableIndex)))
                 .then((_) async {
               setState(() {
                 list = DataBaseManager.instance.queryTableData();
@@ -262,34 +271,31 @@ class _FormListPageState extends State<FormListPage> {
     );
   }
 
-
-
-  Widget Next_to_dynamic_resume(BuildContext context, int index, Type runtimeType,) {
-
-    print("form: ");
-    print(index);
+  Widget Next_to_dynamic_resume(
+    BuildContext context,
+    int index,
+    Type runtimeType,
+  ) {
 
 
     if (index == 1) {
-      return Template_1(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
-
+      return Template_1(runtimeType, _educationTable, _workTable, _projectTable,
+          _profileTable, _achievementTable, _skillTable, _languageTable);
     } else if (index == 2) {
-      return Template_2(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
-
-
+      return Template_2(runtimeType, _educationTable, _workTable, _projectTable,
+          _profileTable, _achievementTable, _skillTable, _languageTable);
     } else if (index == 3) {
-      return Template_3(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
-
-
+      return Template_3(runtimeType, _educationTable, _workTable, _projectTable,
+          _profileTable, _achievementTable, _skillTable, _languageTable);
     } else if (index == 4) {
-      return Template_4(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
-
+      return Template_4(runtimeType, _educationTable, _workTable, _projectTable,
+          _profileTable, _achievementTable, _skillTable, _languageTable);
     } else if (index == 6) {
-      return Template_6(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
-
+      return Template_6(runtimeType, _educationTable, _workTable, _projectTable,
+          _profileTable, _achievementTable, _skillTable, _languageTable);
     } else if (index == 5) {
-      return Template_5(runtimeType, _educationTable,_workTable, _projectTable, _profileTable, _achievementTable, _skillTable, _languageTable);
-
+      return Template_5(runtimeType, _educationTable, _workTable, _projectTable,
+          _profileTable, _achievementTable, _skillTable, _languageTable);
     } else {
       return Text("hello ji");
     }

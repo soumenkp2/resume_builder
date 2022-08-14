@@ -1,37 +1,31 @@
-import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:resume_builder/main.dart';
+
+import 'faq.dart';
 import 'home.dart';
 import 'your_resume.dart';
-import 'faq.dart';
 
-class main_screen extends StatefulWidget
-{
+class main_screen extends StatefulWidget {
   int name;
   @override
   State<StatefulWidget> createState() => main_screen_state();
   main_screen(this.name);
 }
 
-class main_screen_state extends State<main_screen>
-{
-
-  var pages_date = [home(),your_resume(),faq()];
+class main_screen_state extends State<main_screen> {
+  var pages_date = [home(), your_resume(), faq()];
 
   int selected_item = 0;
 
   @override
-  void initState()
-  {
+  void initState() {
     super.initState();
-    if(widget.name != null){
-      selected_item=widget.name;
+    if (widget.name != null) {
+      selected_item = widget.name;
     }
     //onstart();
     //Navigator.of(context).pushNamed('splash_screen');
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,25 +33,21 @@ class main_screen_state extends State<main_screen>
         body: Center(
           child: pages_date[selected_item],
         ),
-
-
         bottomNavigationBar: BottomNavigationBar(
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.dashboard_customize), label: "Your Resume"),
-            BottomNavigationBarItem(icon: Icon(Icons.question_answer), label: "FAQs")
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home_filled), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.dashboard_customize), label: "Your Resume"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.question_answer), label: "FAQs")
           ],
           currentIndex: selected_item,
-          onTap: (setValue)
-          {
+          onTap: (setValue) {
             setState(() {
-              selected_item =setValue;
+              selected_item = setValue;
             });
           },
-        )
-
-
-    );
+        ));
   }
-
 }
