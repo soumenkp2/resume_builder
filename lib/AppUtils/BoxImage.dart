@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:resume_builder/AppUtils/TextWidget.dart';
 
-
 class BoxImage extends StatelessWidget {
-  BoxImage({Key? key, required this.text, required this.imagePath}) : super(key: key);
-  String text,imagePath;
+  BoxImage({Key? key, required this.text, required this.imagePath})
+      : super(key: key);
+  String text, imagePath;
 
   @override
   Widget build(BuildContext context) {

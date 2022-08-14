@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:resume_builder/AppUtils/TextWidget.dart';
-
 
 class CurvedWidget extends StatelessWidget {
   CurvedWidget(
@@ -24,29 +20,31 @@ class CurvedWidget extends StatelessWidget {
         ),
         color: Color(0xFF78CBEC),
       ),
-      child: Stack(
-        children: [
-          Positioned(
-              top: 70,
-              left: 0,
-              child: Container(
-                height: 80,
-                width: 300,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(50),
-                    bottomRight: Radius.circular(50),
-                  ),
+      child: Stack(children: [
+        Positioned(
+            top: 70,
+            left: 0,
+            child: Container(
+              height: 80,
+              width: 300,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(50),
+                  bottomRight: Radius.circular(50),
                 ),
-              )),
-          Positioned(
-              top: 100,
-              left: 20,
-            child: Text(s, style: GoogleFonts.poppins(textStyle: TextStyle(),fontWeight: FontWeight.bold, fontSize: size)),
-          ),
-      ]
-      ),
+              ),
+            )),
+        Positioned(
+          top: 100,
+          left: 20,
+          child: Text(s,
+              style: GoogleFonts.poppins(
+                  textStyle: TextStyle(),
+                  fontWeight: FontWeight.bold,
+                  fontSize: size)),
+        ),
+      ]),
     );
   }
 }

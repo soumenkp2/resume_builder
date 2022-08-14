@@ -1,11 +1,10 @@
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:resume_builder/AppUtils/BoxImage.dart';
 import 'package:resume_builder/AppUtils/CurvedWidget.dart';
 import 'package:resume_builder/AppUtils/TextWidget.dart';
-import 'package:resume_builder/main.dart';
 
 import '../DataBase/DataBaseManager.dart';
 import '../DataBase/TableName.dart';
@@ -137,7 +136,6 @@ class your_resume_state extends State<your_resume> {
                                             fontSize: 30,
                                             fontWeight: FontWeight.bold))),
                               ]),
-
                           new Align(
                             alignment: Alignment.centerLeft,
                             child: Text("Your Previous Templates",
@@ -146,9 +144,10 @@ class your_resume_state extends State<your_resume> {
                                     textStyle: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold))),
-
                           ),
-                        ]),),)
+                        ]),
+                  ),
+                )
               ]),
               SizedBox(
                 height: 400,
@@ -175,14 +174,10 @@ class your_resume_state extends State<your_resume> {
                               return InkWell(
                                 onTap: () async {
                                   await _getDataBase(
-                                      _tableName
-                                          ?.elementAt(index!)
-                                          .tableName ??
+                                      _tableName?.elementAt(index!).tableName ??
                                           'Na');
                                   moveToResume(int.parse(
-                                      _tableName
-                                          ?.elementAt(index!)
-                                          .id ?? '1'));
+                                      _tableName?.elementAt(index!).id ?? '1'));
                                 },
                                 child: Column(
                                   children: [
@@ -199,17 +194,17 @@ class your_resume_state extends State<your_resume> {
                                           child: new Padding(
                                             padding: const EdgeInsets.all(0),
                                             child: Image.asset(
-                                              'assets/images/template_${_tableName
-                                                  ?.elementAt(index)
-                                                  .id}.png',
+                                              'assets/images/template_${_tableName?.elementAt(index).id}.png',
                                               fit: BoxFit.scaleDown,
                                             ),
                                           )),
                                     ),
                                     SizedBox(height: 10),
-                                    TextWidget(text: _tableName
-                                        ?.elementAt(index!)
-                                        .tableName ?? 'Na',
+                                    TextWidget(
+                                        text: _tableName
+                                                ?.elementAt(index!)
+                                                .tableName ??
+                                            'Na',
                                         size: 16,
                                         color: Color(0xFF000000)),
                                   ],

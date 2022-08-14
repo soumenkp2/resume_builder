@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Language_Widget extends StatelessWidget {
-
   double? height;
   double? margin_top;
   double? margin_bottom;
@@ -14,16 +13,12 @@ class Language_Widget extends StatelessWidget {
   String? skill2;
   String? skill3;
 
-
-
-
   Language_Widget({
     this.height,
     this.margin_top,
     this.margin_bottom,
     this.margin_left,
     this.margin_right,
-
     this.skill1,
     this.skill2,
     this.skill3,
@@ -34,19 +29,17 @@ class Language_Widget extends StatelessWidget {
     return new Container(
       //color: Colors.limeAccent,
       height: height,
-      margin: EdgeInsets.fromLTRB(margin_left!, margin_top!, margin_right!, margin_bottom!),
+      margin: EdgeInsets.fromLTRB(
+          margin_left!, margin_top!, margin_right!, margin_bottom!),
       //padding: const EdgeInsets.all(10),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            new Text(
-                "Language",
+            new Text("Language",
                 style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold))
-            ),
+                    textStyle:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
             new Divider(
               color: Colors.black,
               thickness: 3,
@@ -60,36 +53,20 @@ class Language_Widget extends StatelessWidget {
             //   ),
             // ),
 
-            Skill_Details(
-                skill_name: skill1
-            ),
+            Skill_Details(skill_name: skill1),
 
-            Skill_Details(
-                skill_name: skill2
-            ),
+            Skill_Details(skill_name: skill2),
 
-            Skill_Details(
-                skill_name: skill3
-            ),
-
-
-
+            Skill_Details(skill_name: skill3),
           ]),
-
-
     );
   }
 }
 
 class Skill_Details extends StatelessWidget {
-
   String? skill_name;
 
-
-  Skill_Details({
-    this.skill_name
-
-  });
+  Skill_Details({this.skill_name});
 
   @override
   Widget build(BuildContext context) {
@@ -97,15 +74,13 @@ class Skill_Details extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
         child: Container(
           width: 100,
-          child: Text(
-              skill_name!,
+          child: Text(skill_name!,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                   textStyle: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
-                      fontWeight: FontWeight.normal))
-          ),
+                      fontWeight: FontWeight.normal))),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.white,
@@ -113,10 +88,6 @@ class Skill_Details extends StatelessWidget {
               BoxShadow(color: Colors.teal, spreadRadius: 1),
             ],
           ),
-
-        )
-
-
-    );
+        ));
   }
 }

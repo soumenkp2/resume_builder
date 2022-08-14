@@ -1,16 +1,10 @@
-import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:resume_builder/DataBase/TableName.dart';
-import 'package:resume_builder/ResumeTemplates/Resume_temp2.dart';
-import 'package:resume_builder/ResumeWidgets/language_Widget.dart';
-import 'package:resume_builder/main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:resume_builder/Screens/your_resume.dart';
+import 'package:resume_builder/DataBase/TableName.dart';
 import 'package:resume_builder/UserModels/Skills_Languages_UserModel.dart';
 
 import '../DataBase/DataBaseManager.dart';
-import '../ResumeTemplates/Resume_temp1.dart';
 import '../ResumeTemplates/Template_1.dart';
 import '../ResumeTemplates/Template_2.dart';
 import '../ResumeTemplates/Template_3.dart';
@@ -21,7 +15,6 @@ import '../UserModels/Achievements_UserModel.dart';
 import '../UserModels/Education_UserModel.dart';
 import '../UserModels/Profile_UserModel.dart';
 import '../UserModels/Work_Projects_UserModel.dart';
-import 'dart:developer';
 
 String? category_head_name;
 
@@ -81,9 +74,7 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
 
     category_head_name = "Education";
 
-    if (widget.edu == null) {
-      print("Null list");
-    }
+    if (widget.edu == null) {}
 
     edu_list = widget.edu?.toList();
     profile_list = widget.profile?.toList();
@@ -302,7 +293,6 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
     print(form_name);
   }
 
-
   String pointer_categ() {
     if (category_head_name == "Education") {
       return "1/7";
@@ -322,7 +312,6 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
 
     return "1/n";
   }
-
 
   Color detect_gesture_byColor(String categ_name) {
     if (category_head_name == categ_name) {
@@ -532,22 +521,19 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
           child: Text(pointer_categ(),
               style: GoogleFonts.poppins(
                   textStyle:
-                  TextStyle(fontSize: 15, fontWeight: FontWeight.w500))),
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.w500))),
         ),
 
         new Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child:
-              Align(
-                alignment: Alignment.topLeft,
-    child:  new Text(form_name!,
-    textAlign: TextAlign.left,
-    style: GoogleFonts.poppins(
-    textStyle:
-    TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
-
-    ),
-
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: new Text(form_name!,
+                textAlign: TextAlign.left,
+                style: GoogleFonts.poppins(
+                    textStyle:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+          ),
 
           // TextFormField(
           //   initialValue: form_name ,
@@ -629,13 +615,27 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: ElevatedButton(
               onPressed: () async {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        //Resume_temp2()));
-                        Next_to_dynamic_resume(context, widget.index,
-                            widget.form_name1, this.runtimeType)));
-                //Resume_temp2(widget.edu_list, work_list, project_list, profile_list, widget.achievement_list, skill_list, language_list)));
-                //edu_data_upload(context);
+                if (checkValidator() == true) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          Next_to_dynamic_resume(context, widget.index,form_name, this.runtimeType)));
+                } else {
+                  var snackBar = SnackBar(
+                    content: Text('Fill education , skills and profile',style: TextStyle(color: Colors.black)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft:Radius.circular(22),topRight:Radius.circular(22))),
+                    backgroundColor: Colors.red,
+                    duration: Duration(days: 365),
+                    action: SnackBarAction(
+                      textColor: Colors.white,
+                      label: 'Okay',
+                      onPressed: () {
+                        ScaffoldMessenger.of(context)
+                            .hideCurrentSnackBar();
+                      },
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
               },
               child: Text('Next',
                   style: GoogleFonts.poppins(
@@ -647,10 +647,7 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
   }
 }
 
-Widget Next_to_dynamic_resume(
-    BuildContext context, int index, String? form_name1, Type runtimeType) {
-  print(index);
-
+bool checkValidator() {
   bool check = true;
 
   edu_list?.forEach((value) {
@@ -661,6 +658,34 @@ Widget Next_to_dynamic_resume(
       check = false;
     }
   });
+
+  profile_list?.forEach((value) {
+    if (value.tableName == null ||
+        value.name == null ||
+        value.location == null ||
+        value.phone_no == null) {
+      check = false;
+    }
+  });
+
+  skill_list?.forEach((value) {
+    if (value.tableName == null || value.value == null) {
+      check = false;
+    }
+  });
+
+  return check;
+}
+
+Widget Next_to_dynamic_resume(BuildContext context, int index, String? form_name1, Type runtimeType) {
+  // edu_list?.forEach((value) {
+  //   if (value.tableName == null ||
+  //       value.organization_name == null ||
+  //       value.qualification_name == null ||
+  //       value.year_duration == null) {
+  //     check = false;
+  //   }
+  // });
   //
   // project_list?.forEach((value) {
   //   if(value.tableName==null||value.organization_name == null || value.qualification_name==null || value.year_duration==null || value.brief==null)
@@ -683,20 +708,20 @@ Widget Next_to_dynamic_resume(
   //   }
   // });
   //
-  profile_list?.forEach((value) {
-    if (value.tableName == null ||
-        value.name == null ||
-        value.location == null ||
-        value.phone_no == null) {
-      check = false;
-    }
-  });
+  // profile_list?.forEach((value) {
+  //   if (value.tableName == null ||
+  //       value.name == null ||
+  //       value.location == null ||
+  //       value.phone_no == null) {
+  //     check = false;
+  //   }
+  // });
 
-  skill_list?.forEach((value) {
-    if (value.tableName == null || value.value == null) {
-      check = false;
-    }
-  });
+  // skill_list?.forEach((value) {
+  //   if (value.tableName == null || value.value == null) {
+  //     check = false;
+  //   }
+  // });
   //
   // language_list?.forEach((value) {
   //   if(value.tableName==null||value.value == null)
@@ -712,130 +737,139 @@ Widget Next_to_dynamic_resume(
 
   print(index);
 
-  if (check == true) {
-    DataBaseManager.instance
-        .delete(form_name ?? "No Table Name")
-        .then((_) async {
-      insertDataBase(index);
-    });
+  DataBaseManager.instance.delete(form_name ?? "No Table Name").then((_) async {
+    insertDataBase(index);
+  });
 
-    if (index == 1) {
-      return Template_1(runtimeType, edu_list, work_list, project_list,
-          profile_list, achievement_list, skill_list, language_list);
-      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-    } else if (index == 2) {
-      return Template_2(runtimeType, edu_list, work_list, project_list,
-          profile_list, achievement_list, skill_list, language_list);
-      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-    } else if (index == 3) {
-      return Template_3(runtimeType, edu_list, work_list, project_list,
-          profile_list, achievement_list, skill_list, language_list);
-      //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>info_fillup()));
-    } else if (index == 4) {
-      return Template_4(runtimeType, edu_list, work_list, project_list,
-          profile_list, achievement_list, skill_list, language_list);
-      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-    } else if (index == 6) {
-      print("soumen 6");
-      return Template_6(runtimeType, edu_list, work_list, project_list,
-          profile_list, achievement_list, skill_list, language_list);
-      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-    } else if (index == 5) {
-      return Template_5(runtimeType, edu_list, work_list, project_list,
-          profile_list, achievement_list, skill_list, language_list);
-      //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
-    } else {
-      return Text("hello ji");
-    }
-
-    //return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
+  if (index == 1) {
+    return Template_1(runtimeType, edu_list, work_list, project_list,
+        profile_list, achievement_list, skill_list, language_list);
+    //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+  } else if (index == 2) {
+    return Template_2(runtimeType, edu_list, work_list, project_list,
+        profile_list, achievement_list, skill_list, language_list);
+    //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+  } else if (index == 3) {
+    return Template_3(runtimeType, edu_list, work_list, project_list,
+        profile_list, achievement_list, skill_list, language_list);
+    //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>info_fillup()));
+  } else if (index == 4) {
+    return Template_4(runtimeType, edu_list, work_list, project_list,
+        profile_list, achievement_list, skill_list, language_list);
+    //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+  } else if (index == 6) {
+    print("soumen 6");
+    return Template_6(runtimeType, edu_list, work_list, project_list,
+        profile_list, achievement_list, skill_list, language_list);
+    //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
+  } else if (index == 5) {
+    return Template_5(runtimeType, edu_list, work_list, project_list,
+        profile_list, achievement_list, skill_list, language_list);
+    //Navigator.of(context).push(MaterialPageRoute(builder: (context) => info_fillup()));
   } else {
-    //alertDialouge(context, check);
-    return Text("Fill education , skills and profile");
-
-    //ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    // return new Text("Fill all the blanks properly!!",
-    //     textAlign: TextAlign.left,
-    //     style: GoogleFonts.poppins(
-    //         textStyle: TextStyle(
-    //             fontSize: 30, fontWeight: FontWeight.bold)));
-
+    return Text("hello ji");
   }
+
+  //return Resume_temp2(edu_list, work_list, project_list, profile_list, achievement_list, skill_list, language_list);
 }
+//alertDialouge(context, check);
+
+//ScaffoldMessenger.of(context).showSnackBar(snackBar);
+// return new Text("Fill all the blanks properly!!",
+//     textAlign: TextAlign.left,
+//     style: GoogleFonts.poppins(
+//         textStyle: TextStyle(
+//             fontSize: 30, fontWeight: FontWeight.bold)));
 
 void insertDataBase(int index) {
   var db = DataBaseManager.instance;
-  skill_list?.forEach((element) {
-    if (element.tableName!.isNotEmpty &&
-        element.value!.isNotEmpty &&
-        element.id!.isNotEmpty) {
-      db.insertKeys("SKILLS", element);
-    }
-  });
-  edu_list?.forEach((element) {
-    if (element.tableName!.isNotEmpty &&
-        element.qualification_name!.isNotEmpty &&
-        element.id!.isNotEmpty &&
-        element.year_duration!.isNotEmpty &&
-        element.organization_name!.isNotEmpty) {
-      db.insertKeys("EDUCATION", element);
-    }
-  });
-  work_list?.forEach((element) {
-    if (element.organization_name!.isNotEmpty &&
-        element.year_duration!.isNotEmpty &&
-        element.id!.isNotEmpty &&
-        element.qualification_name!.isNotEmpty &&
-        element.brief!.isNotEmpty &&
-        element.tableName!.isNotEmpty &&
-        element.id!.isNotEmpty) {
-      db.insertKeys("WORK", element);
-    }
-  });
-  project_list?.forEach((element) {
-    if (element.id!.isNotEmpty &&
-        element.tableName!.isNotEmpty &&
-        element.brief!.isNotEmpty &&
-        element.qualification_name!.isNotEmpty &&
-        element.year_duration!.isNotEmpty &&
-        element.organization_name!.isNotEmpty) {
-      db.insertKeys("PROJECT", element);
-    }
-  });
-  profile_list?.forEach((element) {
-    if (element.tableName!.isNotEmpty &&
-        element.id!.isNotEmpty &&
-        element.social_link!.isNotEmpty &&
-        element.mail!.isNotEmpty &&
-        element.location!.isNotEmpty &&
-        element.phone_no!.isNotEmpty &&
-        element.name!.isNotEmpty) {
-      db.insertKeys("PROFILE", element);
-    }
-  });
-  language_list?.forEach((element) {
-    if (element.tableName!.isNotEmpty &&
-        element.value!.isNotEmpty &&
-        element.id!.isNotEmpty) {
-      db.insertKeys("LANGUAGE", element);
-    }
-  });
-  achievement_list?.forEach((element) {
-    if (element.tableName!.isNotEmpty &&
-        element.organization_name!.isNotEmpty &&
-        element.qualification_name!.isNotEmpty &&
-        element.id!.isNotEmpty) {
-      db.insertKeys("ACHIEVEMENT", element);
-    }
-  });
+
   TableName t = new TableName(tableName: form_name, id: index.toString());
   db.insertKeys("TABLENAME", t);
+  if (skill_list != null) {
+    skill_list?.forEach((element) {
+      if (element.tableName != null &&
+          element.value != null &&
+          element.id != null) {
+        db.insertKeys("SKILLS", element);
+      }
+    });
+  }
+
+  if (edu_list != null) {
+    edu_list?.forEach((element) {
+      if (element.tableName != null &&
+          element.qualification_name != null &&
+          element.id != null &&
+          element.year_duration != null &&
+          element.organization_name != null) {
+        db.insertKeys("EDUCATION", element);
+      }
+    });
+  }
+
+  if (profile_list != null) {
+    profile_list?.forEach((element) {
+      if (element.tableName != null &&
+          element.id != null &&
+          element.social_link != null &&
+          element.mail != null &&
+          element.location != null &&
+          element.phone_no != null &&
+          element.name != null) {
+        db.insertKeys("PROFILE", element);
+      }
+    });
+  }
+
+  if (achievement_list != null) {
+    achievement_list?.forEach((element) {
+      if (element.tableName != null &&
+          element.organization_name != null &&
+          element.qualification_name != null &&
+          element.id != null) {
+        db.insertKeys("ACHIEVEMENT", element);
+      }
+    });
+  }
+
+  if (language_fillup_widget != null) {
+    language_list?.forEach((element) {
+      if (element.tableName != null &&
+          element.value != null &&
+          element.id != null) {
+        db.insertKeys("LANGUAGE", element);
+      }
+    });
+  }
+  if (work_list != null) {
+    work_list?.forEach((element) {
+      if (element.organization_name != null &&
+          element.year_duration != null &&
+          element.id != null &&
+          element.qualification_name != null &&
+          element.brief != null &&
+          element.tableName != null &&
+          element.id != null) {
+        db.insertKeys("WORK", element);
+      }
+    });
+  }
+  if (project_list != null) {
+    project_list?.forEach((element) {
+      if (element.id != null &&
+          element.tableName != null &&
+          element.brief != null &&
+          element.qualification_name != null &&
+          element.year_duration != null &&
+          element.organization_name != null) {
+        db.insertKeys("PROJECT", element);
+      }
+    });
+  }
 }
 
 int list_len() {
-  print("List len achivement  : ");
-  print(edu_list!.length);
-
   if (categories!["Education"] == true) {
     return edu_list!.length;
   } else if (categories!["Achievements"] == true && achievement_list != null) {
@@ -1496,6 +1530,9 @@ class Achievement_fillup_widget extends StatelessWidget {
       achievement_list?.elementAt(index!).tableName = form_name;
       achievement_list?.elementAt(index!).id = form_name! + index.toString();
       var snackBar = SnackBar(content: Text('Data filled'));
+      achievement_list?.forEach((element) {
+        print('form upload ${element.organization_name}');
+      });
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
       var snackBar = SnackBar(content: Text('Data not filled'));

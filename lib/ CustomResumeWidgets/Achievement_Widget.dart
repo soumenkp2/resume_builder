@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Achievement_Widget extends StatelessWidget {
-
   double? height;
   double? margin_top;
   double? margin_bottom;
@@ -25,46 +24,39 @@ class Achievement_Widget extends StatelessWidget {
   String? course5_name;
   String? org5_name;
 
-
-  Achievement_Widget({
-    this.height,
-    this.margin_top,
-    this.margin_bottom,
-    this.margin_left,
-    this.margin_right,
-
-    this.course1_name,
-    this.course2_name,
-    this.course3_name,
-
-    this.org1_name,
-    this.org2_name,
-    this.org3_name,
-
-    this.course4_name,
-    this.course5_name,
-    this.org4_name,
-    this.org5_name
-  });
+  Achievement_Widget(
+      {this.height,
+      this.margin_top,
+      this.margin_bottom,
+      this.margin_left,
+      this.margin_right,
+      this.course1_name,
+      this.course2_name,
+      this.course3_name,
+      this.org1_name,
+      this.org2_name,
+      this.org3_name,
+      this.course4_name,
+      this.course5_name,
+      this.org4_name,
+      this.org5_name});
 
   @override
   Widget build(BuildContext context) {
     return new Container(
       //color: Colors.limeAccent,
       height: height,
-      margin: EdgeInsets.fromLTRB(margin_left!, margin_top!, margin_right!, margin_bottom!),
+      margin: EdgeInsets.fromLTRB(
+          margin_left!, margin_top!, margin_right!, margin_bottom!),
       //padding: const EdgeInsets.all(10),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            new Text(
-                "Achievements",
+            new Text("Achievements",
                 style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold))
-            ),
+                    textStyle:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
             new Divider(
               color: Colors.black,
               thickness: 3,
@@ -79,50 +71,37 @@ class Achievement_Widget extends StatelessWidget {
             // ),
 
             Course_Details(
-                course_name: course1_name,
-                org_name: org1_name,
-
+              course_name: course1_name,
+              org_name: org1_name,
             ),
             Course_Details(
-                course_name: course2_name,
-                org_name: org2_name,
-
+              course_name: course2_name,
+              org_name: org2_name,
             ),
             Course_Details(
-                course_name: course3_name,
-                org_name: org3_name,
-
+              course_name: course3_name,
+              org_name: org3_name,
             ),
             Course_Details(
               course_name: course4_name,
               org_name: org4_name,
-
             ),
             Course_Details(
               course_name: course5_name,
               org_name: org5_name,
-
             )
-
-
           ]),
-
-
     );
   }
 }
 
 class Course_Details extends StatelessWidget {
-
   String? course_name;
   String? org_name;
 
-
   Course_Details({
     this.course_name,
-
     this.org_name,
-
   });
 
   @override
@@ -132,30 +111,19 @@ class Course_Details extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              new Text(
-                  course_name!,
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500))
-              ),
-
-              new Text(
-                  org_name!,
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600))
-              ),
-
-
-              new Divider(
-                color: Colors.grey,
-              ),
-
-
-            ]));
+          new Text(course_name!,
+              style: GoogleFonts.poppins(
+                  textStyle:
+                      TextStyle(fontSize: 12, fontWeight: FontWeight.w500))),
+          new Text(org_name!,
+              style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.teal,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600))),
+          new Divider(
+            color: Colors.grey,
+          ),
+        ]));
   }
 }
-
