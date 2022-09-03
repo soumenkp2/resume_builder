@@ -37,7 +37,8 @@ dependencies:
   provider: ^6.0.3
   open_file: ^3.1.0
   expandable: ^5.0.1
-  shared_preferences:
+  google_mobile_ads: ^2.0.1
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

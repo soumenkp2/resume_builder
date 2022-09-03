@@ -604,7 +604,10 @@ class info_fillup_state extends State<info_fillup> {
                                       this.runtimeType)));
                         } else {
                           var snackBar = SnackBar(
-                            content: Text('Fill education , skills and profile',style: TextStyle(color: Colors.black)),
+                            content:  Text('Fill Education, Skills and Profile',
+                                style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                        fontSize: 17, fontWeight: FontWeight.bold))),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft:Radius.circular(22),topRight:Radius.circular(22))),
                             backgroundColor: Colors.red,
                             duration: Duration(days: 365),

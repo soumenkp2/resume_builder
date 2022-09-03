@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:resume_builder/PdfApi/pdf_resume_api.dart';
 import 'package:resume_builder/Screens/main_screen.dart';
 
@@ -42,9 +43,28 @@ class Template_6 extends StatefulWidget {
 }
 
 class Template_6state extends State<Template_6> {
+
+  late InterstitialAd _inter_ad;
+  bool inter_Ad_loaded = false;
+
+  void _init_ad()
+  {
+    InterstitialAd.load(
+        adUnitId: //'ca-app-pub-4527142871746030/4974246345',
+        'ca-app-pub-3940256099942544/1033173712',
+        request: AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: onAdLoaded,
+          onAdFailedToLoad: (error) {
+            print("Intersitial ad failed to load $error");
+          },
+        ));
+  }
+
   @override
   void initState() {
     super.initState();
+    _init_ad();
 
     // widget.edu_list = new List<Education_UserModel>.empty(growable: true);
     // widget.work_list = new List<Work_Projects_UserModel>.empty(growable: true);
@@ -234,8 +254,21 @@ class Template_6state extends State<Template_6> {
                   visible: check_visibility_skills_lang(widget.language_list)),
             ])),
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.print),
-          onPressed: _createPDF,
+          child: const Icon(Icons.file_open),
+            onPressed: ()
+            {
+              if(inter_Ad_loaded)
+              {
+                _inter_ad.show();
+                 inter_Ad_loaded = false;
+              }
+              else
+              {
+                print("Template - 6, else");
+                _createPDF();
+              }
+
+            }
           //_printScreen ,
         ),
       ),
@@ -248,4 +281,11 @@ class Template_6state extends State<Template_6> {
     else
       return FormListPage(tableIndex: 6);
   }
+
+  onAdLoaded(InterstitialAd ad) {
+    _inter_ad = ad;
+    inter_Ad_loaded = true;
+  }
+
+
 }

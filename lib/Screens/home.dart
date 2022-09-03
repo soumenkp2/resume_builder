@@ -1,28 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../DataBase/DataBaseManager.dart';
 import '../ResumeTemplates/Resume_temp2.dart';
 import 'FormListPage.dart';
+
+late BannerAd ad;
+bool adLoaded = false;
 
 class home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => home_state();
 }
 
+// void main()
+// {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   MobileAds.instance.initialize();
+//   runApp(home());
+//
+// }
+
 class home_state extends State<home> {
   @override
   void initState() {
     var db = DataBaseManager.instance;
     super.initState();
+    initBannerAd();
     //onstart();
     //Navigator.of(context).pushNamed('splash_screen');
   }
 
   void moveToResume(int index) {
-
-
     if (index == 1) {
       //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Resume_temp2()));
       Navigator.of(context).push(
@@ -83,7 +94,7 @@ class home_state extends State<home> {
 
                 //App Header
                 new Container(
-                    //color: Colors.amberAccent,
+                  //color: Colors.amberAccent,
                     height: 140,
                     margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                     decoration: BoxDecoration(
@@ -148,7 +159,7 @@ class home_state extends State<home> {
                               child: ListView(
                                   scrollDirection: Axis.horizontal,
                                   padding:
-                                      const EdgeInsets.fromLTRB(20, 10, 10, 10),
+                                  const EdgeInsets.fromLTRB(20, 10, 10, 10),
                                   children: <Widget>[
                                     // new InkWell(
                                     //   onTap: (){moveToResume(0);},
@@ -177,7 +188,7 @@ class home_state extends State<home> {
                                         moveToResume(1);
                                       },
                                       child: Container(
-                                          //width: 150,
+                                        //width: 150,
                                           decoration: BoxDecoration(
                                             color: const Color(0xffd4e3ea),
                                             borderRadius: BorderRadius.all(
@@ -200,7 +211,7 @@ class home_state extends State<home> {
                                         moveToResume(2);
                                       },
                                       child: Container(
-                                          //width: 150,
+                                        //width: 150,
                                           decoration: BoxDecoration(
                                             color: const Color(0xffd4e3ea),
                                             borderRadius: BorderRadius.all(
@@ -303,6 +314,17 @@ class home_state extends State<home> {
                                     ),
                                   ])),
                         ])),
+
+
+                Container(
+                  alignment: Alignment.center,
+                  height: ad.size.height.toDouble(),
+                  width: ad.size.width.toDouble(),
+                  child : set_ad()
+                )
+
+
+
 
                 // new Container(
                 //     margin: const EdgeInsets.fromLTRB(10, 30, 20, 0),
@@ -409,4 +431,42 @@ class home_state extends State<home> {
               ],
             )));
   }
+
+  void initBannerAd() {
+
+    print("add");
+
+    ad = BannerAd(
+      size: AdSize.banner,
+      adUnitId: //'ca-app-pub-4527142871746030/4831346935',
+      'ca-app-pub-3940256099942544/6300978111',
+      listener: BannerAdListener(
+          onAdLoaded: (ad) {
+            print('Ad to load');
+            setState(() {
+              adLoaded = true;
+            });
+          },
+          onAdFailedToLoad: (ad, error) {
+            print('Ad failed to load: $error');
+          }
+      ),
+      request: AdRequest(),
+    );
+
+    ad.load();
+  }
+
+  set_ad() {
+    if(adLoaded)
+      {
+        return AdWidget(ad: ad);
+      }
+    else
+      {
+        return Text("Ad is Loading ....");
+      }
+
+  }
+
 }
