@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/AppUtils/CurvedWidget.dart';
+import 'package:resume_builder/Screens/privacy_policy.dart';
+import 'package:resume_builder/Screens/terms_and_conditions.dart';
 
 class faq extends StatefulWidget {
   @override
@@ -9,6 +11,7 @@ class faq extends StatefulWidget {
 }
 
 class faq_state extends State<faq> {
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -16,6 +19,14 @@ class faq_state extends State<faq> {
     //Navigator.of(context).pushNamed('splash_screen');
   }
 
+  void moveToPrivacyPolicy() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => privacy_policy()));
+  }
+
+  void moveToTnC()
+  {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => terms_and_conditions()));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +128,37 @@ class faq_state extends State<faq> {
                           style: GoogleFonts.poppins(textStyle: TextStyle()))),
                 ],
               ),
-            ],
+
+              // const SizedBox(
+              //   height: 40,
+              // ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                  child: GestureDetector(
+                    child:Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text("Privacy Policy", style: TextStyle(decoration: TextDecoration.underline, color: Colors.blue)),
+                    ),
+                    onTap: () {
+                      moveToPrivacyPolicy();
+                      },
+              ),
+              ),
+
+
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: GestureDetector(
+                  child:Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Terms and Conditions", style: TextStyle(decoration: TextDecoration.underline, color: Colors.blue)),
+                  ),
+                  onTap: () {
+                    moveToTnC();
+                  },
+                ),
+              ),
+          ],
           ),
         ),
       ),
