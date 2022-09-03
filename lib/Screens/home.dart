@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../DataBase/DataBaseManager.dart';
-import '../ResumeTemplates/Resume_temp2.dart';
 import 'FormListPage.dart';
 
 late BannerAd ad;
@@ -15,22 +14,12 @@ class home extends StatefulWidget {
   State<StatefulWidget> createState() => home_state();
 }
 
-// void main()
-// {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   MobileAds.instance.initialize();
-//   runApp(home());
-//
-// }
-
 class home_state extends State<home> {
   @override
   void initState() {
     var db = DataBaseManager.instance;
     super.initState();
     initBannerAd();
-    //onstart();
-    //Navigator.of(context).pushNamed('splash_screen');
   }
 
   void moveToResume(int index) {
@@ -54,8 +43,8 @@ class home_state extends State<home> {
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => FormListPage(tableIndex: 5)));
     } else if (index == 0) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => Resume_temp2()));
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => FormListPage(tableIndex: 1)));
     }
   }
 
@@ -68,29 +57,6 @@ class home_state extends State<home> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // Row -> menu btn and search btn (Coloumn child 1)
-                // new Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: <Widget>[
-                //     new Container(
-                //       padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                //       child: new Image.asset(
-                //         'assets/images/menu.png',
-                //         height: 40.0,
-                //         fit: BoxFit.cover,
-                //       ),
-                //     ),
-                //     new Container(
-                //       padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
-                //       child: new Image.asset(
-                //         'assets/images/search.png',
-                //         height: 35.0,
-                //         fit: BoxFit.cover,
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // //Row -> menu btn and search terminates
 
                 //App Header
                 new Container(
@@ -161,27 +127,6 @@ class home_state extends State<home> {
                                   padding:
                                   const EdgeInsets.fromLTRB(20, 10, 10, 10),
                                   children: <Widget>[
-                                    // new InkWell(
-                                    //   onTap: (){moveToResume(0);},
-                                    //   child: Container(
-                                    //     //width: 150,
-                                    //       decoration: BoxDecoration(
-                                    //         color: const Color(0xffd4e3ea),
-                                    //         borderRadius:
-                                    //         BorderRadius.all(Radius.circular(25)),
-                                    //       ),
-                                    //       margin:
-                                    //       const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                    //       child: new Padding(
-                                    //         padding: const EdgeInsets.all(0),
-                                    //         child : Image.asset(
-                                    //           'assets/images/resume_template1.png',
-                                    //           height: 35.0,
-                                    //           fit: BoxFit.cover,
-                                    //         ),
-                                    //       )
-                                    //   ),
-                                    // ),
 
                                     new InkWell(
                                       onTap: () {
@@ -323,111 +268,6 @@ class home_state extends State<home> {
                   child : set_ad()
                 )
 
-
-
-
-                // new Container(
-                //     margin: const EdgeInsets.fromLTRB(10, 30, 20, 0),
-                //     child: new Column(
-                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //         children: <Widget>[
-                //           new Row(
-                //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //               children: <Widget>[
-                //                 new Text("Make Your Resume",
-                //                     style: GoogleFonts.poppins(
-                //                         textStyle: TextStyle(
-                //                             fontSize: 20,
-                //                             fontWeight: FontWeight.bold))),
-                //                 new Text("See All",
-                //                     style: GoogleFonts.poppins(
-                //                         textStyle: TextStyle(fontSize: 10)))
-                //               ]),
-                //           new SizedBox(
-                //               height: 150,
-                //               child: ListView(
-                //                   scrollDirection: Axis.horizontal,
-                //                   padding: const EdgeInsets.all(8),
-                //                   children: <Widget>[
-                //                     new Container(
-                //                       width: 150,
-                //                       decoration: BoxDecoration(
-                //                         color: const Color(0xffd4e3ea),
-                //                         borderRadius:
-                //                             BorderRadius.all(Radius.circular(25)),
-                //                       ),
-                //                       margin:
-                //                           const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                //                       child: new Image.asset(
-                //                         'assets/images/profile.png',
-                //                         height: 35.0,
-                //                         fit: BoxFit.cover,
-                //                       ),
-                //                     ),
-                //                     new Container(
-                //                       width: 150,
-                //                       decoration: BoxDecoration(
-                //                         color: const Color(0xffd4e3ea),
-                //                         borderRadius:
-                //                             BorderRadius.all(Radius.circular(25)),
-                //                       ),
-                //                       margin:
-                //                           const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                //                       child: new Image.asset(
-                //                         'assets/images/profile.png',
-                //                         height: 35.0,
-                //                         fit: BoxFit.cover,
-                //                       ),
-                //                     ),
-                //                     new Container(
-                //                       width: 150,
-                //                       decoration: BoxDecoration(
-                //                         color: const Color(0xffd4e3ea),
-                //                         borderRadius:
-                //                             BorderRadius.all(Radius.circular(25)),
-                //                       ),
-                //                       margin:
-                //                           const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                //                       //padding: const EdgeInsets.all(20),
-                //                       child: new Image.asset(
-                //                         'assets/images/profile.png',
-                //                         fit: BoxFit.cover,
-                //                       ),
-                //                     ),
-                //                     new Container(
-                //                       width: 150,
-                //                       decoration: BoxDecoration(
-                //                         color: const Color(0xffd4e3ea),
-                //                         borderRadius:
-                //                             BorderRadius.all(Radius.circular(25)),
-                //                       ),
-                //                       margin:
-                //                           const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                //                       //padding: const EdgeInsets.all(20),
-                //                       child: new Image.asset(
-                //                         'assets/images/profile.png',
-                //                         fit: BoxFit.cover,
-                //                       ),
-                //                     ),
-                //                     new Container(
-                //                       width: 150,
-                //                       decoration: BoxDecoration(
-                //                         color: const Color(0xffd4e3ea),
-                //                         borderRadius:
-                //                             BorderRadius.all(Radius.circular(25)),
-                //                       ),
-                //                       margin:
-                //                           const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                //                       //padding: const EdgeInsets.all(20),
-                //                       child: new Image.asset(
-                //                         'assets/images/profile.png',
-                //                         fit: BoxFit.cover,
-                //                       ),
-                //                     ),
-                //                   ])),
-                //         ]
-                //     )
-                // ),
               ],
             )));
   }

@@ -67,68 +67,6 @@ class Template_4state extends State<Template_4> {
   void initState() {
     super.initState();
     _init_ad();
-    // widget.edu_list = new List<Education_UserModel>.empty(growable: true);
-    // widget.work_list = new List<Work_Projects_UserModel>.empty(growable: true);
-    // widget.project_list = new List<Work_Projects_UserModel>.empty(growable: true);
-    // widget.skill_list = new List<Skills_Languages_UserModel>.empty(growable: true);
-    // widget.achievement_list = new List<Achievements_UserModel>.empty(growable: true);
-    // widget.profile_list = new List<Profile_UserModel>.empty(growable: true);
-    // widget.language_list = new List<Skills_Languages_UserModel>.empty(growable: true);
-    //
-    // widget.edu_list?.add(new Education_UserModel());
-    // widget.edu_list?.elementAt(0).qualification_name = "BTech - Computer Science Engineering";
-    // widget.edu_list?.elementAt(0).organization_name = "KIET Group of Institutions, Ghaziabad";
-    // widget.edu_list?.elementAt(0).year_duration = "2020-2024";
-    //
-    // widget.edu_list?.add(new Education_UserModel());
-    // widget.edu_list?.elementAt(1).qualification_name = "Secondary High School";
-    // widget.edu_list?.elementAt(1).organization_name = "kiet 2";
-    // widget.edu_list?.elementAt(1).year_duration = "BTECH CSE";
-    //
-    // widget.achievement_list?.add(new Achievements_UserModel());
-    // widget.achievement_list?.elementAt(0).qualification_name = "Winner";
-    // widget.achievement_list?.elementAt(0).organization_name = "Smart India Hackathon 2022";
-    //
-    // widget.achievement_list?.add(new Achievements_UserModel());
-    // widget.achievement_list?.elementAt(1).qualification_name = "Winner";
-    // widget.achievement_list?.elementAt(1).organization_name = "Smart India Hackathon 2022";
-    //
-    // widget.skill_list?.add(new Skills_Languages_UserModel());
-    // widget.skill_list?.elementAt(0).value = "Native Android Dev";
-    //
-    // widget.language_list?.add(new Skills_Languages_UserModel());
-    // widget.language_list?.elementAt(0).value = "Hindi";
-    //
-    // widget.work_list?.add(new Work_Projects_UserModel());
-    // widget.work_list?.elementAt(0).qualification_name = "SWE";
-    // widget.work_list?.elementAt(0).organization_name = "Spare8";
-    // widget.work_list?.elementAt(0).brief = "Android";
-    // widget.work_list?.elementAt(0).year_duration = "July";
-    //
-    // widget.work_list?.add(new Work_Projects_UserModel());
-    // widget.work_list?.elementAt(1).qualification_name = "SWE";
-    // widget.work_list?.elementAt(1).organization_name = "Spare8";
-    // widget.work_list?.elementAt(1).brief = "Android";
-    // widget.work_list?.elementAt(1).year_duration = "July";
-    //
-    // widget.project_list?.add(new Work_Projects_UserModel());
-    // widget.project_list?.elementAt(0).qualification_name = "SWE";
-    // widget.project_list?.elementAt(0).organization_name = "Spare8";
-    // widget.project_list?.elementAt(0).brief = "Android";
-    // widget.project_list?.elementAt(0).year_duration = "July";
-    //
-    // widget.project_list?.add(new Work_Projects_UserModel());
-    // widget.project_list?.elementAt(1).qualification_name = "SWE";
-    // widget.project_list?.elementAt(1).organization_name = "Spare8";
-    // widget.project_list?.elementAt(1).brief = "Android";
-    // widget.project_list?.elementAt(1).year_duration = "July";
-    //
-    // widget.profile_list?.add(new Profile_UserModel());
-    // widget.profile_list?.elementAt(0).name = "Soumen Paul";
-    // widget.profile_list?.elementAt(0).location = "Apna Modinagar";
-    // widget.profile_list?.elementAt(0).social_link = "linkedin.com";
-    // widget.profile_list?.elementAt(0).mail = "soumenkp2";
-    // widget.profile_list?.elementAt(0).phone_no = "8077570708";
   }
 
   void _createPDF() async {

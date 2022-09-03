@@ -65,58 +65,6 @@ class Template_5state extends State<Template_5> {
   void initState() {
     super.initState();
     _init_ad();
-    // widget.edu_list = new List<Education_UserModel>.empty(growable: true);
-    // widget.work_list = new List<Work_Projects_UserModel>.empty(growable: true);
-    // widget.project_list = new List<Work_Projects_UserModel>.empty(growable: true);
-    // widget.skill_list = new List<Skills_Languages_UserModel>.empty(growable: true);
-    // widget.achievement_list = new List<Achievements_UserModel>.empty(growable: true);
-    // widget.profile_list = new List<Profile_UserModel>.empty(growable: true);
-    // widget.language_list = new List<Skills_Languages_UserModel>.empty(growable: true);
-    //
-    //
-    // widget.edu_list?.add(new Education_UserModel());
-    // widget.edu_list?.elementAt(0).qualification_name = "BTech - Computer Science Engineering";
-    // widget.edu_list?.elementAt(0).organization_name = "KIET Group of Institutions, Ghaziabad";
-    // widget.edu_list?.elementAt(0).year_duration = "2020-2024";
-    //
-    // widget.edu_list?.add(new Education_UserModel());
-    // widget.edu_list?.elementAt(1).qualification_name = "Secondary High School";
-    // widget.edu_list?.elementAt(1).organization_name = "Tulsi Ram Maheshwari Public School";
-    // widget.edu_list?.elementAt(1).year_duration = "BTECH CSE";
-    //
-    // widget.achievement_list?.add(new Achievements_UserModel());
-    // widget.achievement_list?.elementAt(0).qualification_name = "National Grand Finalist";
-    // widget.achievement_list?.elementAt(0).organization_name = "Smart India Hackathon 2022";
-    //
-    // widget.achievement_list?.add(new Achievements_UserModel());
-    // widget.achievement_list?.elementAt(1).qualification_name = "National Winner";
-    // widget.achievement_list?.elementAt(1).organization_name = "Execute 2.0 Hackathon - DTU ECell";
-    //
-    // widget.skill_list?.add(new Skills_Languages_UserModel());
-    // widget.skill_list?.elementAt(0).value = "Native Android Dev";
-    //
-    // widget.language_list?.add(new Skills_Languages_UserModel());
-    // widget.language_list?.elementAt(0).value = "Hindi";
-    //
-    // widget.work_list?.add(new Work_Projects_UserModel());
-    // widget.work_list?.elementAt(0).qualification_name = "Software Engineer Intern";
-    // widget.work_list?.elementAt(0).organization_name = "Spare8 Platforms Pvt Ltd";
-    // widget.work_list?.elementAt(0).brief = "Worked on their Android part to improve their User Interface effeciency by 40-50%, Added Shimmers, porguard rules and also implemented Unit test cases";
-    // widget.work_list?.elementAt(0).year_duration = "April-July 2022";
-    //
-    // widget.project_list?.add(new Work_Projects_UserModel());
-    // widget.project_list?.elementAt(0).qualification_name = "Vidya Verse (Android App)";
-    // widget.project_list?.elementAt(0).organization_name = "Group Project";
-    // widget.project_list?.elementAt(0).brief = "Awarded 1st Runner up Prize in Nakshatra Hackosphere\nAn Edu tech based android app which acts as a platform to provide AR Based content";
-    // widget.project_list?.elementAt(0).year_duration = "April-December 2021";
-    //
-    //
-    // widget.profile_list?.add(new Profile_UserModel());
-    // widget.profile_list?.elementAt(0).name = "Soumen Paul";
-    // widget.profile_list?.elementAt(0).location = "Modinagar";
-    // widget.profile_list?.elementAt(0).social_link = "linkedin.com";
-    // widget.profile_list?.elementAt(0).mail = "soumenkp2";
-    // widget.profile_list?.elementAt(0).phone_no = "8077570708";
   }
 
   void _createPDF() async {
