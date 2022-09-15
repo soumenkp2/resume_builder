@@ -624,7 +624,7 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
                     content: Text('Fill education , skills and profile',style: TextStyle(color: Colors.black)),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft:Radius.circular(22),topRight:Radius.circular(22))),
                     backgroundColor: Colors.red,
-                    duration: Duration(days: 365),
+                    duration: Duration(seconds: 20),
                     action: SnackBarAction(
                       textColor: Colors.white,
                       label: 'Okay',
