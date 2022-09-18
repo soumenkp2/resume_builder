@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:resume_builder/DataBase/DataBaseManager.dart';
 import 'package:resume_builder/Screens/edit_form_fillup.dart';
 import 'package:resume_builder/Screens/main_screen.dart';
@@ -112,6 +113,13 @@ class _FormListPageState extends State<FormListPage> {
               } else if (snapshot.hasData) {
                 // Extracting data from snapshot object
                 var data = snapshot.data;
+                if(data?.length==0){
+                  return  Container(
+                    padding: EdgeInsets.all(18),
+                    alignment: Alignment.center,
+                    child: Lottie.asset('assets/images/b.json'),
+                  );
+                }else
                 return ListView.builder(
                     itemCount: data?.length,
                     itemBuilder: (context, index) {

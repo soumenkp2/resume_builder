@@ -24,10 +24,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: //info_fillup()
+        home: splash_screen()
 
-            splash_screen()
-        //Resume_temp2()
 
         );
   }
