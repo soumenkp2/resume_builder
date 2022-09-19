@@ -291,6 +291,9 @@ class info_fillup_state extends State<info_fillup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: const Text('Fill Your Resume Information'),
+        ),
         body: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -1927,7 +1930,7 @@ class Education_fillup_widget extends StatelessWidget {
                     },
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
-                      labelText: 'Enter organization name',
+                      labelText: 'Enter school/college name',
                     ),
                   ),
                 ),

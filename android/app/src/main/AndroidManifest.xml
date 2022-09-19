@@ -2,6 +2,7 @@
     package="com.example.resume_builder">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
         android:label="Instant Resume Maker"
         android:icon="@mipmap/launcher_icon">

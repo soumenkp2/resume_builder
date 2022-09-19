@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/AppUtils/CurvedWidget.dart';
 import 'package:resume_builder/Screens/privacy_policy.dart';
 import 'package:resume_builder/Screens/terms_and_conditions.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class faq extends StatefulWidget {
   @override
@@ -140,7 +141,8 @@ class faq_state extends State<faq> {
                       child: Text("Privacy Policy", style: TextStyle(decoration: TextDecoration.underline, color: Colors.blue)),
                     ),
                     onTap: () {
-                      moveToPrivacyPolicy();
+                      _launchURLApp;
+                      //moveToPrivacyPolicy();
                       },
               ),
               ),
@@ -154,7 +156,8 @@ class faq_state extends State<faq> {
                     child: Text("Terms and Conditions", style: TextStyle(decoration: TextDecoration.underline, color: Colors.blue)),
                   ),
                   onTap: () {
-                    moveToTnC();
+                    _launchURLAppTC;
+                    //moveToTnC();
                   },
                 ),
               ),
@@ -163,5 +166,31 @@ class faq_state extends State<faq> {
         ),
       ),
     );
+  }
+
+  _launchURLAppTC() async
+  {
+    var url = Uri.parse("https://www.freeprivacypolicy.com/live/ad371b3a-f988-469c-b9c0-9a5fcf5a10b3");
+    if(await canLaunchUrl(url))
+    {
+      await launchUrl(url);
+    }
+    else
+    {
+      throw 'Could not launch Url' ;
+    }
+  }
+
+  _launchURLApp() async
+  {
+    var url = Uri.parse("https://www.termsfeed.com/live/756f0212-5110-49f7-b8a6-5ae1a12375ad");
+    if(await canLaunchUrl(url))
+    {
+    await launchUrl(url);
+    }
+    else
+    {
+    throw 'Could not launch Url' ;
+    }
   }
 }

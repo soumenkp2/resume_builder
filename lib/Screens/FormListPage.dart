@@ -94,7 +94,7 @@ class _FormListPageState extends State<FormListPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Form Name'),
+          title: const Text('Resume Name'),
         ),
         body: FutureBuilder<List<TableName>?>(
           builder: (ctx, snapshot) {

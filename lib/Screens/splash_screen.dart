@@ -51,7 +51,7 @@ class splash_state extends State<splash_screen> {
               child: Image.asset('assets/images/resume_app_logo.png',
                   height: 200, width: 200)),
           SizedBox(height: 100),
-          Text("Instant Resume Builder",
+          Text("Instant Resume Maker",
               style: GoogleFonts.poppins(textStyle: text_style))
           // child: Image.asset('assets/images/profile.png',
           //     height: 200,
