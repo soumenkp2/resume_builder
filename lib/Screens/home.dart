@@ -278,7 +278,7 @@ class home_state extends State<home> {
 
     ad = BannerAd(
       size: AdSize.banner,
-      adUnitId: 'ca-app-pub-4527142871746030~1752923309',
+      adUnitId: 'ca-app-pub-4527142871746030/4831346935',
       //'ca-app-pub-4527142871746030/4831346935',
      // 'ca-app-pub-3940256099942544/6300978111',
       listener: BannerAdListener(

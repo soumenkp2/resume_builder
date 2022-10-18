@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resume_builder/AppUtils/CurvedWidget.dart';
@@ -140,10 +140,9 @@ class faq_state extends State<faq> {
                       padding: const EdgeInsets.all(10.0),
                       child: Text("Privacy Policy", style: TextStyle(decoration: TextDecoration.underline, color: Colors.blue)),
                     ),
-                    onTap: () {
-                      _launchURLApp;
+                    onTap: _launchURLApp
                       //moveToPrivacyPolicy();
-                      },
+                      ,
               ),
               ),
 
@@ -155,10 +154,8 @@ class faq_state extends State<faq> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text("Terms and Conditions", style: TextStyle(decoration: TextDecoration.underline, color: Colors.blue)),
                   ),
-                  onTap: () {
-                    _launchURLAppTC;
-                    //moveToTnC();
-                  },
+                  onTap: _launchURLAppTC
+                    //moveToTnC();,
                 ),
               ),
           ],
