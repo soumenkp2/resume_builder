@@ -18,6 +18,7 @@ class _termsandconditionsState extends State<terms_and_conditions>{
             child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    
                     CurvedWidget(
                       s: "Terms & Conditions",
                       size: 22,

@@ -324,6 +324,9 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Fill Your Resume Information'),
+      ),
         body: SingleChildScrollView(
             child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -624,7 +627,7 @@ class edit_form_fillup_state extends State<edit_form_fillup> {
                     content: Text('Fill education , skills and profile',style: TextStyle(color: Colors.black)),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft:Radius.circular(22),topRight:Radius.circular(22))),
                     backgroundColor: Colors.red,
-                    duration: Duration(seconds: 20),
+                    duration: Duration(seconds: 5),
                     action: SnackBarAction(
                       textColor: Colors.white,
                       label: 'Okay',
