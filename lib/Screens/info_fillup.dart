@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:resume_builder/DataBase/TableName.dart';
 import 'package:resume_builder/UserModels/Skills_Languages_UserModel.dart';
 
@@ -16,8 +17,13 @@ import '../UserModels/Education_UserModel.dart';
 import '../UserModels/Profile_UserModel.dart';
 import '../UserModels/Work_Projects_UserModel.dart';
 
+late BannerAd ad;
+bool adLoaded = false;
+
 class info_fillup extends StatefulWidget {
   int index;
+
+
 
   info_fillup(this.index);
 
@@ -44,6 +50,9 @@ class info_fillup_state extends State<info_fillup> {
   @override
   void initState() {
     super.initState();
+
+    initBannerAd();
+
     edu_list = new List<Education_UserModel>.empty(growable: true);
     work_list = new List<Work_Projects_UserModel>.empty(growable: true);
     project_list = new List<Work_Projects_UserModel>.empty(growable: true);
@@ -631,9 +640,56 @@ class info_fillup_state extends State<info_fillup> {
                               textStyle: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold))),
                     )),
+
+                Container(
+                    alignment: Alignment.center,
+                    height: ad.size.height.toDouble(),
+                    width: ad.size.width.toDouble(),
+                    child : set_ad()
+                ),
+
               ],
             )));
   }
+
+  void initBannerAd() {
+
+    print("add");
+
+    ad = BannerAd(
+      size: AdSize.banner,
+      adUnitId: 'ca-app-pub-4527142871746030/4831346935',
+      //'ca-app-pub-4527142871746030/4831346935',
+      // 'ca-app-pub-3940256099942544/6300978111',
+      listener: BannerAdListener(
+          onAdLoaded: (ad) {
+            print('Ad to load');
+            setState(() {
+              adLoaded = true;
+            });
+          },
+          onAdFailedToLoad: (ad, error) {
+            print('Ad failed to load: $error');
+          }
+      ),
+      request: AdRequest(),
+    );
+
+    ad.load();
+  }
+
+  set_ad() {
+    if(adLoaded)
+    {
+      return AdWidget(ad: ad);
+    }
+    else
+    {
+      return Text("Ad is Loading ....");
+    }
+
+  }
+
 }
 
 bool checkValidator() {
@@ -1087,9 +1143,15 @@ class Profile_fillup_widget extends StatelessWidget {
                       },
                       child: Text('Save'),
                     )),
-              ])),
-    );
+  ],
+
+    )));
+
+
   }
+
+
+
 
   void profile_data_upload(BuildContext context) {
     if (name == null) {
