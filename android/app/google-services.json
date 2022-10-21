@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "269156754013",
+    "project_id": "instant-resume-maker",
+    "storage_bucket": "instant-resume-maker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269156754013:android:c4ac58d68ba23c52c7a3b4",
+        "android_client_info": {
+          "package_name": "com.app_kriti.InstantResumeMaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269156754013-00c32bg12fbe449b5rhpdh41h6ngiefc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMHom8GvbkQAq5ncQQH7dkkxx4XBIUnyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "269156754013-00c32bg12fbe449b5rhpdh41h6ngiefc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
