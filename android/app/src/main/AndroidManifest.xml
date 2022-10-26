@@ -1,9 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.resume_builder">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-   <application
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" tools:node="remove" />
+
+
+    <application
         android:label="Instant Resume Maker"
         android:icon="@mipmap/launcher_icon">
         <activity
