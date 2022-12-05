@@ -13,7 +13,7 @@ From the start, SpaceX GO! has been developed to be light-weight, fast and easy 
 This project has been built using the [Flutter](https://flutter.io/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
 
 <p align="center">
-  <img src="https://play.google.com/store/apps/details?id=com.app_kriti.InstantResumeMaker&hl=en_IN&gl=US.jpg" width="256" hspace="4">
+  <img src="https://play.google.com/store/apps/details?id=com.app_kriti.InstantResumeMaker&hl=en_IN&gl=US" width="256" hspace="4">
   <img src="https://raw.githubusercontent.com/jesusrp98/spacex-go/master/screenshots/1.jpg" width="256" hspace="4">
   <img src="https://raw.githubusercontent.com/jesusrp98/spacex-go/master/screenshots/2.jpg" width="256" hspace="4">
 </p>
