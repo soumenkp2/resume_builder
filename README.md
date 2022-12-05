@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jesusrp98/spacex-go/master/screenshots/icon.png" width="200">
+  <img src="https://github.com/soumenkp2/resume_builder/blob/development/RESUME4.jpg" width="200">
 </p>
 <h1 align="center">Resume Builder</h1>
 <h3 align="center">Simple yet powerful, Instant Resume Maker App</h3>
@@ -13,9 +13,9 @@ From the start, SpaceX GO! has been developed to be light-weight, fast and easy 
 This project has been built using the [Flutter](https://flutter.io/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
 
 <p align="center">
-  <img src="https://play.google.com/store/apps/details?id=com.app_kriti.InstantResumeMaker&hl=en_IN&gl=US" width="256" hspace="4">
-  <img src="https://raw.githubusercontent.com/jesusrp98/spacex-go/master/screenshots/1.jpg" width="256" hspace="4">
-  <img src="https://raw.githubusercontent.com/jesusrp98/spacex-go/master/screenshots/2.jpg" width="256" hspace="4">
+  <img src="https://github.com/soumenkp2/resume_builder/blob/development/RESUME1.png" width="256" hspace="4">
+  <img src="https://github.com/soumenkp2/resume_builder/blob/development/RESUME2.png" width="256" hspace="4">
+  <img src="https://github.com/soumenkp2/resume_builder/blob/development/RESUME3.png" width="256" hspace="4">
 </p>
 
 ## Features
