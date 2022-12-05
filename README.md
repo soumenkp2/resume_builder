@@ -59,7 +59,3 @@ There you go, you can now open & edit the project. Enjoy!
 ## Contributing
 
 If you want to take the time to make this project better, please read the issues first. Then, you can open an new [issue], or a [pull request]
-
-## License
-
-This project is licensed under the GNU GPL v3 License - see the [LICENSE.md](LICENSE.md) file for details.
