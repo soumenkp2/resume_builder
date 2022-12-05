@@ -6,9 +6,13 @@
 
 ### About the project
 
-The purpose of this project is to develop the ultimate SpaceX experience in a variety of platforms. A single experience, from a single codebase.
+Instant Resume Maker is with 5+ Resume Designs and Ad Supported App.
 
-From the start, SpaceX GO! has been developed to be light-weight, fast and easy to use. It takes all the data from the open-source r/SpaceX REST API, which can be found [here](https://github.com/r-spacex/SpaceX-API).
+A resume is the first impression and acts as a bridge between you and the prospective recruiter. A professional-looking resume is a must-have when you are applying for a job.
+Instant Resume Maker helps you to create your professional resume in minutes. It helps you create a great resume that will place you ahead of the competition. You no longer have to worry about how to make a resume or CV - just select your resume template, fill in your information, and download your impressive resume in PDF format.
+
+Make your next career move with confidence, create your resume in Instant Resume Maker now and beat the competition with a professional and impressive resume.
+
 
 This project has been built using the [Flutter](https://flutter.io/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
 
@@ -20,20 +24,23 @@ This project has been built using the [Flutter](https://flutter.io/) framework, 
 
 ## Features
 
-- **Launch tracking & details**: detailed list of past & upcoming launches.
-- **Notifications support**: be notify before the rocket leaves the launch pad.
-- **Vehicle catalogue**: read about all rockets, capsules & ships SpaceX has develop over the years.
-- **Ships tracker**: tells position, speed & status of all active ships used by SpaceX.
-- **Tesla Roadster tracker**: orbit, speed & distance of the Elon Musk's Tesla Roadster.
-- **Core & capsules details**: more information about each core & capsules launched.
-- **Company details**: general company details & achievements.
+**The main features of the Instant Resume Maker application:
+• 5+ Standard Resume Templates
+• 7 Sections to fill information
+• Single and Multiple Profile Creation
+• PDF Download
+• Easy PDF sharing
+• Light theme
+• Platform independent
+• FAQ's section
+• View Previously selected templates**
 
 ## Download & install
 
 First, clone the repository with the 'clone' command, or just download the zip.
 
 ```
-$ git clone git@github.com:jesusrp98/spacex-go.git
+$ git clone https://github.com/soumenkp2/resume_builder.git
 ```
 
 Then, download either Android Studio or Visual Studio Code, with their respective [Flutter editor plugins](https://flutter.io/get-started/editor/). For more information about Flutter installation procedure, check the [official install guide](https://flutter.io/get-started/install/).
@@ -48,20 +55,10 @@ There you go, you can now open & edit the project. Enjoy!
 - [Android Studio](https://developer.android.com/studio/index.html/) - Tools for building apps on every type of Android device.
 - [Visual Studio Code](https://code.visualstudio.com/) - Code editing. Redefined.
 
-## Authors
-
-- **Jesús Rodríguez** - lead developer: [GitHub](https://github.com/jesusrp98), [Twitter](https://twitter.com/jesusrp98) & [Reddit](https://www.reddit.com/user/jesusrp98).
-- **Matias de Andrea** - UI/UX designer: [GitHub](https://github.com/deandreamatias), [Twitter](https://twitter.com/deandreamatias) & [Behance](https://www.behance.net/deandreamatias).
-- **/u/OuterSpaceCitizen** - Portuguese translations.
-- **loopsun** - Simplified Chinese translations.
-- **Charlie Merland** - French translations.
-- **Tommi Avery** - Italian translations.
-- **Fatur Rahman S** - Indonesian translations: [GitHub](https://github.com/Dexalt142).
-- **Patrick Kilter** - German translations: [GitHub](https://github.com/m0veax).
 
 ## Contributing
 
-If you want to take the time to make this project better, please read the [contributing guides](https://github.com/jesusrp98/spacex-go/blob/master/CONTRIBUTING.md) first. Then, you can open an new [issue](https://github.com/jesusrp98/spacex-go/issues/new/choose), of a [pull request](https://github.com/jesusrp98/spacex-go/compare).
+If you want to take the time to make this project better, please read the issues first. Then, you can open an new [issue], or a [pull request]
 
 ## License
 
